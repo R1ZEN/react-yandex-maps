@@ -11,6 +11,7 @@ dist
 !.eslintrc
 !.npmrc
 !.travis.yml
+!.size-limit.js
 
 yarn.lock
 package-lock.json

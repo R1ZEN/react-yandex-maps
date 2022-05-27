@@ -1,3 +1,7 @@
 *.tmp
 package-lock.json
 npm-shrinkwrap.json
+
+src/
+scripts/
+docz/
