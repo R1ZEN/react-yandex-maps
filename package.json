@@ -28,7 +28,7 @@
     "test": "jest"
   },
   "peerDependencies": {
-    "react": "^0.14.9 || ^15.x || ^16.x || ^17.x"
+    "react": "^0.14.9 || ^15.x || ^16.x || ^17.x || ^18.x"
   },
   "dependencies": {
     "create-react-context": "^0.3.0",
