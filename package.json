@@ -1,0 +1,105 @@
+{
+  "name": "@pbe/react-yandex-maps",
+  "version": "1.0.0",
+  "description": "Yandex.Maps API bindings for React",
+  "typings": "typings/index.d.ts",
+  "main": "index.js",
+  "module": "dist/production/react-yandex-maps.esm.js",
+  "umd:main": "dist/production/react-yandex-maps.umd.js",
+  "unpkg": "dist/production/react-yandex-maps.umd.js",
+  "files": [
+    "README.md",
+    "dist",
+    "typings"
+  ],
+  "scripts": {
+    "clear": "rm -rf dist",
+    "prettier": "prettier --write",
+    "lint": "eslint",
+    "build": "npm run clear && npm run microbundle:production && npm run microbundle:development",
+    "microbundle": "microbundle --jsx React.createElement --name ReactYandexMaps --external react --globals react=React --define process.env.NODE_ENV=\"${NODE_ENV}\",__DOCZ__=false",
+    "microbundle:production": "cross-env NODE_ENV=production npm run microbundle -- --output ./dist/production",
+    "microbundle:development": "cross-env NODE_ENV=development npm run microbundle -- --output ./dist/development",
+    "microbundle:watch": "cross-env NODE_ENV=development npm run microbundle -- --output ./dist/development --no-compress --watch",
+    "docs:dev": "docz dev",
+    "docs:build": "docz build",
+    "docs:deploy": "now",
+    "release": "release-it",
+    "test": "jest"
+  },
+  "peerDependencies": {
+    "react": "^0.14.9 || ^15.x || ^16.x || ^17.x"
+  },
+  "dependencies": {
+    "create-react-context": "^0.3.0",
+    "prop-types": "^15.7.2",
+    "react-display-name": "^0.2.5"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.0",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.9.0",
+    "capitalize": "^2.0.0",
+    "cross-env": "^7.0.2",
+    "docz": "^1.3.2",
+    "docz-theme-default": "^1.2.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-jest": "^22.21.0",
+    "eslint-plugin-react": "^7.16.0",
+    "husky": "^1.3.1",
+    "jest": "^24.9.0",
+    "lint-staged": "^8.2.1",
+    "lodash": "^4.17.15",
+    "marksy": "^8.0.0",
+    "microbundle": "^0.11.0",
+    "now": "^15.8.7",
+    "prettier": "^1.19.1",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "release-it": "15.0.0",
+    "webpack": "^4.41.2"
+  },
+  "keywords": [
+    "react",
+    "react-component",
+    "yandex",
+    "maps",
+    "yandex-maps"
+  ],
+  "sideEffects": false,
+  "directories": {
+    "doc": "docs"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run test --coverage"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run lint",
+      "npm run prettier",
+      "git add"
+    ],
+    "*.{json,yml,css,md,mdx,html}": [
+      "npm run prettier",
+      "git add"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "testURL": "http://localhost",
+    "collectCoverageFrom": [
+      "<rootDir>/src/**/*.js",
+      "!**/*.test.js"
+    ],
+    "transform": {
+      "^.+\\.js$": "./jest.transform.js"
+    }
+  },
+  "resolutions": {
+    "docz/**/webpack": "4.28.4"
+  }
+}
