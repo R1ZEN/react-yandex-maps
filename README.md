@@ -1,4 +1,4 @@
-# react-yandex-maps
+# @pbe/react-yandex-maps (fork of [react-yandex-maps](https://github.com/gribnoysup/react-yandex-maps))
 
 [Yandex.Maps JS API][ymaps-api] bindings for React
 
