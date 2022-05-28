@@ -13,6 +13,7 @@ export class Map extends React.Component {
   constructor() {
     super();
     this.instance = null;
+    this.state = { instance: null };
     this._parentElement = null;
     this._getRef = ref => {
       this._parentElement = ref;
@@ -25,6 +26,8 @@ export class Map extends React.Component {
       this.props.ymaps.Map,
       this.props
     );
+
+    this.setState({ instance: this.instance });
   }
 
   componentDidUpdate(prevProps) {
@@ -57,7 +60,7 @@ export class Map extends React.Component {
     ]);
 
     return (
-      <ParentContext.Provider value={this.instance}>
+      <ParentContext.Provider value={this.state.instance}>
         <div ref={this._getRef} {...parentElementStyle} {...parentElementProps}>
           {this.props.children}
         </div>
