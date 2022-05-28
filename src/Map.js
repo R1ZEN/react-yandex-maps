@@ -12,7 +12,7 @@ import getParentElementSize from './util/getParentElementSize';
 export class Map extends React.Component {
   constructor() {
     super();
-    this.state = { instance: null };
+    this.instance = null;
     this._parentElement = null;
     this._getRef = ref => {
       this._parentElement = ref;
@@ -20,23 +20,21 @@ export class Map extends React.Component {
   }
 
   componentDidMount() {
-    const instance = Map.mountObject(
+    this.instance = Map.mountObject(
       this._parentElement,
       this.props.ymaps.Map,
       this.props
     );
-
-    this.setState({ instance });
   }
 
   componentDidUpdate(prevProps) {
-    if (this.state.instance !== null) {
-      Map.updateObject(this.state.instance, prevProps, this.props);
+    if (this.instance !== null) {
+      Map.updateObject(this.instance, prevProps, this.props);
     }
   }
 
   componentWillUnmount() {
-    Map.unmountObject(this.state.instance, this.props);
+    Map.unmountObject(this.instance, this.props);
   }
 
   render() {
@@ -59,7 +57,7 @@ export class Map extends React.Component {
     ]);
 
     return (
-      <ParentContext.Provider value={this.state.instance}>
+      <ParentContext.Provider value={this.instance}>
         <div ref={this._getRef} {...parentElementStyle} {...parentElementProps}>
           {this.props.children}
         </div>

@@ -24,7 +24,7 @@ module.exports = {
       },
     },
     {
-      files: ['**/*.test.js', '**/__mocks__/**'],
+      files: ['**/*.test.{js,jsx}', '**/__mocks__/**'],
       ...jestRecommendedConfig,
       env: {
         jest: true,
