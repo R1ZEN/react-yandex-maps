@@ -1,4 +1,4 @@
-# @pbe/react-yandex-maps (fork of [react-yandex-maps](https://github.com/gribnoysup/react-yandex-maps))
+# @pbe/react-yandex-maps
 
 [Yandex.Maps JS API][ymaps-api] bindings for React
 
@@ -7,7 +7,7 @@
 
 ## Documentation
 
-You can find the documentation at https://react-yandex-maps.now.sh
+You can find the documentation at https://pbe-react-yandex-maps.vercel.app
 
 ## Contributing
 
@@ -20,7 +20,13 @@ that docs are lacking in some places 📝👩‍🔬
 If you want to work on the library locally:
 
 1. Fork this repository and clone your version of the repo
-2. Install npm dependencies
+2. Switch to correct node version
+
+```sh
+nvm use
+```
+
+3. Install npm dependencies
 
 ```sh
 npm install
@@ -34,25 +40,16 @@ npm install
 npm run dev
 ```
 
-4. Install documentation dependencies
+4. Start storybook server locally
 
 ```sh
-cd docs && npm install
-```
-
-5. Start docs server locally
-
-```sh
-npm run dev
+npm run sb:dev
 ```
 
 If everything went well, you now have documentation running on
-`http://localhost:3000`
+`http://localhost:6006`
 
-You can find special sandbox page on
-[`http://localhost:3000/sandbox`](http://localhost:3000/sandbox)
-
-Now you can make changes to the library and see them applied to the sandbox in
+Now you can make changes to the library and see them applied to the storybook in
 real time.
 
 When you commit changes, eslint will make sure that there are no linting errors
