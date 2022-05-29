@@ -1,5 +1,8 @@
 # @pbe/react-yandex-maps
 
+![npm](https://img.shields.io/npm/v/@pbe/react-yandex-maps)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/@pbe/react-yandex-maps)
+
 [Yandex.Maps JS API][ymaps-api] bindings for React
 
 [ymaps-api]:
