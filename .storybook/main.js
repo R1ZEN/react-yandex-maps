@@ -1,13 +1,18 @@
 module.exports = {
-  stories: [
-    '../stories/**/*.stories.mdx',
-    '../src/**/*.stories.mdx',
-    '../src/**/*.stories.@(js|jsx|ts|tsx)',
-  ],
+  stories: ['../stories/**/*.stories.mdx', '../src/**/*.stories.mdx'],
   addons: [
     '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
+    {
+      name: '@storybook/addon-essentials',
+      options: {
+        backgrounds: false,
+        measure: false,
+        outline: false,
+        toolbars: false,
+        controls: false,
+        actions: false,
+      },
+    },
   ],
   framework: '@storybook/react',
 };
