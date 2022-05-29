@@ -12,6 +12,7 @@ dist
 !.npmrc
 !.travis.yml
 !.size-limit.js
+!.storybook
 
 yarn.lock
 package-lock.json

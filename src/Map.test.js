@@ -40,12 +40,15 @@ describe('Map', () => {
 
     it('should add events to the instance', () => {
       const instance = Map.mountObject(parentElement, MockMapObject, baseProps);
-      expect(instance.events.add).toBeCalledWith('click', baseProps.onClick);
+      expect(instance.events.add).toHaveBeenCalledWith(
+        'click',
+        baseProps.onClick
+      );
     });
 
     it('should call instanceRef with an instance', () => {
       const instance = Map.mountObject(parentElement, MockMapObject, baseProps);
-      expect(baseProps.instanceRef).toBeCalledWith(instance);
+      expect(baseProps.instanceRef).toHaveBeenCalledWith(instance);
     });
   });
 
@@ -56,7 +59,7 @@ describe('Map', () => {
 
       Map.updateObject(instance, baseProps, props);
 
-      expect(instance.setType).toBeCalledWith(props.state.type);
+      expect(instance.setType).toHaveBeenCalledWith(props.state.type);
     });
 
     it('should update behaviors when changed', () => {
@@ -65,7 +68,9 @@ describe('Map', () => {
 
       Map.updateObject(instance, baseProps, props);
 
-      expect(instance.behaviors.enable).toBeCalledWith(props.state.behaviors);
+      expect(instance.behaviors.enable).toHaveBeenCalledWith(
+        props.state.behaviors
+      );
     });
 
     it('should update zoom when changed', () => {
@@ -74,7 +79,7 @@ describe('Map', () => {
 
       Map.updateObject(instance, baseProps, props);
 
-      expect(instance.setZoom).toBeCalledWith(props.state.zoom);
+      expect(instance.setZoom).toHaveBeenCalledWith(props.state.zoom);
     });
 
     it('should update center when changed', () => {
@@ -83,16 +88,24 @@ describe('Map', () => {
 
       Map.updateObject(instance, baseProps, props);
 
-      expect(instance.setCenter).toBeCalledWith(props.state.center);
+      expect(instance.setCenter).toHaveBeenCalledWith(props.state.center);
     });
 
     it('should update bounds when changed', () => {
       const instance = Map.mountObject(parentElement, MockMapObject, baseProps);
-      const props = { ...baseProps, state: { bounds: [[0, 0], [1, 1]] } };
+      const props = {
+        ...baseProps,
+        state: {
+          bounds: [
+            [0, 0],
+            [1, 1],
+          ],
+        },
+      };
 
       Map.updateObject(instance, baseProps, props);
 
-      expect(instance.setBounds).toBeCalledWith(props.state.bounds);
+      expect(instance.setBounds).toHaveBeenCalledWith(props.state.bounds);
     });
 
     it('should update options when changed', () => {
@@ -101,7 +114,7 @@ describe('Map', () => {
 
       Map.updateObject(instance, baseProps, props);
 
-      expect(instance.options.set).toBeCalledWith(props.options);
+      expect(instance.options.set).toHaveBeenCalledWith(props.options);
     });
 
     it('should update events', () => {
@@ -110,8 +123,11 @@ describe('Map', () => {
 
       Map.updateObject(instance, baseProps, props);
 
-      expect(instance.events.remove).toBeCalledWith('click', baseProps.onClick);
-      expect(instance.events.add).toBeCalledWith('click', props.onClick);
+      expect(instance.events.remove).toHaveBeenCalledWith(
+        'click',
+        baseProps.onClick
+      );
+      expect(instance.events.add).toHaveBeenCalledWith('click', props.onClick);
     });
 
     it('should call instanceRef if changed', () => {
@@ -120,8 +136,8 @@ describe('Map', () => {
 
       Map.updateObject(instance, baseProps, props);
 
-      expect(baseProps.instanceRef).toBeCalledWith(null);
-      expect(props.instanceRef).toBeCalledWith(instance);
+      expect(baseProps.instanceRef).toHaveBeenCalledWith(null);
+      expect(props.instanceRef).toHaveBeenCalledWith(instance);
     });
   });
 
@@ -130,21 +146,24 @@ describe('Map', () => {
       const instance = Map.mountObject(parentElement, MockMapObject, baseProps);
       Map.unmountObject(instance, baseProps);
 
-      expect(instance.events.remove).toBeCalledWith('click', baseProps.onClick);
+      expect(instance.events.remove).toHaveBeenCalledWith(
+        'click',
+        baseProps.onClick
+      );
     });
 
     it('should destroy instance', () => {
       const instance = Map.mountObject(parentElement, MockMapObject, baseProps);
       Map.unmountObject(instance, baseProps);
 
-      expect(instance.destroy).toBeCalled();
+      expect(instance.destroy).toHaveBeenCalled();
     });
 
     it('should call instanceRef with null', () => {
       const instance = Map.mountObject(parentElement, MockMapObject, baseProps);
       Map.unmountObject(instance, baseProps);
 
-      expect(baseProps.instanceRef).toBeCalledWith(null);
+      expect(baseProps.instanceRef).toHaveBeenCalledWith(null);
     });
   });
 });

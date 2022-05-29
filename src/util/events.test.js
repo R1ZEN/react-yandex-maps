@@ -40,7 +40,7 @@ describe('Event utils', () => {
       addEvent(instance, 'blerb', onWhatIsThat);
 
       expect(instance.events.add).toHaveBeenCalledTimes(1);
-      expect(instance.events.add).toBeCalledWith('click', onClick);
+      expect(instance.events.add).toHaveBeenCalledWith('click', onClick);
     });
   });
 
@@ -55,7 +55,7 @@ describe('Event utils', () => {
       removeEvent(instance, 'blerb', onWhatIsThat);
 
       expect(instance.events.remove).toHaveBeenCalledTimes(1);
-      expect(instance.events.remove).toBeCalledWith('click', onClick);
+      expect(instance.events.remove).toHaveBeenCalledWith('click', onClick);
     });
   });
 

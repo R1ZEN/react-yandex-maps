@@ -9,7 +9,7 @@
 export default function applyRef(oldRef, newRef, value = null) {
   if (oldRef !== newRef) {
     if (oldRef) {
-      if (oldRef.hasOwnProperty('current')) {
+      if ('current' in oldRef) {
         oldRef.current = null;
       } else if (typeof oldRef === 'function') {
         oldRef(null);
@@ -18,7 +18,7 @@ export default function applyRef(oldRef, newRef, value = null) {
 
     if (!newRef) return;
 
-    if (newRef.hasOwnProperty('current')) {
+    if ('current' in newRef) {
       newRef.current = value;
     } else if (typeof newRef === 'function') {
       newRef(value);
