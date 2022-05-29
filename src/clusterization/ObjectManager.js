@@ -54,7 +54,7 @@ export class ObjectManager extends React.Component {
     instance.objects.options.set(objects);
     instance.clusters.options.set(clusters);
 
-    Object.keys(_events).forEach(key =>
+    Object.keys(_events).forEach((key) =>
       events.addEvent(instance, key, _events[key])
     );
 
@@ -73,9 +73,8 @@ export class ObjectManager extends React.Component {
 
   static updateObject(instance, oldProps, newProps) {
     const { _events: newEvents, instanceRef } = events.separateEvents(newProps);
-    const { _events: oldEvents, instanceRef: oldRef } = events.separateEvents(
-      oldProps
-    );
+    const { _events: oldEvents, instanceRef: oldRef } =
+      events.separateEvents(oldProps);
 
     if (isControlledProp(newProps, 'options')) {
       const oldOptions = getProp(oldProps, 'options');
@@ -132,7 +131,7 @@ export class ObjectManager extends React.Component {
     const { instanceRef, parent, _events } = events.separateEvents(props);
 
     if (instance !== null) {
-      Object.keys(_events).forEach(key =>
+      Object.keys(_events).forEach((key) =>
         events.removeEvent(instance, key, _events[key])
       );
 

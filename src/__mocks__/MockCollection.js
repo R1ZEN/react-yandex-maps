@@ -11,7 +11,7 @@ export default class MockCollection {
   }
 
   remove(item) {
-    this.collection = this.collection.filter(i => i !== item);
+    this.collection = this.collection.filter((i) => i !== item);
   }
 
   raw() {

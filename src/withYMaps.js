@@ -19,7 +19,7 @@ export default function withYMaps(Component, waitForApi = false, modules = []) {
 
       this.props.ymaps
         .load()
-        .then(api => {
+        .then((api) => {
           return Promise.all(
             modules.concat(this.props.modules).map(api.loadModule)
           ).then(() => {
@@ -30,7 +30,7 @@ export default function withYMaps(Component, waitForApi = false, modules = []) {
             }
           });
         })
-        .catch(err => {
+        .catch((err) => {
           if (this._isMounted === true) {
             this.props.onError(err);
           }
@@ -42,14 +42,18 @@ export default function withYMaps(Component, waitForApi = false, modules = []) {
     }
 
     render() {
-      const { ymaps } = this.props;
+      const { ymaps, width, height } = this.props;
       const { loading } = this.state;
 
       const shouldRender = waitForApi === false || loading === false;
 
       const props = omit(this.props, ['onLoad', 'onError', 'modules', 'ymaps']);
 
-      return shouldRender && <Component ymaps={ymaps.getApi()} {...props} />;
+      if (!shouldRender) {
+        return <div style={{ width, height }} />;
+      }
+
+      return <Component ymaps={ymaps.getApi()} {...props} />;
     }
   }
 
@@ -57,6 +61,8 @@ export default function withYMaps(Component, waitForApi = false, modules = []) {
     WithYMaps.displayName = `withYMaps(${name(Component)})`;
 
     WithYMaps.propTypes = {
+      width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+      height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
       onLoad: PropTypes.func,
       onError: PropTypes.func,
       modules: PropTypes.arrayOf(PropTypes.string),

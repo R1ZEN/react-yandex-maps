@@ -15,7 +15,7 @@ export class Map extends React.Component {
     this.instance = null;
     this.state = { instance: null };
     this._parentElement = null;
-    this._getRef = ref => {
+    this._getRef = (ref) => {
       this._parentElement = ref;
     };
   }
@@ -76,7 +76,7 @@ export class Map extends React.Component {
 
     const instance = new Map(parentElement, state, options);
 
-    Object.keys(_events).forEach(key =>
+    Object.keys(_events).forEach((key) =>
       events.addEvent(instance, key, _events[key])
     );
 
@@ -87,9 +87,8 @@ export class Map extends React.Component {
 
   static updateObject(instance, oldProps, newProps) {
     const { _events: newEvents, instanceRef } = events.separateEvents(newProps);
-    const { _events: oldEvents, instanceRef: oldRef } = events.separateEvents(
-      oldProps
-    );
+    const { _events: oldEvents, instanceRef: oldRef } =
+      events.separateEvents(oldProps);
 
     if (isControlledProp(newProps, 'state')) {
       const oldState = getProp(oldProps, 'state', {});
@@ -142,7 +141,7 @@ export class Map extends React.Component {
     const { instanceRef, _events } = events.separateEvents(props);
 
     if (instance !== null) {
-      Object.keys(_events).forEach(key =>
+      Object.keys(_events).forEach((key) =>
         events.removeEvent(instance, key, _events[key])
       );
 
@@ -233,9 +232,11 @@ if (process.env.NODE_ENV !== 'production') {
   };
 }
 
-Map.defaultProps = {
+const YMapsMap = withYMaps(Map, true, ['Map']);
+
+YMapsMap.defaultProps = {
   width: 320,
   height: 240,
 };
 
-export default withYMaps(Map, true, ['Map']);
+export default YMapsMap;

@@ -1,4 +1,4 @@
-const defaultName = name =>
+const defaultName = (name) =>
   'default' + name.charAt(0).toUpperCase() + name.slice(1);
 
 /**

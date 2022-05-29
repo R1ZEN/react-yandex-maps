@@ -65,7 +65,7 @@ export class YMaps {
     );
 
     const queryString = Object.keys(query)
-      .map(key => `${key}=${query[key]}`)
+      .map((key) => `${key}=${query[key]}`)
       .join('&');
 
     const baseUrl = getBaseUrl(this.options.enterprise);
@@ -73,13 +73,13 @@ export class YMaps {
     const url = [baseUrl, this.options.version, '?' + queryString].join('/');
 
     const promise = new Promise((resolve, reject) => {
-      window[this.onload] = ymaps => {
+      window[this.onload] = (ymaps) => {
         delete window[this.onload];
         ymaps.loadModule = this.loadModule.bind(this);
         ymaps.ready(() => resolve(this.setApi(ymaps)));
       };
 
-      window[this.onerror] = err => {
+      window[this.onerror] = (err) => {
         delete window[this.onerror];
         reject(err);
       };
@@ -108,7 +108,7 @@ export class YMaps {
     return new Promise((resolve, reject) => {
       this.getApi().modules.require(
         moduleName,
-        Module => {
+        (Module) => {
           set(this.api, moduleName, Module, true);
           resolve(Module);
         },

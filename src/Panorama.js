@@ -11,7 +11,7 @@ export class Panorama extends React.Component {
     super();
     this.state = { instance: null };
     this._parentElement = null;
-    this._getRef = ref => {
+    this._getRef = (ref) => {
       this._parentElement = ref;
     };
   }
@@ -27,7 +27,7 @@ export class Panorama extends React.Component {
       this._parentElement,
       this.props.ymaps.panorama,
       this.props
-    ).then(instance => this._mounted && this.setState({ instance }));
+    ).then((instance) => this._mounted && this.setState({ instance }));
   }
 
   componentDidUpdate(prevProps) {
@@ -55,7 +55,7 @@ export class Panorama extends React.Component {
     const options = getProp(props, 'options');
 
     return new Promise((resolve, reject) => {
-      panorama.locate(point, locateOptions).done(panoramas => {
+      panorama.locate(point, locateOptions).done((panoramas) => {
         if (panoramas.length > 0) {
           const instance = new panorama.Player(
             parentElement,
@@ -65,7 +65,7 @@ export class Panorama extends React.Component {
 
           applyRef(null, instanceRef, instance);
 
-          Object.keys(_events).forEach(key =>
+          Object.keys(_events).forEach((key) =>
             events.addEvent(instance, key, _events[key])
           );
 
@@ -77,9 +77,8 @@ export class Panorama extends React.Component {
 
   static updateObject(instance, oldProps, newProps) {
     const { _events: newEvents, instanceRef } = events.separateEvents(newProps);
-    const { _events: oldEvents, instanceRef: oldRef } = events.separateEvents(
-      oldProps
-    );
+    const { _events: oldEvents, instanceRef: oldRef } =
+      events.separateEvents(oldProps);
 
     if (isControlledProp(newProps, 'options')) {
       const oldOptions = getProp(oldProps, 'options');
@@ -109,7 +108,7 @@ export class Panorama extends React.Component {
     const { instanceRef, _events } = events.separateEvents(props);
 
     if (instance !== null) {
-      Object.keys(_events).forEach(key =>
+      Object.keys(_events).forEach((key) =>
         events.removeEvent(instance, key, _events[key])
       );
 
@@ -191,14 +190,16 @@ if (process.env.NODE_ENV !== 'production') {
   };
 }
 
-Panorama.defaultProps = {
-  width: 320,
-  height: 240,
-};
-
-export default withYMaps(Panorama, true, [
+const YMapsPanorama = withYMaps(Panorama, true, [
   'panorama.isSupported',
   'panorama.locate',
   'panorama.createPlayer',
   'panorama.Player',
 ]);
+
+YMapsPanorama.defaultProps = {
+  width: 320,
+  height: 240,
+};
+
+export default YMapsPanorama;

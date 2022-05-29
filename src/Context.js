@@ -4,12 +4,12 @@ import name from 'react-display-name';
 
 export const YMapsContext = createReactContext(null);
 
-export const withYMapsContext = Component => {
+export const withYMapsContext = (Component) => {
   const displayName = name(Component);
 
-  const WithYMapsContext = props => (
+  const WithYMapsContext = (props) => (
     <YMapsContext.Consumer>
-      {ymaps => {
+      {(ymaps) => {
         if (ymaps === null) {
           const message =
             "Couldn't find Yandex.Maps API in the context. " +
@@ -31,10 +31,10 @@ export const withYMapsContext = Component => {
 
 export const ParentContext = createReactContext(null);
 
-export const withParentContext = Component => {
-  const WithParentContext = props => (
+export const withParentContext = (Component) => {
+  const WithParentContext = (props) => (
     <ParentContext.Consumer>
-      {parent => <Component parent={parent} {...props} />}
+      {(parent) => <Component parent={parent} {...props} />}
     </ParentContext.Consumer>
   );
 

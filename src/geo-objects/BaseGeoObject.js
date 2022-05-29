@@ -47,7 +47,7 @@ export class BaseGeoObject extends React.Component {
 
     const instance = new GeoObject(geometry, properties, options);
 
-    Object.keys(_events).forEach(key =>
+    Object.keys(_events).forEach((key) =>
       events.addEvent(instance, key, _events[key])
     );
 
@@ -70,9 +70,8 @@ export class BaseGeoObject extends React.Component {
 
   static updateObject(instance, oldProps, newProps) {
     const { _events: newEvents, instanceRef } = events.separateEvents(newProps);
-    const { _events: oldEvents, instanceRef: oldRef } = events.separateEvents(
-      oldProps
-    );
+    const { _events: oldEvents, instanceRef: oldRef } =
+      events.separateEvents(oldProps);
 
     if (isControlledProp(newProps, 'geometry')) {
       const oldGeometry = getProp(oldProps, 'geometry', {});
@@ -127,7 +126,7 @@ export class BaseGeoObject extends React.Component {
     const { instanceRef, parent, _events } = events.separateEvents(props);
 
     if (instance !== null) {
-      Object.keys(_events).forEach(key =>
+      Object.keys(_events).forEach((key) =>
         events.removeEvent(instance, key, _events[key])
       );
 

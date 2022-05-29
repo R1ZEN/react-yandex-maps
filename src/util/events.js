@@ -58,7 +58,7 @@ export function removeEvent(instance, eventName, handler) {
  * @param {Object} newEvents Map of new events
  */
 export function updateEvents(instance, oldEvents, newEvents) {
-  Object.keys(Object.assign({}, oldEvents, newEvents)).forEach(eventName => {
+  Object.keys(Object.assign({}, oldEvents, newEvents)).forEach((eventName) => {
     if (oldEvents[eventName] !== newEvents[eventName]) {
       removeEvent(instance, eventName, oldEvents[eventName]);
       addEvent(instance, eventName, newEvents[eventName]);
