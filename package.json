@@ -12,6 +12,10 @@
     "dist",
     "typings"
   ],
+  "engines": {
+    "npm": ">=6",
+    "node": ">=14"
+  },
   "scripts": {
     "clear": "rm -rf dist",
     "prettier": "prettier --write",
