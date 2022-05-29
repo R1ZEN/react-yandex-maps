@@ -1,0 +1,32 @@
+import { Meta, Canvas, ArgsTable } from '@storybook/addon-docs';
+import { RouteEditor as RouteEditorCmp } from './RouteEditor';
+import { YMaps, Map, RouteEditor } from '../';
+
+<Meta title="api/Controls/RouteEditor" />
+
+# RouteEditor
+
+Renders Yandex.Maps API [RouteEditor][control] control
+
+## Basic Usage
+
+<Canvas>
+  <YMaps>
+    <Map
+      defaultState={{
+        center: [55.751574, 37.573856],
+        zoom: 9,
+        controls: [],
+      }}
+    >
+      <RouteEditor />
+    </Map>
+  </YMaps>
+</Canvas>
+
+## Props
+
+<ArgsTable of={RouteEditorCmp} />
+
+[control]:
+  https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/control.RouteEditor-docpage/

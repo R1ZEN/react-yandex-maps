@@ -4,7 +4,12 @@ const {
 
 module.exports = {
   parser: 'babel-eslint',
-  extends: ['eslint:recommended', 'plugin:react/recommended'],
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:storybook/recommended',
+    'plugin:storybook/recommended',
+  ],
   plugins: ['react'],
   parserOptions: {
     ecmaVersion: 2018,

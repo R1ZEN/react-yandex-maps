@@ -1,0 +1,44 @@
+import { Meta, ArgsTable, Canvas } from '@storybook/addon-docs';
+import { Polyline as PolylineCmp } from './Polyline';
+import { YMaps, Map, Polyline } from '../';
+
+<Meta title="api/GeoObjects/Polyline" />
+
+# Polyline
+
+Renders Yandex.Maps API [Polyline][docs] object
+
+## Basic Usage
+
+<Canvas>
+  <YMaps>
+    <Map
+      defaultState={{
+        center: [55.72, 37.44],
+        zoom: 10,
+      }}
+    >
+      <Polyline
+        geometry={[
+          [55.8, 37.5],
+          [55.8, 37.4],
+          [55.7, 37.5],
+          [55.7, 37.4],
+        ]}
+        options={{
+          balloonCloseButton: false,
+          strokeColor: '#000',
+          strokeWidth: 4,
+          strokeOpacity: 0.5,
+        }}
+      />
+    </Map>
+  </YMaps>
+</Canvas>
+
+## Props
+
+<ArgsTable of={PolylineCmp} />
+
+[docs]:
+  https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Polyline-docpage/
