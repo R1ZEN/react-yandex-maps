@@ -1,0 +1,32 @@
+import { Meta, Canvas, ArgsTable } from '@storybook/addon-docs';
+import { FullscreenControl as FullscreenControlCmp } from './FullscreenControl';
+import { YMaps, Map, FullscreenControl } from '../';
+
+<Meta title="api/Controls/FullscreenControl" />
+
+# FullscreenControl
+
+Renders Yandex.Maps API [FullscreenControl][control] control
+
+## Basic Usage
+
+<Canvas>
+  <YMaps>
+    <Map
+      defaultState={{
+        center: [55.751574, 37.573856],
+        zoom: 9,
+        controls: [],
+      }}
+    >
+      <FullscreenControl />
+    </Map>
+  </YMaps>
+</Canvas>
+
+## Props
+
+<ArgsTable of={FullscreenControlCmp} />
+
+[control]:
+  https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/control.FullscreenControl-docpage/

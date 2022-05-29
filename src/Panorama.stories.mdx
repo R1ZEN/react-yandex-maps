@@ -1,0 +1,33 @@
+import { Meta, ArgsTable } from '@storybook/addon-docs';
+import { Panorama as PanoramaCmp } from './Panorama';
+
+<Meta title="api/Panorama" />
+
+# Panorama
+
+Renders Yandex.Maps API [Panorama][panorama] object
+
+## Basic Usage
+
+```jsx
+<YMaps>
+  <Panorama defaultPoint={[55.733685, 37.588264]} />
+</YMaps>
+```
+
+## Props
+
+<ArgsTable of={PanoramaCmp} />
+
+### Width And Height Props
+
+Yandex.Maps Panorama parent element should have at least some size set to it,
+otherwise the Panorama instance is rendered into the container with zero size.
+
+To avoid that, this library uses `width` and `height` props as default way of
+sizing the panorama element, but if the library user provides `style` or
+`className` prop, Panorama component will assume that the Panorama instance is
+sized by those props and will not use `width` and `height` props
+
+[panorama]:
+  https://tech.yandex.ru/maps/doc/jsapi/2.1/ref/reference/panorama.Player-docpage/
