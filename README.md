@@ -32,7 +32,7 @@ nvm use
 npm install
 ```
 
-3. Start library build in the watch mode. This command will start microbundle in
+4. Start library build in the watch mode. This command will start microbundle in
    watch mode, meaning that everytime you make changes to the source of the
    library it will be compiled to `dist` folder
 
@@ -40,7 +40,7 @@ npm install
 npm run dev
 ```
 
-4. Start storybook server locally
+5. Start storybook server locally
 
 ```sh
 npm run sb:dev
