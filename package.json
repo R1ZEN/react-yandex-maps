@@ -23,8 +23,8 @@
     "microbundle:watch": "cross-env NODE_ENV=development npm run microbundle -- --output ./dist/development --no-compress --watch",
     "release": "release-it",
     "test": "jest",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "sb:dev": "start-storybook -p 6006",
+    "sb:build": "build-storybook"
   },
   "peerDependencies": {
     "react": "^0.14.9 || ^15.x || ^16.x || ^17.x || ^18.x"
@@ -38,6 +38,7 @@
     "@babel/core": "7.18.2",
     "@babel/preset-env": "7.18.2",
     "@babel/preset-react": "7.12.13",
+    "@mdx-js/react": "1.6.22",
     "@size-limit/file": "7.0.8",
     "@storybook/addon-actions": "6.5.5",
     "@storybook/addon-essentials": "6.5.5",
