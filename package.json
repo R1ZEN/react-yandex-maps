@@ -31,12 +31,11 @@
     "sb:build": "build-storybook"
   },
   "peerDependencies": {
-    "react": "^0.14.9 || ^15.x || ^16.x || ^17.x || ^18.x"
+    "react": "^16.x || ^17.x || ^18.x"
   },
   "dependencies": {
-    "create-react-context": "^0.3.0",
-    "prop-types": "^15.7.2",
-    "react-display-name": "^0.2.5"
+    "prop-types": "15.8.1",
+    "react-display-name": "0.2.5"
   },
   "devDependencies": {
     "@babel/core": "7.18.2",

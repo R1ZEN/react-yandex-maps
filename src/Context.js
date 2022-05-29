@@ -1,8 +1,7 @@
 import React from 'react';
-import createReactContext from 'create-react-context';
 import name from 'react-display-name';
 
-export const YMapsContext = createReactContext(null);
+export const YMapsContext = React.createContext(null);
 
 export const withYMapsContext = (Component) => {
   const displayName = name(Component);
@@ -29,7 +28,7 @@ export const withYMapsContext = (Component) => {
   return WithYMapsContext;
 };
 
-export const ParentContext = createReactContext(null);
+export const ParentContext = React.createContext(null);
 
 export const withParentContext = (Component) => {
   const WithParentContext = (props) => (
