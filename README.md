@@ -40,7 +40,7 @@ npm install
    library it will be compiled to `dist` folder
 
 ```sh
-npm run dev
+npm run microbundle:watch
 ```
 
 5. Start storybook server locally
