@@ -1,4 +1,4 @@
-import setValue from './set';
+import { set as setValue } from './set';
 
 describe('set', () => {
   it('should set deeply nested value by provided path', () => {

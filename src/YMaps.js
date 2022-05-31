@@ -1,4 +1,4 @@
-import set from './util/set';
+import { set } from './util/set';
 
 const YMAPS_ONLOAD = '__yandex-maps-api-onload__';
 
