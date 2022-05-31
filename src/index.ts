@@ -2,7 +2,7 @@
 
 export { default as withYMaps } from './withYMaps';
 
-export { default as YMaps } from './Provider';
+export { Provider as YMaps } from './Provider';
 
 /** Parent components */
 

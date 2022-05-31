@@ -4,6 +4,7 @@
   "description": "Yandex.Maps API bindings for React",
   "typings": "typings/index.d.ts",
   "main": "index.js",
+  "source": "src/index.ts",
   "module": "dist/production/react-yandex-maps.esm.js",
   "umd:main": "dist/production/react-yandex-maps.umd.js",
   "unpkg": "dist/production/react-yandex-maps.umd.js",
@@ -41,6 +42,7 @@
     "@babel/core": "7.18.2",
     "@babel/preset-env": "7.18.2",
     "@babel/preset-react": "7.12.13",
+    "@babel/preset-typescript": "7.17.12",
     "@mdx-js/react": "1.6.22",
     "@size-limit/file": "7.0.8",
     "@storybook/addon-essentials": "6.5.5",
@@ -65,7 +67,8 @@
     "react-dom": "16.11.0",
     "react-test-renderer": "16.11.0",
     "release-it": "14.14.3",
-    "size-limit": "7.0.8"
+    "size-limit": "7.0.8",
+    "typescript": "4.7.2"
   },
   "keywords": [
     "react",
