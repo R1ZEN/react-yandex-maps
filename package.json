@@ -35,6 +35,7 @@
     "react": "^16.x || ^17.x || ^18.x"
   },
   "dependencies": {
+    "@types/yandex-maps": "2.1.21",
     "prop-types": "15.8.1",
     "react-display-name": "0.2.5"
   },
