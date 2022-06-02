@@ -1,32 +1,29 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../withYMaps';
 
-import { BaseGeoObject } from './BaseGeoObject';
-import {
-  IDataManager,
-  IOptionManager,
-  IPixelRectangleGeometry,
-} from 'yandex-maps';
+import { BaseGeoObject, BaseGeoObjectProps } from './BaseGeoObject';
+import { IDataManager, IGeometry, IOptionManager } from 'yandex-maps';
+import { AnyObject, WithInstanceRef } from '../util/typing';
 
-interface RectangleProps {
+interface RectangleProps extends Omit<BaseGeoObjectProps, 'name'> {
   /**
    * Rectangle [geometry](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Rectangle-docpage/#param-geometry)
    */
-  geometry?: IPixelRectangleGeometry;
+  geometry?: IGeometry[][][][] | number[][] | object;
   /**
    * Uncontrolled Rectangle [geometry](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Rectangle-docpage/#param-geometry)
    */
-  defaultGeometry?: IPixelRectangleGeometry;
+  defaultGeometry?: IGeometry[][][][] | number[][] | object;
   /**
    * Rectangle [properties](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Rectangle-docpage/#param-properties)
    */
-  properties?: IDataManager;
+  properties?: AnyObject | IDataManager;
   /**
    * Uncontrolled Rectangle [properties](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Rectangle-docpage/#param-properties)
    */
-  defaultProperties?: IDataManager;
+  defaultProperties?: AnyObject | IDataManager;
   /**
    * Rectangle [options](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Rectangle-docpage/#param-options)
    */
@@ -37,8 +34,16 @@ interface RectangleProps {
   defaultOptions?: IOptionManager;
 }
 
-export const Rectangle = (props: RectangleProps) => {
+export const Rectangle: React.FC<
+  RectangleProps & WithYMapsProps & WithInstanceRef & AnyObject
+> = (props) => {
   return <BaseGeoObject {...props} name="Rectangle" />;
 };
 
-export default withParentContext(withYMaps(Rectangle, true, ['Rectangle']));
+export default withParentContext(
+  withYMaps<RectangleProps & WithYMapsProps & WithInstanceRef>(
+    Rectangle,
+    true,
+    ['Rectangle']
+  )
+);

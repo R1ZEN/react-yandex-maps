@@ -1,12 +1,13 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../withYMaps';
 
-import { BaseControl } from './BaseControl';
+import { BaseControl, BaseControlProps } from './BaseControl';
 import { data, IOptionManager } from 'yandex-maps';
+import { AnyObject, WithInstanceRef } from '../util/typing';
 
-interface TypeSelectorProps {
+interface TypeSelectorProps extends Omit<BaseControlProps, 'name'> {
   /**
    * [Array of constructors for map types](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/control.TypeSelector-docpage/#control.TypeSelector__param-parameters.mapTypes) or keys. If the parameter is omitted, the item is added to the standard set of map types.
    */
@@ -33,10 +34,16 @@ interface TypeSelectorProps {
   defaultState?: data.Manager;
 }
 
-export const TypeSelector = (props: TypeSelectorProps) => {
+export const TypeSelector: React.FC<
+  TypeSelectorProps & WithYMapsProps & WithInstanceRef & AnyObject
+> = (props) => {
   return <BaseControl {...props} name="TypeSelector" />;
 };
 
 export default withParentContext(
-  withYMaps(TypeSelector, true, [`control.TypeSelector`])
+  withYMaps<TypeSelectorProps & WithYMapsProps & WithInstanceRef & AnyObject>(
+    TypeSelector,
+    true,
+    [`control.TypeSelector`]
+  )
 );

@@ -1,28 +1,29 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../withYMaps';
 
-import { BaseGeoObject } from './BaseGeoObject';
+import { BaseGeoObject, BaseGeoObjectProps } from './BaseGeoObject';
 import { IDataManager, IGeometry, IPlacemarkOptions } from 'yandex-maps';
+import { AnyObject, WithInstanceRef } from '../util/typing';
 
-interface PlacemarkProps {
+interface PlacemarkProps extends Omit<BaseGeoObjectProps, 'name'> {
   /**
    * Placemark [geometry](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Placemark-docpage/#param-geometry)
    */
-  geometry?: IGeometry;
+  geometry?: IGeometry[][][][] | number[][] | object;
   /**
    * Uncontrolled Placemark [geometry](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Placemark-docpage/#param-geometry)
    */
-  defaultGeometry?: IGeometry;
+  defaultGeometry?: IGeometry[][][][] | number[][] | object;
   /**
    * Placemark [properties](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Placemark-docpage/#param-properties)
    */
-  properties?: IDataManager;
+  properties?: AnyObject | IDataManager;
   /**
    * Uncontrolled Placemark [properties](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Placemark-docpage/#param-properties)
    */
-  defaultProperties?: IDataManager;
+  defaultProperties?: AnyObject | IDataManager;
   /**
    * Placemark [options](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Placemark-docpage/#param-options)
    */
@@ -33,8 +34,16 @@ interface PlacemarkProps {
   defaultOptions?: IPlacemarkOptions;
 }
 
-export const Placemark = (props: PlacemarkProps) => {
+export const Placemark: React.FC<
+  PlacemarkProps & WithYMapsProps & WithInstanceRef & AnyObject
+> = (props) => {
   return <BaseGeoObject {...props} name="Placemark" />;
 };
 
-export default withParentContext(withYMaps(Placemark, true, ['Placemark']));
+export default withParentContext(
+  withYMaps<PlacemarkProps & WithYMapsProps & WithInstanceRef & AnyObject>(
+    Placemark,
+    true,
+    ['Placemark']
+  )
+);

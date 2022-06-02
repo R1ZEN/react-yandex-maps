@@ -5,9 +5,9 @@
   "typings": "typings/index.d.ts",
   "main": "index.js",
   "source": "src/index.ts",
-  "module": "dist/production/react-yandex-maps.esm.js",
-  "umd:main": "dist/production/react-yandex-maps.umd.js",
-  "unpkg": "dist/production/react-yandex-maps.umd.js",
+  "module": "dist/react-yandex-maps.esm.js",
+  "umd:main": "dist/react-yandex-maps.umd.js",
+  "unpkg": "dist/react-yandex-maps.umd.js",
   "files": [
     "README.md",
     "dist",
@@ -21,11 +21,10 @@
     "clear": "rm -rf dist",
     "prettier": "prettier --write",
     "lint": "eslint",
-    "build": "npm run clear && npm run microbundle:production && npm run microbundle:development && size-limit",
-    "microbundle": "microbundle --generateTypes false --jsx React.createElement --name ReactYandexMaps --external react --globals react=React --define process.env.NODE_ENV=\"${NODE_ENV}\"",
-    "microbundle:production": "cross-env NODE_ENV=production npm run microbundle -- --output ./dist/production",
-    "microbundle:development": "cross-env NODE_ENV=development npm run microbundle -- --output ./dist/development",
-    "microbundle:watch": "cross-env NODE_ENV=development npm run microbundle -- --output ./dist/development --no-compress --watch",
+    "build": "npm run clear && npm run microbundle:production && size-limit",
+    "microbundle": "microbundle --jsx React.createElement --name ReactYandexMaps --external react --globals react=React --define process.env.NODE_ENV=\"${NODE_ENV}\"",
+    "microbundle:production": "cross-env NODE_ENV=production npm run microbundle -- --output ./dist",
+    "microbundle:develop": "npm run microbundle:production -- --no-compress --watch",
     "release": "release-it",
     "test": "jest",
     "sb:dev": "start-storybook -p 6006",
@@ -36,7 +35,6 @@
   },
   "dependencies": {
     "@types/yandex-maps": "2.1.21",
-    "prop-types": "15.8.1",
     "react-display-name": "0.2.5"
   },
   "devDependencies": {
@@ -51,6 +49,7 @@
     "@storybook/builder-webpack4": "6.5.5",
     "@storybook/manager-webpack4": "6.5.5",
     "@storybook/react": "6.5.5",
+    "@types/react": "16.14.26",
     "@typescript-eslint/eslint-plugin": "5.27.0",
     "@typescript-eslint/parser": "5.27.0",
     "babel-jest": "25.0.0",
@@ -98,7 +97,7 @@
     }
   },
   "lint-staged": {
-    "*.js": [
+    "*.{ts,tsx}": [
       "npm run lint",
       "npm run prettier",
       "git add"

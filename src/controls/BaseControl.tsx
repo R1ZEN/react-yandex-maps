@@ -6,18 +6,10 @@ import * as events from '../util/events';
 import { getProp, isControlledProp } from '../util/props';
 import { ParentContext } from '../Context';
 import applyRef from '../util/ref';
-import { AnyObject } from '../util/typing';
+import { AnyObject, WithInstanceRef } from '../util/typing';
 import ymaps from 'yandex-maps';
 
-interface BaseControlProps {
-  children?: ReactNode;
-
-  /** ref prop but for Yandex.Maps object instances */
-  instanceRef?: () => void;
-
-  /** Yandex.Maps API object */
-  ymaps?: typeof ymaps;
-
+export interface BaseControlProps {
   /** Parent object (e.g, ymaps.Map or ymaps.Clusterer) */
   parent?: AnyObject;
 
@@ -39,7 +31,9 @@ interface BaseControlProps {
   >;
 }
 
-export class BaseControl extends React.Component<BaseControlProps> {
+export class BaseControl extends React.Component<
+  BaseControlProps & WithInstanceRef
+> {
   constructor() {
     super();
     this.state = { instance: null };

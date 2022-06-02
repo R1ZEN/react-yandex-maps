@@ -1,12 +1,13 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../withYMaps';
 
-import { BaseControl } from './BaseControl';
+import { BaseControl, BaseControlProps } from './BaseControl';
 import { control, IDataManager } from 'yandex-maps';
+import { AnyObject, WithInstanceRef } from '../util/typing';
 
-interface FullscreenControlProps {
+interface FullscreenControlProps extends Omit<BaseControlProps, 'name'> {
   /**
    * Control [data](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/control.FullscreenControl-docpage/#control.FullscreenControl__param-parameters.data)
    */
@@ -33,10 +34,14 @@ interface FullscreenControlProps {
   defaultState?: IDataManager;
 }
 
-export const FullscreenControl = (props: FullscreenControlProps) => {
+export const FullscreenControl: React.FC<
+  FullscreenControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+> = (props) => {
   return <BaseControl {...props} name="FullscreenControl" />;
 };
 
 export default withParentContext(
-  withYMaps(FullscreenControl, true, [`control.FullscreenControl`])
+  withYMaps<
+    FullscreenControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+  >(FullscreenControl, true, [`control.FullscreenControl`])
 );

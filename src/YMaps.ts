@@ -21,7 +21,7 @@ const YMAPS_DEFAULT_QUERY = {
 const PROMISES = {};
 
 export class YMaps {
-  options: YMapProvider;
+  options: any;
   namespace: string;
 
   onload: string;

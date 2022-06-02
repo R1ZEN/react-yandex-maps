@@ -1,12 +1,13 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../withYMaps';
 
-import { BaseControl } from './BaseControl';
+import { BaseControl, BaseControlProps } from './BaseControl';
 import { control } from 'yandex-maps';
+import { AnyObject, WithInstanceRef } from '../util/typing';
 
-interface RulerControlProps {
+interface RulerControlProps extends Omit<BaseControlProps, 'name'> {
   /**
    * Control [data](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/control.RulerControl-docpage/#control.RulerControl__param-parameters.data)
    */
@@ -33,10 +34,16 @@ interface RulerControlProps {
   defaultState?: control.IRulerControlParameters['state'];
 }
 
-export const RulerControl = (props: RulerControlProps) => {
+export const RulerControl: React.FC<
+  RulerControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+> = (props) => {
   return <BaseControl {...props} name="RulerControl" />;
 };
 
 export default withParentContext(
-  withYMaps(RulerControl, true, [`control.RulerControl`])
+  withYMaps<RulerControlProps & WithYMapsProps & WithInstanceRef & AnyObject>(
+    RulerControl,
+    true,
+    [`control.RulerControl`]
+  )
 );

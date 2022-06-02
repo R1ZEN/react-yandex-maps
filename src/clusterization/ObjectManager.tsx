@@ -5,10 +5,46 @@ import React from 'react';
 import * as events from '../util/events';
 import { getProp, isControlledProp } from '../util/props';
 import { withParentContext } from '../Context';
-import withYMaps from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../withYMaps';
 import applyRef from '../util/ref';
+import { AnyFunction, AnyObject, WithInstanceRef } from '../util/typing';
 
-export class ObjectManager extends React.Component {
+interface ObjectManagerProps {
+  /**
+   * ObjectManager [features](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/ObjectManager-docpage/#method_detail__add-param-objects)
+   */
+  features?: AnyObject;
+  /**
+   * Uncontrolled ObjectManager [features](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/ObjectManager-docpage/#method_detail__add-param-objects)
+   */
+  defaultFeatures?: AnyObject;
+  /**
+   * ObjectManager [features filter](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/ObjectManager-docpage/#method_detail__setFilter-param-filterFunction)
+   */
+  filter?: AnyFunction;
+  /**
+   * Uncontrolled ObjectManager [features filter](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/ObjectManager-docpage/#method_detail__setFilter-param-filterFunction)
+   */
+  defaultFilter?: AnyFunction;
+  /**
+   * ObjectManager [options](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/ObjectManager-docpage/#ObjectManager__param-options)
+   */
+  options?: AnyObject;
+  /**
+   * Uncontrolled ObjectManager [options](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/ObjectManager-docpage/#ObjectManager__param-options)
+   */
+  defaultOptions?: AnyObject;
+  /** ObjectManager object options */
+  objects?: AnyObject;
+  defaultObjects?: AnyObject;
+  /** ObjectManager clusters options */
+  clusters?: AnyObject;
+  defaultClusters?: AnyObject;
+}
+
+export class ObjectManager extends React.Component<
+  ObjectManagerProps & WithYMapsProps & WithInstanceRef & AnyObject
+> {
   constructor() {
     super();
     this.state = { instance: null };
@@ -149,5 +185,9 @@ export class ObjectManager extends React.Component {
 }
 
 export default withParentContext(
-  withYMaps(ObjectManager, true, ['ObjectManager'])
+  withYMaps<ObjectManagerProps & WithYMapsProps & WithInstanceRef & AnyObject>(
+    ObjectManager,
+    true,
+    ['ObjectManager']
+  )
 );

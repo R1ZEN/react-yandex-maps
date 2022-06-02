@@ -1,22 +1,33 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import React, { CSSProperties, ReactNode } from 'react';
+import React, { CSSProperties } from 'react';
 import { getProp, isControlledProp } from './util/props';
-import withYMaps from './withYMaps';
+import withYMaps, { WithYMapsProps } from './withYMaps';
 import * as events from './util/events';
 import applyRef from './util/ref';
 import getParentElementSize from './util/getParentElementSize';
 import ymaps from 'yandex-maps';
+import { AnyObject, WithInstanceRef } from './util/typing';
+
+interface PanoramaOptions {
+  autoFitToViewport?: 'none' | 'ifNull' | 'always' | undefined;
+  controls?: string[] | undefined;
+  direction?: number[] | string | undefined;
+  hotkeysEnabled?: boolean | undefined;
+  scrollZoomBehavior?: boolean | undefined;
+  span?: number[] | string | undefined;
+  suppressMapOpenBlock?: boolean | undefined;
+}
 
 interface PanoramaProps {
   /**
    * [Panorama options](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/panorama.Player-docpage/#panorama.Player__param-options)
    */
-  options?: Record<string, unknown>;
+  options?: PanoramaOptions;
   /**
    * Uncontrolled [Panorama options](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/panorama.Player-docpage/#panorama.Player__param-options)
    */
-  defaultOptions?: Record<string, unknown>;
+  defaultOptions?: PanoramaOptions;
 
   /**
    * The point for searching for nearby panoramas.
@@ -31,8 +42,6 @@ interface PanoramaProps {
    * Panorama [locate options](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/panorama.locate-docpage/#panorama.locate__param-options)
    */
   locateOptions?: { layer: ymaps.panorama.Layer };
-
-  children?: ReactNode | undefined;
 
   /**
    * Yandex.Maps Panorama parent element should have at least
@@ -67,7 +76,9 @@ interface PanoramaProps {
   className?: string;
 }
 
-export class Panorama extends React.Component<PanoramaProps> {
+export class Panorama extends React.Component<
+  PanoramaProps & WithYMapsProps & WithInstanceRef
+> {
   constructor() {
     super();
     this.state = { instance: null };
@@ -181,7 +192,9 @@ export class Panorama extends React.Component<PanoramaProps> {
   }
 }
 
-const YMapsPanorama = withYMaps(Panorama, true, [
+const YMapsPanorama = withYMaps<
+  PanoramaProps & WithYMapsProps & WithInstanceRef & AnyObject
+>(Panorama, true, [
   'panorama.isSupported',
   'panorama.locate',
   'panorama.createPlayer',

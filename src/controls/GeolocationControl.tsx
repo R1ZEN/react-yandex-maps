@@ -1,12 +1,13 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../withYMaps';
 
-import { BaseControl } from './BaseControl';
+import { BaseControl, BaseControlProps } from './BaseControl';
 import { control } from 'yandex-maps';
+import { AnyObject, WithInstanceRef } from '../util/typing';
 
-interface GeolocationControlProps {
+interface GeolocationControlProps extends Omit<BaseControlProps, 'name'> {
   /**
    * Control [data](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/control.GeolocationControl-docpage/#control.GeolocationControl__param-parameters.data)
    */
@@ -33,10 +34,14 @@ interface GeolocationControlProps {
   defaultState?: control.IGeolocationControlParameters['state'];
 }
 
-export const GeolocationControl = (props: GeolocationControlProps) => {
+export const GeolocationControl: React.FC<
+  GeolocationControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+> = (props) => {
   return <BaseControl {...props} name="GeolocationControl" />;
 };
 
 export default withParentContext(
-  withYMaps(GeolocationControl, true, [`control.GeolocationControl`])
+  withYMaps<
+    GeolocationControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+  >(GeolocationControl, true, [`control.GeolocationControl`])
 );

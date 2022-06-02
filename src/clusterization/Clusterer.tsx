@@ -5,9 +5,10 @@ import React, { ReactNode } from 'react';
 import * as events from '../util/events';
 import { getProp, isControlledProp } from '../util/props';
 import { withParentContext, ParentContext } from '../Context';
-import withYMaps from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../withYMaps';
 import applyRef from '../util/ref';
 import { IClustererOptions } from 'yandex-maps';
+import { AnyFunction, AnyObject, WithInstanceRef } from '../util/typing';
 
 interface ClusterProps {
   /** Clusterer [options](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Clusterer-docpage/) */
@@ -15,10 +16,18 @@ interface ClusterProps {
   /** Uncontrolled Clusterer [options](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Clusterer-docpage/) */
   defaultOptions?: IClustererOptions;
 
+  instanceRef?: AnyFunction;
+
+  ymaps?: typeof ymaps;
+
+  parent?: AnyObject;
+
   children?: ReactNode;
 }
 
-export class Clusterer extends React.Component<ClusterProps> {
+export class Clusterer extends React.Component<
+  ClusterProps & WithYMapsProps & WithInstanceRef & AnyObject
+> {
   constructor() {
     super();
     this.state = { instance: null };
@@ -114,4 +123,10 @@ export class Clusterer extends React.Component<ClusterProps> {
   }
 }
 
-export default withParentContext(withYMaps(Clusterer, true, ['Clusterer']));
+export default withParentContext(
+  withYMaps<ClusterProps & WithYMapsProps & WithInstanceRef & AnyObject>(
+    Clusterer,
+    true,
+    ['Clusterer']
+  )
+);

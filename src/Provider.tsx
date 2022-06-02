@@ -1,9 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { YMapsContext } from './Context';
 import { YMaps } from './YMaps';
+import { AnyObject } from './util/typing';
 
 interface YMapProvider {
-  version: string;
+  version?: string;
   enterprise?: boolean;
   /**
    *  Yandex.Maps API avaliable query params
@@ -12,15 +13,15 @@ interface YMapProvider {
    *  by the library: onload, onerror
    */
   query?: {
-    lang: 'tr_TR' | 'en_US' | 'en_RU' | 'ru_RU' | 'ru_UA' | 'uk_UA';
-    apikey: string;
-    coordorder: 'latlong' | 'longlat';
-    load: string;
-    mode: 'release' | 'debug';
-    csp: boolean;
-    ns: string;
+    lang?: 'tr_TR' | 'en_US' | 'en_RU' | 'ru_RU' | 'ru_UA' | 'uk_UA';
+    apikey?: string;
+    coordorder?: 'latlong' | 'longlat';
+    load?: string;
+    mode?: 'release' | 'debug';
+    csp?: boolean;
+    ns?: string;
   };
-
+  children?: React.ReactNode;
   /**
    *  Allows provider to preload Yandex.Maps API even if
    *  there are no map components on the page
@@ -37,7 +38,7 @@ export const Provider: React.FC<YMapProvider> = (props) => {
     children,
   } = props;
 
-  const ymapsRef = useRef<any>(
+  const ymapsRef = useRef<AnyObject>(
     new YMaps({ version, enterprise, query, preload })
   );
 

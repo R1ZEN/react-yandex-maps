@@ -1,12 +1,13 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../withYMaps';
 
-import { BaseControl } from './BaseControl';
+import { BaseControl, BaseControlProps } from './BaseControl';
 import { data, IDataManager, IOptionManager } from 'yandex-maps';
+import { AnyObject, WithInstanceRef } from '../util/typing';
 
-interface ButtonProps {
+interface ButtonProps extends Omit<BaseControlProps, 'name'> {
   /**
    * Control [data](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/control.Button-docpage/#control.Button__param-parameters.data)
    */
@@ -33,8 +34,16 @@ interface ButtonProps {
   defaultState?: IDataManager;
 }
 
-export const Button = (props: ButtonProps) => {
+export const Button: React.FC<
+  ButtonProps & WithYMapsProps & WithInstanceRef & AnyObject
+> = (props) => {
   return <BaseControl {...props} name="Button" />;
 };
 
-export default withParentContext(withYMaps(Button, true, [`control.Button`]));
+export default withParentContext(
+  withYMaps<ButtonProps & WithYMapsProps & WithInstanceRef & AnyObject>(
+    Button,
+    true,
+    [`control.Button`]
+  )
+);

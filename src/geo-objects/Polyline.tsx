@@ -1,12 +1,13 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../withYMaps';
 
-import { BaseGeoObject } from './BaseGeoObject';
+import { BaseGeoObject, BaseGeoObjectProps } from './BaseGeoObject';
 import { IDataManager, IPolygonGeometry, IPolylineOptions } from 'yandex-maps';
+import { AnyObject, WithInstanceRef } from '../util/typing';
 
-interface PolylineProps {
+interface PolylineProps extends Omit<BaseGeoObjectProps, 'name'> {
   /**
    * Polyline [geometry](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Polyline-docpage/#param-geometry)
    */
@@ -18,11 +19,11 @@ interface PolylineProps {
   /**
    * Polyline [properties](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Polyline-docpage/#param-properties)
    */
-  properties?: IDataManager;
+  properties?: AnyObject | IDataManager;
   /**
    * Uncontrolled Polyline [properties](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Polyline-docpage/#param-properties)
    */
-  defaultProperties?: IDataManager;
+  defaultProperties?: AnyObject | IDataManager;
   /**
    * Polyline [options](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Polyline-docpage/#param-options)
    */
@@ -33,8 +34,14 @@ interface PolylineProps {
   defaultOptions?: IPolylineOptions;
 }
 
-export const Polyline = (props: PolylineProps) => {
+export const Polyline: React.FC<
+  PolylineProps & WithYMapsProps & WithInstanceRef & AnyObject
+> = (props) => {
   return <BaseGeoObject {...props} name="Polyline" />;
 };
 
-export default withParentContext(withYMaps(Polyline, true, ['Polyline']));
+export default withParentContext(
+  withYMaps<PolylineProps & WithYMapsProps & WithInstanceRef>(Polyline, true, [
+    'Polyline',
+  ])
+);

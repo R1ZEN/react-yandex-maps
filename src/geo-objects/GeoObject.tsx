@@ -1,36 +1,37 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../withYMaps';
 
-import { BaseGeoObject } from './BaseGeoObject';
-import { IDataManager, IGeometry, IOptionManager } from 'yandex-maps';
+import { BaseGeoObject, BaseGeoObjectProps } from './BaseGeoObject';
+import { AnyObject, WithInstanceRef } from '../util/typing';
+import { IDataManager, IGeometry } from 'yandex-maps';
 
-interface GeoObjectProps {
+interface GeoObjectProps extends Omit<BaseGeoObjectProps, 'name'> {
   /**
    * GeoObject [feature.geometry](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/GeoObject-docpage/#param-feature.geometry)
    */
-  geometry?: IGeometry;
+  geometry?: IGeometry[][][][] | number[][] | object;
   /**
    * Uncontrolled GeoObject [feature.geometry](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/GeoObject-docpage/#param-feature.geometry)
    */
-  defaultGeometry?: IGeometry;
+  defaultGeometry?: IGeometry[][][][] | number[][] | object;
   /**
    * GeoObject [feature.properties](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/GeoObject-docpage/#param-feature.properties)
    */
-  properties?: IDataManager;
+  properties?: AnyObject | IDataManager;
   /**
    * Uncontrolled GeoObject [feature.properties](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/GeoObject-docpage/#param-feature.properties)
    */
-  defaultProperties?: IDataManager;
+  defaultProperties?: AnyObject | IDataManager;
   /**
    * GeoObject [options](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/GeoObject-docpage/#param-options)
    */
-  options?: IOptionManager;
+  options?: AnyObject;
   /**
    * Uncontrolled GeoObject [options](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/GeoObject-docpage/#param-options)
    */
-  defaultOptions?: IOptionManager;
+  defaultOptions?: AnyObject;
 }
 
 const geoObjectDangerZoneProps = {
@@ -62,7 +63,9 @@ const geoObjectDangerZoneProps = {
   },
 };
 
-export const GeoObject = (props: GeoObjectProps) => {
+export const GeoObject: React.FC<
+  GeoObjectProps & WithYMapsProps & WithInstanceRef & AnyObject
+> = (props) => {
   return (
     <BaseGeoObject
       {...props}
@@ -72,4 +75,10 @@ export const GeoObject = (props: GeoObjectProps) => {
   );
 };
 
-export default withParentContext(withYMaps(GeoObject, true, ['GeoObject']));
+export default withParentContext(
+  withYMaps<GeoObjectProps & WithYMapsProps & WithInstanceRef>(
+    GeoObject,
+    true,
+    ['GeoObject']
+  )
+);

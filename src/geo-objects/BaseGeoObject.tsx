@@ -4,16 +4,9 @@ import React from 'react';
 import * as events from '../util/events';
 import { getProp, isControlledProp } from '../util/props';
 import applyRef from '../util/ref';
-import ymaps from 'yandex-maps';
-import { AnyFunction, AnyObject } from '../util/typing';
+import { AnyFunction, AnyObject, WithInstanceRef } from '../util/typing';
 
 export interface BaseGeoObjectProps {
-  /** ref prop but for Yandex.Maps object instances */
-  instanceRef?: () => void;
-
-  /** Yandex.Maps API object */
-  ymaps?: typeof ymaps;
-
   /** Parent object (e.g, ymaps.Map or ymaps.Clusterer) */
   parent?: AnyObject;
 
@@ -29,7 +22,9 @@ export interface BaseGeoObjectProps {
   dangerZone?: { modifyConstructor: AnyFunction };
 }
 
-export class BaseGeoObject extends React.Component<BaseGeoObjectProps> {
+export class BaseGeoObject extends React.Component<
+  BaseGeoObjectProps & WithInstanceRef
+> {
   constructor() {
     super();
     this.state = { instance: null };

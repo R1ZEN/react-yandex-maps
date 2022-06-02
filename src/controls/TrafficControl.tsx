@@ -1,12 +1,13 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../withYMaps';
 
-import { BaseControl } from './BaseControl';
+import { BaseControl, BaseControlProps } from './BaseControl';
 import { data, IOptionManager } from 'yandex-maps';
+import { AnyObject, WithInstanceRef } from '../util/typing';
 
-interface TrafficControlProps {
+interface TrafficControlProps extends Omit<BaseControlProps, 'name'> {
   /**
    * Control [data](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/control.TrafficControl-docpage/#control.TrafficControl__param-parameters.data)
    */
@@ -34,10 +35,16 @@ interface TrafficControlProps {
   defaultState?: data.Manager;
 }
 
-export const TrafficControl = (props: TrafficControlProps) => {
+export const TrafficControl: React.FC<
+  TrafficControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+> = (props) => {
   return <BaseControl {...props} name="TrafficControl" />;
 };
 
 export default withParentContext(
-  withYMaps(TrafficControl, true, [`control.TrafficControl`])
+  withYMaps<TrafficControlProps & WithYMapsProps & WithInstanceRef & AnyObject>(
+    TrafficControl,
+    true,
+    [`control.TrafficControl`]
+  )
 );

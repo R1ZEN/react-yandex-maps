@@ -1,12 +1,13 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../withYMaps';
 
-import { BaseControl } from './BaseControl';
+import { BaseControl, BaseControlProps } from './BaseControl';
 import { control } from 'yandex-maps';
+import { AnyObject, WithInstanceRef } from '../util/typing';
 
-interface RouteButtonProps {
+interface RouteButtonProps extends Omit<BaseControlProps, 'name'> {
   /**
    * Control [options](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/control.RouteButton-docpage/#control.RouteButton__param-parameters.options)
    */
@@ -25,10 +26,16 @@ interface RouteButtonProps {
   defaultState?: control.IRouteButtonParameters['state'];
 }
 
-export const RouteButton = (props: RouteButtonProps) => {
+export const RouteButton: React.FC<
+  RouteButtonProps & WithYMapsProps & WithInstanceRef & AnyObject
+> = (props) => {
   return <BaseControl {...props} name="RouteButton" />;
 };
 
 export default withParentContext(
-  withYMaps(RouteButton, true, [`control.RouteButton`])
+  withYMaps<RouteButtonProps & WithYMapsProps & WithInstanceRef & AnyObject>(
+    RouteButton,
+    true,
+    [`control.RouteButton`]
+  )
 );

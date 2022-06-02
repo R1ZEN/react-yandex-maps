@@ -1,5 +1,6 @@
 node_modules
 dist
+typings
 
 *.tmp
 
@@ -14,6 +15,8 @@ dist
 !.travis.yml
 !.size-limit.js
 !.storybook
+!.prettierrc.yml
+!.babelrc.js
 
 yarn.lock
 package-lock.json

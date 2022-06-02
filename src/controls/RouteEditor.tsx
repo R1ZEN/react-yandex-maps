@@ -1,12 +1,13 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../withYMaps';
 
-import { BaseControl } from './BaseControl';
+import { BaseControl, BaseControlProps } from './BaseControl';
 import { control } from 'yandex-maps';
+import { AnyObject, WithInstanceRef } from '../util/typing';
 
-interface RouteEditorProps {
+interface RouteEditorProps extends Omit<BaseControlProps, 'name'> {
   /**
    * Control [data](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/control.RouteEditor-docpage/#control.RouteEditor__param-parameters.data)
    */
@@ -33,10 +34,16 @@ interface RouteEditorProps {
   defaultState?: control.IRouteEditorParameters['state'];
 }
 
-export const RouteEditor = (props: RouteEditorProps) => {
+export const RouteEditor: React.FC<
+  RouteEditorProps & WithYMapsProps & WithInstanceRef & AnyObject
+> = (props) => {
   return <BaseControl {...props} name="RouteEditor" />;
 };
 
 export default withParentContext(
-  withYMaps(RouteEditor, true, [`control.RouteEditor`])
+  withYMaps<RouteEditorProps & WithYMapsProps & WithInstanceRef & AnyObject>(
+    RouteEditor,
+    true,
+    [`control.RouteEditor`]
+  )
 );

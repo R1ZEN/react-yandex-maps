@@ -14,5 +14,6 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true
-  }
+  },
+  "include": ["src/util/typing.ts"]
 }

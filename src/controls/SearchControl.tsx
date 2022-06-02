@@ -1,12 +1,13 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../withYMaps';
 
-import { BaseControl } from './BaseControl';
+import { BaseControl, BaseControlProps } from './BaseControl';
 import { control } from 'yandex-maps';
+import { AnyObject, WithInstanceRef } from '../util/typing';
 
-interface SearchControlProps {
+interface SearchControlProps extends Omit<BaseControlProps, 'name'> {
   /**
    * Control [data](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/control.SearchControl-docpage/#control.SearchControl__param-parameters.data)
    */
@@ -33,10 +34,16 @@ interface SearchControlProps {
   defaultState?: control.ISearchControlParameters['state'];
 }
 
-export const SearchControl = (props: SearchControlProps) => {
+export const SearchControl: React.FC<
+  SearchControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+> = (props) => {
   return <BaseControl {...props} name="SearchControl" />;
 };
 
 export default withParentContext(
-  withYMaps(SearchControl, true, [`control.SearchControl`])
+  withYMaps<SearchControlProps & WithYMapsProps & WithInstanceRef & AnyObject>(
+    SearchControl,
+    true,
+    [`control.SearchControl`]
+  )
 );

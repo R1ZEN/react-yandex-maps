@@ -1,12 +1,13 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../withYMaps';
 
-import { BaseControl } from './BaseControl';
+import { BaseControl, BaseControlProps } from './BaseControl';
 import { control, data } from 'yandex-maps';
+import { AnyObject, WithInstanceRef } from '../util/typing';
 
-interface ZoomControlProps {
+interface ZoomControlProps extends Omit<BaseControlProps, 'name'> {
   /**
    * Control [data](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/control.ZoomControl-docpage/#control.ZoomControl__param-parameters.data)
    */
@@ -34,10 +35,16 @@ interface ZoomControlProps {
   defaultState?: data.Manager;
 }
 
-export const ZoomControl = (props: ZoomControlProps) => {
+export const ZoomControl: React.FC<
+  ZoomControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+> = (props) => {
   return <BaseControl {...props} name="ZoomControl" />;
 };
 
 export default withParentContext(
-  withYMaps(ZoomControl, true, [`control.ZoomControl`])
+  withYMaps<ZoomControlProps & WithYMapsProps & WithInstanceRef & AnyObject>(
+    ZoomControl,
+    true,
+    [`control.ZoomControl`]
+  )
 );

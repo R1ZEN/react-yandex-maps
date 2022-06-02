@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { separateEvents, addEvent, removeEvent, updateEvents } from './events';
 import MockGeoObject from '../__mocks__/MockGeoObject';
 

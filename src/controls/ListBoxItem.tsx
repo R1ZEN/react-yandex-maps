@@ -1,10 +1,11 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../withYMaps';
 
 import { BaseControl } from './BaseControl';
 import { control } from 'yandex-maps';
+import { AnyObject, WithInstanceRef } from '../util/typing';
 
 interface ListBoxItemProps {
   /**
@@ -33,10 +34,16 @@ interface ListBoxItemProps {
   defaultState?: control.IListBoxItemParameters['state'];
 }
 
-export const ListBoxItem = (props: ListBoxItemProps) => {
+export const ListBoxItem: React.FC<
+  ListBoxItemProps & WithYMapsProps & WithInstanceRef & AnyObject
+> = (props) => {
   return <BaseControl {...props} name="ListBoxItem" />;
 };
 
 export default withParentContext(
-  withYMaps(ListBoxItem, true, [`control.ListBoxItem`])
+  withYMaps<ListBoxItemProps & WithYMapsProps & WithInstanceRef & AnyObject>(
+    ListBoxItem,
+    true,
+    [`control.ListBoxItem`]
+  )
 );

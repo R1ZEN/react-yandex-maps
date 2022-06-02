@@ -1,14 +1,15 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 import React from 'react';
 import name from 'react-display-name';
+import { AnyObject } from './util/typing';
 
-export const YMapsContext = React.createContext(null);
+export const YMapsContext = React.createContext<AnyObject | null>(null);
 
-export const withYMapsContext = (Component) => {
+export const withYMapsContext = <TComponent extends React.ComponentType>(
+  Component: TComponent
+): TComponent => {
   const displayName = name(Component);
 
-  const WithYMapsContext = (props) => (
+  const WithYMapsContext: React.FC = (props) => (
     <YMapsContext.Consumer>
       {(ymaps) => {
         if (ymaps === null) {
@@ -18,6 +19,9 @@ export const withYMapsContext = (Component) => {
 
           throw new Error(message);
         }
+
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         return <Component ymaps={ymaps} {...props} />;
       }}
     </YMapsContext.Consumer>
@@ -27,15 +31,21 @@ export const withYMapsContext = (Component) => {
     WithYMapsContext.displayName = `withYMapsContext(${displayName})`;
   }
 
-  return WithYMapsContext;
+  return WithYMapsContext as TComponent;
 };
 
 export const ParentContext = React.createContext(null);
 
-export const withParentContext = (Component) => {
-  const WithParentContext = (props) => (
+export const withParentContext = <TComponent extends React.ComponentType>(
+  Component: TComponent
+): TComponent => {
+  const WithParentContext: React.FC = (props) => (
     <ParentContext.Consumer>
-      {(parent) => <Component parent={parent} {...props} />}
+      {(parent) => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        return <Component parent={parent} {...props} />;
+      }}
     </ParentContext.Consumer>
   );
 
@@ -43,5 +53,5 @@ export const withParentContext = (Component) => {
     WithParentContext.displayName = `withParentContext(${name(Component)})`;
   }
 
-  return WithParentContext;
+  return WithParentContext as TComponent;
 };

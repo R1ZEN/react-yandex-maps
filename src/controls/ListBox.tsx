@@ -1,12 +1,13 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../withYMaps';
 
-import { BaseControl } from './BaseControl';
+import { BaseControl, BaseControlProps } from './BaseControl';
 import { control } from 'yandex-maps';
+import { AnyObject, WithInstanceRef } from '../util/typing';
 
-interface ListBoxProps {
+interface ListBoxProps extends Omit<BaseControlProps, 'name'> {
   /**
    * Control [data](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/control.ListBox-docpage/#control.ListBox__param-parameters.data)
    */
@@ -35,8 +36,16 @@ interface ListBoxProps {
   defaultState?: control.IListBoxParameters['state'];
 }
 
-export const ListBox = (props: ListBoxProps) => {
+export const ListBox: React.FC<
+  ListBoxProps & WithYMapsProps & WithInstanceRef & AnyObject
+> = (props) => {
   return <BaseControl {...props} name="ListBox" />;
 };
 
-export default withParentContext(withYMaps(ListBox, true, [`control.ListBox`]));
+export default withParentContext(
+  withYMaps<ListBoxProps & WithYMapsProps & WithInstanceRef & AnyObject>(
+    ListBox,
+    true,
+    [`control.ListBox`]
+  )
+);

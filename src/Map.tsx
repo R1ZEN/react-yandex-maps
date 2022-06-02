@@ -1,14 +1,15 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import React, { CSSProperties, ReactNode } from 'react';
+import React, { CSSProperties } from 'react';
 import * as events from './util/events';
 import { omit } from './util/omit';
 import { getProp, isControlledProp } from './util/props';
-import withYMaps from './withYMaps';
+import withYMaps, { WithYMapsProps } from './withYMaps';
 import { ParentContext } from './Context';
 import applyRef from './util/ref';
 import getParentElementSize from './util/getParentElementSize';
 import ymaps from 'yandex-maps';
+import { AnyObject, WithInstanceRef } from './util/typing';
 
 interface MapProps {
   /**
@@ -60,11 +61,11 @@ interface MapProps {
    * Map container className
    */
   className?: string;
-
-  children?: ReactNode | undefined;
 }
 
-export class Map extends React.Component<MapProps> {
+export class Map extends React.Component<
+  MapProps & WithYMapsProps & WithInstanceRef
+> {
   constructor() {
     super();
     this.instance = null;
@@ -209,7 +210,9 @@ export class Map extends React.Component<MapProps> {
   }
 }
 
-const YMapsMap = withYMaps(Map, true, ['Map']);
+const YMapsMap = withYMaps<
+  MapProps & WithYMapsProps & WithInstanceRef & AnyObject
+>(Map, true, ['Map']);
 
 YMapsMap.defaultProps = {
   width: 320,
