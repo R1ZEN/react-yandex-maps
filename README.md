@@ -1,7 +1,7 @@
 # @pbe/react-yandex-maps
 
-![npm](https://img.shields.io/npm/v/@pbe/react-yandex-maps)
-![npm bundle size](https://img.shields.io/bundlephobia/minzip/@pbe/react-yandex-maps)
+[![npm](https://img.shields.io/npm/v/@pbe/react-yandex-maps)](https://www.npmjs.com/package/@pbe/react-yandex-maps)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/@pbe/react-yandex-maps)](https://bundlephobia.com/package/@pbe/react-yandex-maps)
 
 [Yandex.Maps JS API][ymaps-api] bindings for React
 
@@ -35,15 +35,7 @@ nvm use
 npm install
 ```
 
-4. Start library build in the watch mode. This command will start microbundle in
-   watch mode, meaning that everytime you make changes to the source of the
-   library it will be compiled to `dist` folder
-
-```sh
-npm run microbundle:watch
-```
-
-5. Start storybook server locally
+4. Start storybook server locally
 
 ```sh
 npm run sb:dev

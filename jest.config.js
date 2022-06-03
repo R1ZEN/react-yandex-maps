@@ -1,5 +1,5 @@
 module.exports = {
-  collectCoverageFrom: ['<rootDir>/src/**/*.js', '!**/*.test.js'],
-  testMatch: ['**/*.test.js', '**/*.test.jsx'],
-  moduleFileExtensions: ['js', 'json', 'jsx'],
+  collectCoverageFrom: ['<rootDir>/src/**/*.ts', '!**/*.test.ts'],
+  testMatch: ['**/*.test.ts', '**/*.test.tsx'],
+  moduleFileExtensions: ['js', 'json', 'jsx', 'ts', 'tsx'],
 };

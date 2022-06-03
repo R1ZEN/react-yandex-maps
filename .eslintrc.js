@@ -3,14 +3,14 @@ const {
 } = require('eslint-plugin-jest');
 
 module.exports = {
-  parser: 'babel-eslint',
+  parser: '@typescript-eslint/parser',
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:storybook/recommended',
-    'plugin:storybook/recommended',
+    'plugin:@typescript-eslint/recommended',
   ],
-  plugins: ['react'],
+  plugins: ['react', '@typescript-eslint'],
   parserOptions: {
     ecmaVersion: 2018,
   },
