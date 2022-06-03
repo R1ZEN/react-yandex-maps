@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import name from 'react-display-name';
-import { AnyObject } from './util/typing';
+import { isDevEnv } from './util/is-dev-env';
+import { ApiLoader } from './util/create-api-loader';
 
-export const YMapsContext = React.createContext<AnyObject | null>(null);
+export const YMapsApiLoaderContext = React.createContext<ApiLoader | null>(
+  null
+);
 
 export const withYMapsContext = <TComponent extends React.ComponentType>(
   Component: TComponent
@@ -10,9 +13,9 @@ export const withYMapsContext = <TComponent extends React.ComponentType>(
   const displayName = name(Component);
 
   const WithYMapsContext: React.FC = (props) => (
-    <YMapsContext.Consumer>
-      {(ymaps) => {
-        if (ymaps === null) {
+    <YMapsApiLoaderContext.Consumer>
+      {(apiLoader) => {
+        if (apiLoader === null) {
           const message =
             "Couldn't find Yandex.Maps API in the context. " +
             `Make sure that <${displayName} /> is inside <YMaps /> provider`;
@@ -22,16 +25,29 @@ export const withYMapsContext = <TComponent extends React.ComponentType>(
 
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        return <Component ymaps={ymaps} {...props} />;
+        return <Component apiLoader={apiLoader} {...props} />;
       }}
-    </YMapsContext.Consumer>
+    </YMapsApiLoaderContext.Consumer>
   );
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (isDevEnv) {
     WithYMapsContext.displayName = `withYMapsContext(${displayName})`;
   }
 
   return WithYMapsContext as TComponent;
+};
+
+export const useYMapsApiLoader = () => {
+  const apiLoader = useContext(YMapsApiLoaderContext);
+  if (apiLoader === null) {
+    const message =
+      "Couldn't find Yandex.Maps API in the context. " +
+      `Make sure that hook useYMaps is inside <YMaps /> provider`;
+
+    throw new Error(message);
+  }
+
+  return apiLoader;
 };
 
 export const ParentContext = React.createContext(null);
@@ -49,7 +65,7 @@ export const withParentContext = <TComponent extends React.ComponentType>(
     </ParentContext.Consumer>
   );
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (isDevEnv) {
     WithParentContext.displayName = `withParentContext(${name(Component)})`;
   }
 

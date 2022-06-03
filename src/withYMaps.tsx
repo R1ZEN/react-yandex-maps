@@ -5,9 +5,9 @@ import { omit } from './util/omit';
 import { withYMapsContext } from './Context';
 import ymaps from 'yandex-maps';
 import { AnyObject } from './util/typing';
+import { ApiLoader } from './util/create-api-loader';
 
 export interface WithYMapsProps {
-  ymaps?: typeof ymaps;
   modules?: string[];
   width?: string | number;
   height?: string | number;
@@ -20,7 +20,9 @@ export default function withYMaps<TProps extends AnyObject>(
   waitForApi = false,
   modules: string[] = []
 ): React.FC<TProps> {
-  class WithYMaps extends React.Component<WithYMapsProps> {
+  class WithYMaps extends React.Component<
+    WithYMapsProps & { apiLoader: ApiLoader }
+  > {
     constructor() {
       super();
 
@@ -31,11 +33,13 @@ export default function withYMaps<TProps extends AnyObject>(
     componentDidMount() {
       this._isMounted = true;
 
-      this.props.ymaps
+      this.props.apiLoader
         .load()
         .then((api) => {
           return Promise.all(
-            modules.concat(this.props.modules).map(api.loadModule)
+            modules
+              .concat(this.props.modules)
+              .map(this.props.apiLoader.loadModule)
           ).then(() => {
             if (this._isMounted === true) {
               this.setState({ loading: false }, () => {
@@ -56,18 +60,23 @@ export default function withYMaps<TProps extends AnyObject>(
     }
 
     render() {
-      const { ymaps, width, height } = this.props;
+      const { apiLoader, width, height } = this.props;
       const { loading } = this.state;
 
       const shouldRender = !waitForApi || loading === false;
 
-      const props = omit(this.props, ['onLoad', 'onError', 'modules', 'ymaps']);
+      const props = omit(this.props, [
+        'onLoad',
+        'onError',
+        'modules',
+        'apiLoader',
+      ]);
 
       if (!shouldRender) {
         return <div style={{ width, height }} />;
       }
 
-      return <Component ymaps={ymaps.getApi()} {...props} />;
+      return <Component ymaps={apiLoader.getApi()} {...props} />;
     }
   }
 

@@ -1,3 +1,7 @@
+import ymaps from 'yandex-maps';
+
+export type YMapsApi = typeof ymaps;
+
 export interface AnyObject {
   [key: string]: any;
 }

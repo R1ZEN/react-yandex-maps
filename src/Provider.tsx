@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { YMapsContext } from './Context';
-import { YMaps } from './YMaps';
-import { AnyObject } from './util/typing';
+import { YMapsApiLoaderContext } from './Context';
+import { createApiLoader } from './util/create-api-loader';
 
 interface YMapProvider {
   version?: string;
@@ -21,7 +20,6 @@ interface YMapProvider {
     csp?: boolean;
     ns?: string;
   };
-  children?: React.ReactNode;
   /**
    *  Allows provider to preload Yandex.Maps API even if
    *  there are no map components on the page
@@ -38,19 +36,19 @@ export const Provider: React.FC<YMapProvider> = (props) => {
     children,
   } = props;
 
-  const ymapsRef = useRef<AnyObject>(
-    new YMaps({ version, enterprise, query, preload })
+  const ymapsRef = useRef(
+    createApiLoader({ version, enterprise, query, preload })
   );
 
   useEffect(() => {
     if (preload) {
       ymapsRef.current.load();
     }
-  }, []);
+  }, [ymapsRef.current]);
 
   return (
-    <YMapsContext.Provider value={ymapsRef.current}>
+    <YMapsApiLoaderContext.Provider value={ymapsRef.current}>
       {children}
-    </YMapsContext.Provider>
+    </YMapsApiLoaderContext.Provider>
   );
 };

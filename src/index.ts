@@ -4,6 +4,8 @@ export { default as withYMaps } from './withYMaps';
 
 export { Provider as YMaps } from './Provider';
 
+export { useYMaps } from './hooks/useYMaps';
+
 /** Parent components */
 
 export { default as Map } from './Map';

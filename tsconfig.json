@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "lib": ["dom", "ESNext"],
     "module": "esnext",
     "target": "es5",
     "allowJs": true,
@@ -15,5 +16,5 @@
     "skipLibCheck": true,
     "strict": true
   },
-  "include": ["src/util/typing.ts"]
+  "include": ["src"]
 }
