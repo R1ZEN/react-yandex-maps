@@ -10,6 +10,7 @@
   "unpkg": "dist/react-yandex-maps.umd.js",
   "files": [
     "README.md",
+    "LICENSE",
     "dist",
     "typings"
   ],
@@ -79,7 +80,8 @@
     "yandex-maps"
   ],
   "sideEffects": false,
-  "homepage": "https://github.com/R1ZEN/react-yandex-maps",
+  "homepage": "https://pbe-react-yandex-maps.vercel.app/",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/R1ZEN/react-yandex-maps.git"
