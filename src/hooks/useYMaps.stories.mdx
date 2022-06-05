@@ -1,0 +1,41 @@
+import { Meta } from '@storybook/addon-docs';
+import { useYMaps } from './useYMaps';
+
+<Meta title="api/useYMaps" />
+
+# useYMaps
+
+Return Yandex.Maps API instance
+
+## Basic Usage
+
+```jsx
+const ymaps = useYMaps(modules);
+```
+
+## Parameters
+
+- modules: `string[] | undefined` - list of modules to be loaded. For example:
+  _Map_, _Placemark_, _etc._
+
+## Example
+
+```jsx
+export const CustomMap = () => {
+  const mapRef = useRef(null);
+  const ymaps = useYMaps(['Map']);
+
+  useEffect(() => {
+    if (!ymaps || !mapRef.current) {
+      return;
+    }
+
+    new ymaps.Map(mapRef.current, {
+      center: [55.76, 37.64],
+      zoom: 10,
+    });
+  }, [ymaps]);
+
+  return <div ref={mapRef} style={{ width: '320px', height: '240px' }} />;
+};
+```
