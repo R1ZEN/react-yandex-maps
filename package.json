@@ -29,7 +29,7 @@
     "release": "release-it",
     "test": "jest",
     "sb:dev": "start-storybook -p 6006",
-    "sb:build": "build-storybook"
+    "sb:build": "build-storybook --docs"
   },
   "peerDependencies": {
     "react": "^16.x || ^17.x || ^18.x"
