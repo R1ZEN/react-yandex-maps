@@ -2,6 +2,7 @@ import ymaps from 'yandex-maps';
 import { set } from './set';
 import { AnyObject, YMapsApi } from './typing';
 import { isDevEnv } from './is-dev-env';
+import { isBrowser } from './is-browser';
 
 interface YMapsQuery {
   lang?: 'tr_TR' | 'en_US' | 'en_RU' | 'ru_RU' | 'ru_UA' | 'uk_UA';
@@ -55,7 +56,7 @@ export const createApiLoader = (options: CreateYMapsLoaderOptions) => {
   const namespace = query.ns || '';
   const onload = YMAPS_ONLOAD + '$$' + hash;
   const onerror = YMAPS_ONERROR + '$$' + hash;
-  const windowObj: Record<string, any> = window;
+  const windowObj: Record<string, any> = isBrowser ? window : {};
 
   const PROMISES: Record<string, Promise<YMapsApi> | undefined> = {};
   let promise: Promise<YMapsApi> | undefined;
