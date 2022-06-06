@@ -5,10 +5,10 @@ module.exports = [
   },
   {
     path: 'dist/*.umd.js',
-    limit: '4.34 kB',
+    limit: '4.36 kB',
   },
   {
     path: 'dist/*maps.js',
-    limit: '4.28 kB',
+    limit: '4.30 kB',
   },
 ];
