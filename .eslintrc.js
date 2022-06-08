@@ -3,6 +3,11 @@ const {
 } = require('eslint-plugin-jest');
 
 module.exports = {
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
   parser: '@typescript-eslint/parser',
   extends: [
     'eslint:recommended',

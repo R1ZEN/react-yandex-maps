@@ -20,7 +20,6 @@ typings
 !.babelrc.js
 
 yarn.lock
-package-lock.json
 npm-shrinkwrap.json
 coverage
 storybook-static
