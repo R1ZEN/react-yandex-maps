@@ -5,6 +5,7 @@ typings
 *.tmp
 
 .*
+!.github
 !.gitignore
 !.npmignore
 !.babelrc
