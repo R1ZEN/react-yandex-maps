@@ -35,7 +35,9 @@ interface RouteEditorProps extends Omit<BaseControlProps, 'name'> {
 }
 
 export const RouteEditor: React.FC<
-  RouteEditorProps & WithYMapsProps & WithInstanceRef & AnyObject
+  React.PropsWithChildren<
+    RouteEditorProps & WithYMapsProps & WithInstanceRef & AnyObject
+  >
 > = (props) => {
   return <BaseControl {...props} name="RouteEditor" />;
 };

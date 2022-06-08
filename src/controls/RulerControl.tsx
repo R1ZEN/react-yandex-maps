@@ -35,7 +35,9 @@ interface RulerControlProps extends Omit<BaseControlProps, 'name'> {
 }
 
 export const RulerControl: React.FC<
-  RulerControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+  React.PropsWithChildren<
+    RulerControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+  >
 > = (props) => {
   return <BaseControl {...props} name="RulerControl" />;
 };

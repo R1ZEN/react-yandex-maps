@@ -145,8 +145,8 @@ describe('BaseControl', () => {
     it('should update events', () => {
       const instance = BaseControl.mountControl(MockControl, baseProps);
 
-      const onClick = () => {};
-      const onTouchStart = () => {};
+      const onClick = () => undefined;
+      const onTouchStart = () => undefined;
 
       BaseControl.updateControl(instance, baseProps, { onClick });
 

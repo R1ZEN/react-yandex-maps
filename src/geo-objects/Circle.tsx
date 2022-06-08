@@ -35,7 +35,9 @@ interface CircleProps extends Omit<BaseGeoObjectProps, 'name'> {
 }
 
 export const Circle: React.FC<
-  CircleProps & WithYMapsProps & WithInstanceRef & AnyObject
+  React.PropsWithChildren<
+    CircleProps & WithYMapsProps & WithInstanceRef & AnyObject
+  >
 > = (props) => {
   return <BaseGeoObject {...props} name="Circle" />;
 };

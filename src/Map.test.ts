@@ -121,7 +121,7 @@ describe('Map', () => {
 
     it('should update events', () => {
       const instance = Map.mountObject(parentElement, MockMapObject, baseProps);
-      const props = { ...baseProps, onClick: () => {} };
+      const props = { ...baseProps, onClick: () => undefined };
 
       Map.updateObject(instance, baseProps, props);
 

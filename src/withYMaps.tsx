@@ -19,7 +19,7 @@ export default function withYMaps<TProps extends AnyObject>(
   Component: React.FC<any> | React.Component<any>,
   waitForApi = false,
   modules: string[] = []
-): React.FC<TProps> {
+): React.FC<React.PropsWithChildren<TProps>> {
   class WithYMaps extends React.Component<
     WithYMapsProps & { apiLoader: ApiLoader }
   > {

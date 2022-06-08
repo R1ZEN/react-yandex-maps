@@ -35,7 +35,9 @@ interface PolygonProps extends Omit<BaseGeoObjectProps, 'name'> {
 }
 
 export const Polygon: React.FC<
-  PolygonProps & WithYMapsProps & WithInstanceRef & AnyObject
+  React.PropsWithChildren<
+    PolygonProps & WithYMapsProps & WithInstanceRef & AnyObject
+  >
 > = (props) => {
   return <BaseGeoObject {...props} name="Polygon" />;
 };

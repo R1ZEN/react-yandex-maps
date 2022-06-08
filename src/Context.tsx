@@ -7,12 +7,16 @@ export const YMapsApiLoaderContext = React.createContext<ApiLoader | null>(
   null
 );
 
-export const withYMapsContext = <TComponent extends React.ComponentType>(
+export const withYMapsContext = <
+  TComponent extends React.ComponentType<React.PropsWithChildren<unknown>>
+>(
   Component: TComponent
 ): TComponent => {
   const displayName = name(Component);
 
-  const WithYMapsContext: React.FC = (props) => (
+  const WithYMapsContext: React.FC<React.PropsWithChildren<unknown>> = (
+    props
+  ) => (
     <YMapsApiLoaderContext.Consumer>
       {(apiLoader) => {
         if (apiLoader === null) {
@@ -52,10 +56,14 @@ export const useYMapsApiLoader = () => {
 
 export const ParentContext = React.createContext(null);
 
-export const withParentContext = <TComponent extends React.ComponentType>(
+export const withParentContext = <
+  TComponent extends React.ComponentType<React.PropsWithChildren<unknown>>
+>(
   Component: TComponent
 ): TComponent => {
-  const WithParentContext: React.FC = (props) => (
+  const WithParentContext: React.FC<React.PropsWithChildren<unknown>> = (
+    props
+  ) => (
     <ParentContext.Consumer>
       {(parent) => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment

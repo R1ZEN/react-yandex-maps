@@ -35,7 +35,9 @@ interface ButtonProps extends Omit<BaseControlProps, 'name'> {
 }
 
 export const Button: React.FC<
-  ButtonProps & WithYMapsProps & WithInstanceRef & AnyObject
+  React.PropsWithChildren<
+    ButtonProps & WithYMapsProps & WithInstanceRef & AnyObject
+  >
 > = (props) => {
   return <BaseControl {...props} name="Button" />;
 };

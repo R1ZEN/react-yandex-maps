@@ -35,7 +35,9 @@ interface ListBoxItemProps {
 }
 
 export const ListBoxItem: React.FC<
-  ListBoxItemProps & WithYMapsProps & WithInstanceRef & AnyObject
+  React.PropsWithChildren<
+    ListBoxItemProps & WithYMapsProps & WithInstanceRef & AnyObject
+  >
 > = (props) => {
   return <BaseControl {...props} name="ListBoxItem" />;
 };

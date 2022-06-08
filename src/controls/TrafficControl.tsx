@@ -36,7 +36,9 @@ interface TrafficControlProps extends Omit<BaseControlProps, 'name'> {
 }
 
 export const TrafficControl: React.FC<
-  TrafficControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+  React.PropsWithChildren<
+    TrafficControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+  >
 > = (props) => {
   return <BaseControl {...props} name="TrafficControl" />;
 };

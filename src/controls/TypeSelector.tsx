@@ -35,7 +35,9 @@ interface TypeSelectorProps extends Omit<BaseControlProps, 'name'> {
 }
 
 export const TypeSelector: React.FC<
-  TypeSelectorProps & WithYMapsProps & WithInstanceRef & AnyObject
+  React.PropsWithChildren<
+    TypeSelectorProps & WithYMapsProps & WithInstanceRef & AnyObject
+  >
 > = (props) => {
   return <BaseControl {...props} name="TypeSelector" />;
 };

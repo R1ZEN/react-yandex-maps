@@ -35,7 +35,9 @@ interface FullscreenControlProps extends Omit<BaseControlProps, 'name'> {
 }
 
 export const FullscreenControl: React.FC<
-  FullscreenControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+  React.PropsWithChildren<
+    FullscreenControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+  >
 > = (props) => {
   return <BaseControl {...props} name="FullscreenControl" />;
 };

@@ -64,7 +64,9 @@ const geoObjectDangerZoneProps = {
 };
 
 export const GeoObject: React.FC<
-  GeoObjectProps & WithYMapsProps & WithInstanceRef & AnyObject
+  React.PropsWithChildren<
+    GeoObjectProps & WithYMapsProps & WithInstanceRef & AnyObject
+  >
 > = (props) => {
   return (
     <BaseGeoObject

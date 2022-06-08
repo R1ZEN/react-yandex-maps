@@ -35,7 +35,9 @@ interface GeolocationControlProps extends Omit<BaseControlProps, 'name'> {
 }
 
 export const GeolocationControl: React.FC<
-  GeolocationControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+  React.PropsWithChildren<
+    GeolocationControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+  >
 > = (props) => {
   return <BaseControl {...props} name="GeolocationControl" />;
 };
