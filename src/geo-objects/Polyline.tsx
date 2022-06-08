@@ -35,7 +35,9 @@ interface PolylineProps extends Omit<BaseGeoObjectProps, 'name'> {
 }
 
 export const Polyline: React.FC<
-  PolylineProps & WithYMapsProps & WithInstanceRef & AnyObject
+  React.PropsWithChildren<
+    PolylineProps & WithYMapsProps & WithInstanceRef & AnyObject
+  >
 > = (props) => {
   return <BaseGeoObject {...props} name="Polyline" />;
 };

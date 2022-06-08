@@ -1,13 +1,12 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import React, { ReactNode } from 'react';
+import React from 'react';
 
 import * as events from '../util/events';
 import { getProp, isControlledProp } from '../util/props';
 import { ParentContext } from '../Context';
 import applyRef from '../util/ref';
 import { AnyObject, WithInstanceRef } from '../util/typing';
-import ymaps from 'yandex-maps';
 
 export interface BaseControlProps {
   /** Parent object (e.g, ymaps.Map or ymaps.Clusterer) */

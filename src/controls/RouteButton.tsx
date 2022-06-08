@@ -27,7 +27,9 @@ interface RouteButtonProps extends Omit<BaseControlProps, 'name'> {
 }
 
 export const RouteButton: React.FC<
-  RouteButtonProps & WithYMapsProps & WithInstanceRef & AnyObject
+  React.PropsWithChildren<
+    RouteButtonProps & WithYMapsProps & WithInstanceRef & AnyObject
+  >
 > = (props) => {
   return <BaseControl {...props} name="RouteButton" />;
 };

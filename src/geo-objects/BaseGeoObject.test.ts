@@ -159,8 +159,8 @@ describe('BaseGeoObject', () => {
     it('should update events', () => {
       const instance = BaseGeoObject.mountObject(MockGeoObject, baseProps);
 
-      const onClick = () => {};
-      const onTouchStart = () => {};
+      const onClick = () => undefined;
+      const onTouchStart = () => undefined;
 
       BaseGeoObject.updateObject(instance, baseProps, { onClick });
 

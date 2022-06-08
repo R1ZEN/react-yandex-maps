@@ -35,7 +35,9 @@ interface PlacemarkProps extends Omit<BaseGeoObjectProps, 'name'> {
 }
 
 export const Placemark: React.FC<
-  PlacemarkProps & WithYMapsProps & WithInstanceRef & AnyObject
+  React.PropsWithChildren<
+    PlacemarkProps & WithYMapsProps & WithInstanceRef & AnyObject
+  >
 > = (props) => {
   return <BaseGeoObject {...props} name="Placemark" />;
 };

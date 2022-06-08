@@ -27,7 +27,9 @@ interface YMapProvider {
   preload?: boolean;
 }
 
-export const Provider: React.FC<YMapProvider> = (props) => {
+export const Provider: React.FC<React.PropsWithChildren<YMapProvider>> = (
+  props
+) => {
   const {
     version = '2.1',
     enterprise = false,

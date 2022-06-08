@@ -7,9 +7,9 @@ describe('Event utils', () => {
   describe('separateEvents', () => {
     it('should separate keys starting with `on[A-Z]` to `_events` key', () => {
       const props = {
-        onClick: () => {},
-        onMouseUp: () => {},
-        onSomethingHappened: () => {},
+        onClick: () => undefined,
+        onMouseUp: () => undefined,
+        onSomethingHappened: () => undefined,
         some: {},
         other: {},
         props: {},

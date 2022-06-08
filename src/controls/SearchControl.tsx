@@ -35,7 +35,9 @@ interface SearchControlProps extends Omit<BaseControlProps, 'name'> {
 }
 
 export const SearchControl: React.FC<
-  SearchControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+  React.PropsWithChildren<
+    SearchControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+  >
 > = (props) => {
   return <BaseControl {...props} name="SearchControl" />;
 };

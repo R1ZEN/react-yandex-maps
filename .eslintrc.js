@@ -20,7 +20,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['**/{src,pages,components}/**'],
+      files: ['**/src/**'],
       parserOptions: {
         sourceType: 'module',
       },

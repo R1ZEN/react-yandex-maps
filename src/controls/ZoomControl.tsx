@@ -36,7 +36,9 @@ interface ZoomControlProps extends Omit<BaseControlProps, 'name'> {
 }
 
 export const ZoomControl: React.FC<
-  ZoomControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+  React.PropsWithChildren<
+    ZoomControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+  >
 > = (props) => {
   return <BaseControl {...props} name="ZoomControl" />;
 };

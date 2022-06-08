@@ -37,7 +37,9 @@ interface ListBoxProps extends Omit<BaseControlProps, 'name'> {
 }
 
 export const ListBox: React.FC<
-  ListBoxProps & WithYMapsProps & WithInstanceRef & AnyObject
+  React.PropsWithChildren<
+    ListBoxProps & WithYMapsProps & WithInstanceRef & AnyObject
+  >
 > = (props) => {
   return <BaseControl {...props} name="ListBox" />;
 };

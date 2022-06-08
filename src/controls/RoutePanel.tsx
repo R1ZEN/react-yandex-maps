@@ -28,7 +28,9 @@ interface RoutePanelProps extends Omit<BaseControlProps, 'name'> {
 }
 
 export const RoutePanel: React.FC<
-  RoutePanelProps & WithYMapsProps & WithInstanceRef & AnyObject
+  React.PropsWithChildren<
+    RoutePanelProps & WithYMapsProps & WithInstanceRef & AnyObject
+  >
 > = (props) => {
   return <BaseControl {...props} name="RoutePanel" />;
 };

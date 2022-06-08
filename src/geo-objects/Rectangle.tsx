@@ -35,7 +35,9 @@ interface RectangleProps extends Omit<BaseGeoObjectProps, 'name'> {
 }
 
 export const Rectangle: React.FC<
-  RectangleProps & WithYMapsProps & WithInstanceRef & AnyObject
+  React.PropsWithChildren<
+    RectangleProps & WithYMapsProps & WithInstanceRef & AnyObject
+  >
 > = (props) => {
   return <BaseGeoObject {...props} name="Rectangle" />;
 };
