@@ -82,7 +82,7 @@
         [55.865386, 37.713329],
       ];
 
-      const pointsToFeatures = points => ({
+      const pointsToFeatures = (points) => ({
         type: 'FeatureCollection',
         features: points.map((coordinates, index) => ({
           type: 'Feature',
@@ -149,7 +149,11 @@
                     [55.7, 38.0],
                     [55.7, 37.8],
                   ],
-                  [[55.75, 37.82], [55.75, 37.98], [55.65, 37.9]],
+                  [
+                    [55.75, 37.82],
+                    [55.75, 37.98],
+                    [55.65, 37.9],
+                  ],
                 ]}
                 defaultOptions=${{
                   strokeColor: '#0f0',
@@ -202,7 +206,7 @@
                 clusters=${{
                   preset: 'islands#greenClusterIcons',
                 }}
-                filter=${object => object.id >= 5}
+                filter=${(object) => object.id >= 5}
                 defaultFeatures=${pointsToFeatures(points)}
                 modules=${[
                   'objectManager.addon.objectsBalloon',
@@ -218,12 +222,7 @@
         <//>
       `;
 
-      ReactDOM.render(
-        html`
-          <${App} />
-        `,
-        document.getElementById('root')
-      );
+      ReactDOM.render(html` <${App} /> `, document.getElementById('root'));
     </script>
   </body>
 </html>
