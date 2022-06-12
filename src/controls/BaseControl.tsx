@@ -36,6 +36,7 @@ export class BaseControl extends React.Component<
   constructor() {
     super();
     this.state = { instance: null };
+    this.instance = null;
   }
 
   componentDidMount() {
@@ -44,17 +45,18 @@ export class BaseControl extends React.Component<
       this.props
     );
 
+    this.instance = instance;
     this.setState({ instance });
   }
 
   componentDidUpdate(prevProps) {
-    if (this.state.instance !== null) {
-      BaseControl.updateControl(this.state.instance, prevProps, this.props);
+    if (this.instance !== null) {
+      BaseControl.updateControl(this.instance, prevProps, this.props);
     }
   }
 
   componentWillUnmount() {
-    BaseControl.unmountControl(this.state.instance, this.props);
+    BaseControl.unmountControl(this.instance, this.props);
   }
 
   render() {

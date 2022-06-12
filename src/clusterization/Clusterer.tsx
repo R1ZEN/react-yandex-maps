@@ -31,6 +31,7 @@ export class Clusterer extends React.Component<
   constructor() {
     super();
     this.state = { instance: null };
+    this.instance = null;
   }
 
   componentDidMount() {
@@ -40,17 +41,18 @@ export class Clusterer extends React.Component<
       this.props
     );
 
+    this.instance = instance;
     this.setState({ instance });
   }
 
   componentDidUpdate(prevProps) {
     if (this.state.instance !== null) {
-      Clusterer.updateObject(this.state.instance, prevProps, this.props);
+      Clusterer.updateObject(this.instance, prevProps, this.props);
     }
   }
 
   componentWillUnmount() {
-    Clusterer.unmountObject(this.state.instance, this.props);
+    Clusterer.unmountObject(this.instance, this.props);
   }
 
   render() {

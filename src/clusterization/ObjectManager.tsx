@@ -57,17 +57,18 @@ export class ObjectManager extends React.Component<
       this.props
     );
 
+    this.instance = instance;
     this.setState({ instance });
   }
 
   componentDidUpdate(prevProps) {
-    if (this.state.instance !== null) {
-      ObjectManager.updateObject(this.state.instance, prevProps, this.props);
+    if (this.instance !== null) {
+      ObjectManager.updateObject(this.instance, prevProps, this.props);
     }
   }
 
   componentWillUnmount() {
-    ObjectManager.unmountObject(this.state.instance, this.props);
+    ObjectManager.unmountObject(this.instance, this.props);
   }
 
   render() {
