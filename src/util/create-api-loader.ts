@@ -1,4 +1,3 @@
-import ymaps from 'yandex-maps';
 import { set } from './set';
 import { AnyObject, YMapsApi } from './typing';
 import { isDevEnv } from './is-dev-env';
@@ -56,10 +55,9 @@ export const createApiLoader = (options: CreateYMapsLoaderOptions) => {
   const namespace = query.ns || '';
   const onload = YMAPS_ONLOAD + '$$' + hash;
   const onerror = YMAPS_ONERROR + '$$' + hash;
-  const windowObj: Record<string, any> = isBrowser ? window : {};
+  const windowObj: AnyObject = isBrowser ? window : {};
 
   const PROMISES: Record<string, Promise<YMapsApi> | undefined> = {};
-  let promise: Promise<YMapsApi> | undefined;
   let api: YMapsApi;
 
   const getApi = (): YMapsApi =>
@@ -67,41 +65,30 @@ export const createApiLoader = (options: CreateYMapsLoaderOptions) => {
       ? (window as unknown as Record<string, YMapsApi>)[namespace]
       : api;
 
-  const setApi = (value: YMapsApi) => {
-    api = value;
+  const loadModule = (moduleName: string): Promise<YMapsApi> => {
+    return new Promise((res, rej) => {
+      api.modules.require(moduleName).done((modules: AnyObject[]) => {
+        modules.forEach((module) => {
+          set(api, moduleName, module, true);
+        });
 
-    return value;
-  };
-
-  const getPromise = () => {
-    return namespace ? PROMISES[namespace] : promise;
-  };
-
-  const setPromise = (p?: Promise<YMapsApi>) => {
-    promise = p;
-
-    if (namespace) {
-      PROMISES[namespace] = p;
-    }
-
-    return p;
-  };
-
-  const loadModule = (moduleName: string) => {
-    return api.modules.require(moduleName).then((modules: AnyObject[]) => {
-      modules.forEach((module) => {
-        set(api, moduleName, module, true);
-      });
+        res(api);
+      }, rej);
     });
   };
 
-  const load = () => {
+  const clearWindow = () => {
+    delete windowObj[onload];
+    delete windowObj[onerror];
+  };
+
+  const load = (): Promise<YMapsApi> => {
     if (getApi()) {
-      return Promise.resolve(setApi(getApi()));
+      return Promise.resolve(api);
     }
 
-    if (getPromise()) {
-      setPromise(getPromise());
+    if (PROMISES[namespace]) {
+      return PROMISES[namespace] as Promise<YMapsApi>;
     }
 
     const ymapsQuery: Record<string, string | boolean> = {
@@ -119,24 +106,26 @@ export const createApiLoader = (options: CreateYMapsLoaderOptions) => {
 
     const url = [baseUrl, options.version, '?' + queryString].join('/');
 
-    const p = new Promise<YMapsApi>((resolve, reject) => {
-      windowObj[onload] = (ym: typeof ymaps) => {
-        delete windowObj[onload];
+    PROMISES[namespace] = new Promise<YMapsApi>((resolve, reject) => {
+      windowObj[onload] = (ym: YMapsApi) => {
+        clearWindow();
 
-        ym.ready(() => resolve(setApi(ym)));
+        ym.ready(() => {
+          api = ym;
+
+          resolve(ym);
+        });
       };
 
       windowObj[onerror] = (err: Error) => {
-        delete windowObj[onerror];
+        clearWindow();
         reject(err);
       };
 
       fetchScript(url).catch(windowObj[onerror]);
     });
 
-    setPromise(p);
-
-    return p;
+    return PROMISES[namespace] as Promise<YMapsApi>;
   };
 
   return { load, getApi, loadModule };

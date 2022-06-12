@@ -28,6 +28,7 @@ export class BaseGeoObject extends React.Component<
   constructor() {
     super();
     this.state = { instance: null };
+    this.instance = null;
   }
 
   componentDidMount() {
@@ -40,17 +41,18 @@ export class BaseGeoObject extends React.Component<
       this.props
     );
 
+    this.instance = instance;
     this.setState({ instance });
   }
 
   componentDidUpdate(prevProps) {
-    if (this.state.instance !== null) {
-      BaseGeoObject.updateObject(this.state.instance, prevProps, this.props);
+    if (this.instance !== null) {
+      BaseGeoObject.updateObject(this.instance, prevProps, this.props);
     }
   }
 
   componentWillUnmount() {
-    BaseGeoObject.unmountObject(this.state.instance, this.props);
+    BaseGeoObject.unmountObject(this.instance, this.props);
   }
 
   render() {
