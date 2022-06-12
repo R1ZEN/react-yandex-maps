@@ -1,90 +1,43 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-import React from 'react';
+import React, { useEffect } from 'react';
 import { omit } from '../util/omit';
-import { withYMapsContext } from '../Context';
 import ymaps from 'yandex-maps';
 import { AnyObject } from '../util/typing';
 import { ApiLoader } from '../util/create-api-loader';
+import { useYMaps } from '../hooks/useYMaps';
 
 export interface WithYMapsProps {
   modules?: string[];
   width?: string | number;
   height?: string | number;
   onLoad?: (api: typeof ymaps) => void;
-  onError?: (err: Error) => void;
 }
+
+const defaultFunction = () => void 0;
+const omitProps = ['onLoad', 'onError', 'modules', 'apiLoader'];
 
 export default function withYMaps<TProps extends AnyObject>(
   Component: React.FC<TProps> | React.Component<TProps>,
   waitForApi = false,
-  modules: string[] = []
+  hocModules: string[] = []
 ): React.FC<React.PropsWithChildren<TProps>> {
-  class WithYMaps extends React.Component<
-    WithYMapsProps & { apiLoader: ApiLoader }
-  > {
-    constructor() {
-      super();
+  const WithYMaps: React.FC<WithYMapsProps & { apiLoader: ApiLoader }> = (
+    props
+  ) => {
+    const { width, height, modules = [], onLoad = defaultFunction } = props;
+    const ymaps = useYMaps(hocModules.concat(modules));
+    const shouldRender = !waitForApi || !!ymaps;
+    const newProps = omit(props, omitProps);
 
-      this.state = { loading: true };
-      this._isMounted = false;
+    useEffect(() => (ymaps ? onLoad(ymaps) : void 0), [ymaps]);
+
+    if (!shouldRender) {
+      return <div style={{ width, height }} />;
     }
 
-    componentDidMount() {
-      this._isMounted = true;
-
-      this.props.apiLoader
-        .load()
-        .then((api) => {
-          return Promise.all(
-            modules
-              .concat(this.props.modules)
-              .map(this.props.apiLoader.loadModule)
-          ).then(() => {
-            if (this._isMounted === true) {
-              this.setState({ loading: false }, () => {
-                this.props.onLoad(api);
-              });
-            }
-          });
-        })
-        .catch((err) => {
-          if (this._isMounted === true) {
-            this.props.onError(err);
-          }
-        });
-    }
-
-    componentWillUnmount() {
-      this._isMounted = false;
-    }
-
-    render() {
-      const { apiLoader, width, height } = this.props;
-      const { loading } = this.state;
-
-      const shouldRender = !waitForApi || loading === false;
-
-      const props = omit(this.props, [
-        'onLoad',
-        'onError',
-        'modules',
-        'apiLoader',
-      ]);
-
-      if (!shouldRender) {
-        return <div style={{ width, height }} />;
-      }
-
-      return <Component ymaps={apiLoader.getApi()} {...props} />;
-    }
-  }
-
-  WithYMaps.defaultProps = {
-    onLoad: Function.prototype,
-    onError: Function.prototype,
-    modules: [],
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return <Component ymaps={ymaps} {...newProps} />;
   };
 
-  return withYMapsContext(WithYMaps);
+  return WithYMaps as unknown as React.FC<React.PropsWithChildren<TProps>>;
 }
