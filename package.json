@@ -36,8 +36,7 @@
     "react": "^16.x || ^17.x || ^18.x"
   },
   "dependencies": {
-    "@types/yandex-maps": "2.1.21",
-    "react-display-name": "0.2.5"
+    "@types/yandex-maps": "2.1.21"
   },
   "devDependencies": {
     "@babel/core": "7.18.2",
@@ -67,6 +66,7 @@
     "microbundle": "0.15.0",
     "prettier": "2.6.2",
     "react": "16.11.0",
+    "react-display-name": "0.2.5",
     "react-dom": "16.11.0",
     "react-test-renderer": "16.11.0",
     "release-it": "14.14.3",
