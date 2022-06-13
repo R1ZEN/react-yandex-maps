@@ -1,12 +1,13 @@
-import ymaps from 'yandex-maps';
 import { useEffect, useRef, useState } from 'react';
 import { useYMapsApiLoader } from '../Context';
+import { YMapsApi } from '../util/typing';
 
 /**
  * Return loaded ymaps instance
  * @param modules
+ * @param onError
  */
-export const useYMaps = (modules: string[] = []): typeof ymaps | null => {
+export const useYMaps = (modules: string[] = []): YMapsApi | null => {
   const [loaded, setLoaded] = useState(false);
   const modulesRef = useRef(modules);
   const apiLoader = useYMapsApiLoader();

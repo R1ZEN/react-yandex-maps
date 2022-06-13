@@ -110,7 +110,7 @@ export const createApiLoader = (options: CreateYMapsLoaderOptions) => {
       windowObj[onload] = (ym: YMapsApi) => {
         clearWindow();
 
-        ym.ready(() => {
+        void ym.ready(() => {
           api = ym;
 
           resolve(ym);
