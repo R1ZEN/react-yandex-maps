@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps, { WithYMapsProps } from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 
 import { BaseGeoObject, BaseGeoObjectProps } from './BaseGeoObject';
 import { IDataManager, IPolygonGeometry, IPolylineOptions } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
+import { withErrorBoundary } from '../hocs/with-error-boundary';
 
 interface PolylineProps extends Omit<BaseGeoObjectProps, 'name'> {
   /**
@@ -42,8 +43,12 @@ export const Polyline: React.FC<
   return <BaseGeoObject {...props} name="Polyline" />;
 };
 
-export default withParentContext(
-  withYMaps<PolylineProps & WithYMapsProps & WithInstanceRef>(Polyline, true, [
-    'Polyline',
-  ])
+export default withErrorBoundary(
+  withParentContext(
+    withYMaps<PolylineProps & WithYMapsProps & WithInstanceRef>(
+      Polyline,
+      true,
+      ['Polyline']
+    )
+  )
 );

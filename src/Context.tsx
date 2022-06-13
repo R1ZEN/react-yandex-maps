@@ -1,6 +1,4 @@
 import React, { useContext } from 'react';
-import name from 'react-display-name';
-import { isDevEnv } from './util/is-dev-env';
 import { ApiLoader } from './util/create-api-loader';
 
 export const YMapsApiLoaderContext = React.createContext<ApiLoader | null>(
@@ -12,8 +10,6 @@ export const withYMapsContext = <
 >(
   Component: TComponent
 ): TComponent => {
-  const displayName = name(Component);
-
   const WithYMapsContext: React.FC<React.PropsWithChildren<unknown>> = (
     props
   ) => (
@@ -22,7 +18,7 @@ export const withYMapsContext = <
         if (apiLoader === null) {
           const message =
             "Couldn't find Yandex.Maps API in the context. " +
-            `Make sure that <${displayName} /> is inside <YMaps /> provider`;
+            `Make sure that <${Component.displayName} /> is inside <YMaps /> provider`;
 
           throw new Error(message);
         }
@@ -33,10 +29,6 @@ export const withYMapsContext = <
       }}
     </YMapsApiLoaderContext.Consumer>
   );
-
-  if (isDevEnv) {
-    WithYMapsContext.displayName = `withYMapsContext(${displayName})`;
-  }
 
   return WithYMapsContext as TComponent;
 };
@@ -72,10 +64,6 @@ export const withParentContext = <
       }}
     </ParentContext.Consumer>
   );
-
-  if (isDevEnv) {
-    WithParentContext.displayName = `withParentContext(${name(Component)})`;
-  }
 
   return WithParentContext as TComponent;
 };

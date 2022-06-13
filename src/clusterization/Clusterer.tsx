@@ -5,10 +5,11 @@ import React, { ReactNode } from 'react';
 import * as events from '../util/events';
 import { getProp, isControlledProp } from '../util/props';
 import { withParentContext, ParentContext } from '../Context';
-import withYMaps, { WithYMapsProps } from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 import applyRef from '../util/ref';
 import { IClustererOptions } from 'yandex-maps';
 import { AnyFunction, AnyObject, WithInstanceRef } from '../util/typing';
+import { withErrorBoundary } from '../hocs/with-error-boundary';
 
 interface ClusterProps {
   /** Clusterer [options](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Clusterer-docpage/) */
@@ -125,10 +126,12 @@ export class Clusterer extends React.Component<
   }
 }
 
-export default withParentContext(
-  withYMaps<ClusterProps & WithYMapsProps & WithInstanceRef & AnyObject>(
-    Clusterer,
-    true,
-    ['Clusterer']
+export default withErrorBoundary(
+  withParentContext(
+    withYMaps<ClusterProps & WithYMapsProps & WithInstanceRef & AnyObject>(
+      Clusterer,
+      true,
+      ['Clusterer']
+    )
   )
 );

@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps, { WithYMapsProps } from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 
 import { BaseControl, BaseControlProps } from './BaseControl';
 import { data, IOptionManager } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
+import { withErrorBoundary } from '../hocs/with-error-boundary';
 
 interface TrafficControlProps extends Omit<BaseControlProps, 'name'> {
   /**
@@ -43,10 +44,10 @@ export const TrafficControl: React.FC<
   return <BaseControl {...props} name="TrafficControl" />;
 };
 
-export default withParentContext(
-  withYMaps<TrafficControlProps & WithYMapsProps & WithInstanceRef & AnyObject>(
-    TrafficControl,
-    true,
-    [`control.TrafficControl`]
+export default withErrorBoundary(
+  withParentContext(
+    withYMaps<
+      TrafficControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+    >(TrafficControl, true, [`control.TrafficControl`])
   )
 );

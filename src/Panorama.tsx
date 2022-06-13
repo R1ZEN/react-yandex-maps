@@ -2,12 +2,13 @@
 // @ts-nocheck
 import React, { CSSProperties } from 'react';
 import { getProp, isControlledProp } from './util/props';
-import withYMaps, { WithYMapsProps } from './withYMaps';
+import withYMaps, { WithYMapsProps } from './hocs/withYMaps';
 import * as events from './util/events';
 import applyRef from './util/ref';
 import getParentElementSize from './util/getParentElementSize';
 import ymaps from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from './util/typing';
+import { withErrorBoundary } from './hocs/with-error-boundary';
 
 interface PanoramaOptions {
   autoFitToViewport?: 'none' | 'ifNull' | 'always' | undefined;
@@ -192,14 +193,18 @@ export class Panorama extends React.Component<
   }
 }
 
-const YMapsPanorama = withYMaps<
-  PanoramaProps & WithYMapsProps & WithInstanceRef & AnyObject
->(Panorama, true, [
-  'panorama.isSupported',
-  'panorama.locate',
-  'panorama.createPlayer',
-  'panorama.Player',
-]);
+const YMapsPanorama = withErrorBoundary(
+  withYMaps<PanoramaProps & WithYMapsProps & WithInstanceRef & AnyObject>(
+    Panorama,
+    true,
+    [
+      'panorama.isSupported',
+      'panorama.locate',
+      'panorama.createPlayer',
+      'panorama.Player',
+    ]
+  )
+);
 
 YMapsPanorama.defaultProps = {
   width: 320,

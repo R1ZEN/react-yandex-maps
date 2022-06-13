@@ -4,12 +4,13 @@ import React, { CSSProperties } from 'react';
 import * as events from './util/events';
 import { omit } from './util/omit';
 import { getProp, isControlledProp } from './util/props';
-import withYMaps, { WithYMapsProps } from './withYMaps';
+import withYMaps, { WithYMapsProps } from './hocs/withYMaps';
 import { ParentContext } from './Context';
 import applyRef from './util/ref';
 import getParentElementSize from './util/getParentElementSize';
 import ymaps from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from './util/typing';
+import { withErrorBoundary } from './hocs/with-error-boundary';
 
 interface MapProps {
   /**
@@ -210,9 +211,13 @@ export class Map extends React.Component<
   }
 }
 
-const YMapsMap = withYMaps<
-  MapProps & WithYMapsProps & WithInstanceRef & AnyObject
->(Map, true, ['Map']);
+const YMapsMap = withErrorBoundary(
+  withYMaps<MapProps & WithYMapsProps & WithInstanceRef & AnyObject>(
+    Map,
+    true,
+    ['Map']
+  )
+);
 
 YMapsMap.defaultProps = {
   width: 320,

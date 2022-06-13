@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps, { WithYMapsProps } from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 
 import { BaseControl, BaseControlProps } from './BaseControl';
 import { control } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
+import { withErrorBoundary } from '../hocs/with-error-boundary';
 
 interface RouteEditorProps extends Omit<BaseControlProps, 'name'> {
   /**
@@ -42,10 +43,12 @@ export const RouteEditor: React.FC<
   return <BaseControl {...props} name="RouteEditor" />;
 };
 
-export default withParentContext(
-  withYMaps<RouteEditorProps & WithYMapsProps & WithInstanceRef & AnyObject>(
-    RouteEditor,
-    true,
-    [`control.RouteEditor`]
+export default withErrorBoundary(
+  withParentContext(
+    withYMaps<RouteEditorProps & WithYMapsProps & WithInstanceRef & AnyObject>(
+      RouteEditor,
+      true,
+      [`control.RouteEditor`]
+    )
   )
 );

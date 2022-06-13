@@ -28,7 +28,8 @@
     "microbundle:production": "cross-env NODE_ENV=production npm run microbundle -- --output ./dist",
     "microbundle:develop": "npm run microbundle:production -- --no-compress --watch",
     "release": "release-it",
-    "test": "jest",
+    "test": "jest --ci --no-cache",
+    "test:coverage": "jest --ci --no-cahce --coverage",
     "sb:dev": "start-storybook -p 6006",
     "sb:build": "build-storybook --docs"
   },
@@ -66,7 +67,6 @@
     "microbundle": "0.15.0",
     "prettier": "2.6.2",
     "react": "16.11.0",
-    "react-display-name": "0.2.5",
     "react-dom": "16.11.0",
     "react-test-renderer": "16.11.0",
     "release-it": "14.14.3",

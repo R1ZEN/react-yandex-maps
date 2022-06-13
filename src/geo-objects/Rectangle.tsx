@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps, { WithYMapsProps } from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 
 import { BaseGeoObject, BaseGeoObjectProps } from './BaseGeoObject';
 import { IDataManager, IGeometry, IOptionManager } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
+import { withErrorBoundary } from '../hocs/with-error-boundary';
 
 interface RectangleProps extends Omit<BaseGeoObjectProps, 'name'> {
   /**
@@ -42,10 +43,12 @@ export const Rectangle: React.FC<
   return <BaseGeoObject {...props} name="Rectangle" />;
 };
 
-export default withParentContext(
-  withYMaps<RectangleProps & WithYMapsProps & WithInstanceRef>(
-    Rectangle,
-    true,
-    ['Rectangle']
+export default withErrorBoundary(
+  withParentContext(
+    withYMaps<RectangleProps & WithYMapsProps & WithInstanceRef>(
+      Rectangle,
+      true,
+      ['Rectangle']
+    )
   )
 );

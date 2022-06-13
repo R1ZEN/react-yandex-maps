@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps, { WithYMapsProps } from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 
 import { BaseControl, BaseControlProps } from './BaseControl';
 import { control } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
+import { withErrorBoundary } from '../hocs/with-error-boundary';
 
 interface RulerControlProps extends Omit<BaseControlProps, 'name'> {
   /**
@@ -42,10 +43,12 @@ export const RulerControl: React.FC<
   return <BaseControl {...props} name="RulerControl" />;
 };
 
-export default withParentContext(
-  withYMaps<RulerControlProps & WithYMapsProps & WithInstanceRef & AnyObject>(
-    RulerControl,
-    true,
-    [`control.RulerControl`]
+export default withErrorBoundary(
+  withParentContext(
+    withYMaps<RulerControlProps & WithYMapsProps & WithInstanceRef & AnyObject>(
+      RulerControl,
+      true,
+      [`control.RulerControl`]
+    )
   )
 );

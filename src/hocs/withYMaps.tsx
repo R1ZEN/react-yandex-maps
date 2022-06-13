@@ -1,11 +1,11 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import React from 'react';
-import { omit } from './util/omit';
-import { withYMapsContext } from './Context';
+import { omit } from '../util/omit';
+import { withYMapsContext } from '../Context';
 import ymaps from 'yandex-maps';
-import { AnyObject } from './util/typing';
-import { ApiLoader } from './util/create-api-loader';
+import { AnyObject } from '../util/typing';
+import { ApiLoader } from '../util/create-api-loader';
 
 export interface WithYMapsProps {
   modules?: string[];
@@ -16,7 +16,7 @@ export interface WithYMapsProps {
 }
 
 export default function withYMaps<TProps extends AnyObject>(
-  Component: React.FC<any> | React.Component<any>,
+  Component: React.FC<TProps> | React.Component<TProps>,
   waitForApi = false,
   modules: string[] = []
 ): React.FC<React.PropsWithChildren<TProps>> {
