@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps, { WithYMapsProps } from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 
 import { BaseControl, BaseControlProps } from './BaseControl';
 import { control } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
+import { withErrorBoundary } from '../hocs/with-error-boundary';
 
 interface SearchControlProps extends Omit<BaseControlProps, 'name'> {
   /**
@@ -42,10 +43,10 @@ export const SearchControl: React.FC<
   return <BaseControl {...props} name="SearchControl" />;
 };
 
-export default withParentContext(
-  withYMaps<SearchControlProps & WithYMapsProps & WithInstanceRef & AnyObject>(
-    SearchControl,
-    true,
-    [`control.SearchControl`]
+export default withErrorBoundary(
+  withParentContext(
+    withYMaps<
+      SearchControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+    >(SearchControl, true, [`control.SearchControl`])
   )
 );

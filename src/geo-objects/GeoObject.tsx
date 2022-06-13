@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps, { WithYMapsProps } from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 
 import { BaseGeoObject, BaseGeoObjectProps } from './BaseGeoObject';
 import { AnyObject, WithInstanceRef } from '../util/typing';
 import { IDataManager, IGeometry } from 'yandex-maps';
+import { withErrorBoundary } from '../hocs/with-error-boundary';
 
 interface GeoObjectProps extends Omit<BaseGeoObjectProps, 'name'> {
   /**
@@ -77,10 +78,12 @@ export const GeoObject: React.FC<
   );
 };
 
-export default withParentContext(
-  withYMaps<GeoObjectProps & WithYMapsProps & WithInstanceRef>(
-    GeoObject,
-    true,
-    ['GeoObject']
+export default withErrorBoundary(
+  withParentContext(
+    withYMaps<GeoObjectProps & WithYMapsProps & WithInstanceRef>(
+      GeoObject,
+      true,
+      ['GeoObject']
+    )
   )
 );

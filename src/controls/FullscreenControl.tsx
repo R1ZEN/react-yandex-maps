@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps, { WithYMapsProps } from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 
 import { BaseControl, BaseControlProps } from './BaseControl';
 import { control, IDataManager } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
+import { withErrorBoundary } from '../hocs/with-error-boundary';
 
 interface FullscreenControlProps extends Omit<BaseControlProps, 'name'> {
   /**
@@ -42,8 +43,10 @@ export const FullscreenControl: React.FC<
   return <BaseControl {...props} name="FullscreenControl" />;
 };
 
-export default withParentContext(
-  withYMaps<
-    FullscreenControlProps & WithYMapsProps & WithInstanceRef & AnyObject
-  >(FullscreenControl, true, [`control.FullscreenControl`])
+export default withErrorBoundary(
+  withParentContext(
+    withYMaps<
+      FullscreenControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+    >(FullscreenControl, true, [`control.FullscreenControl`])
+  )
 );

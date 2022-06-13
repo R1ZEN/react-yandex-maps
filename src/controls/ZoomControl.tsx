@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps, { WithYMapsProps } from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 
 import { BaseControl, BaseControlProps } from './BaseControl';
 import { control, data } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
+import { withErrorBoundary } from '../hocs/with-error-boundary';
 
 interface ZoomControlProps extends Omit<BaseControlProps, 'name'> {
   /**
@@ -43,10 +44,12 @@ export const ZoomControl: React.FC<
   return <BaseControl {...props} name="ZoomControl" />;
 };
 
-export default withParentContext(
-  withYMaps<ZoomControlProps & WithYMapsProps & WithInstanceRef & AnyObject>(
-    ZoomControl,
-    true,
-    [`control.ZoomControl`]
+export default withErrorBoundary(
+  withParentContext(
+    withYMaps<ZoomControlProps & WithYMapsProps & WithInstanceRef & AnyObject>(
+      ZoomControl,
+      true,
+      [`control.ZoomControl`]
+    )
   )
 );

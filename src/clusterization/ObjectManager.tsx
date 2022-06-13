@@ -5,9 +5,10 @@ import React from 'react';
 import * as events from '../util/events';
 import { getProp, isControlledProp } from '../util/props';
 import { withParentContext } from '../Context';
-import withYMaps, { WithYMapsProps } from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 import applyRef from '../util/ref';
 import { AnyFunction, AnyObject, WithInstanceRef } from '../util/typing';
+import { withErrorBoundary } from '../hocs/with-error-boundary';
 
 interface ObjectManagerProps {
   /**
@@ -185,10 +186,10 @@ export class ObjectManager extends React.Component<
   }
 }
 
-export default withParentContext(
-  withYMaps<ObjectManagerProps & WithYMapsProps & WithInstanceRef & AnyObject>(
-    ObjectManager,
-    true,
-    ['ObjectManager']
+export default withErrorBoundary(
+  withParentContext(
+    withYMaps<
+      ObjectManagerProps & WithYMapsProps & WithInstanceRef & AnyObject
+    >(ObjectManager, true, ['ObjectManager'])
   )
 );

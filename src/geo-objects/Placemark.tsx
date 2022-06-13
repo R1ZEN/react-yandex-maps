@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps, { WithYMapsProps } from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 
 import { BaseGeoObject, BaseGeoObjectProps } from './BaseGeoObject';
 import { IDataManager, IGeometry, IPlacemarkOptions } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
+import { withErrorBoundary } from '../hocs/with-error-boundary';
 
 interface PlacemarkProps extends Omit<BaseGeoObjectProps, 'name'> {
   /**
@@ -42,10 +43,12 @@ export const Placemark: React.FC<
   return <BaseGeoObject {...props} name="Placemark" />;
 };
 
-export default withParentContext(
-  withYMaps<PlacemarkProps & WithYMapsProps & WithInstanceRef & AnyObject>(
-    Placemark,
-    true,
-    ['Placemark']
+export default withErrorBoundary(
+  withParentContext(
+    withYMaps<PlacemarkProps & WithYMapsProps & WithInstanceRef & AnyObject>(
+      Placemark,
+      true,
+      ['Placemark']
+    )
   )
 );

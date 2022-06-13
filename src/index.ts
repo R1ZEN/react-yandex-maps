@@ -1,6 +1,6 @@
 /** Yandex.Maps context-related stuff */
 
-export { default as withYMaps } from './withYMaps';
+export { default as withYMaps } from './hocs/withYMaps';
 
 export { Provider as YMaps } from './Provider';
 

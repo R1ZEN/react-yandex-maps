@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps, { WithYMapsProps } from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 
 import { BaseControl, BaseControlProps } from './BaseControl';
 import { data, IOptionManager } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
+import { withErrorBoundary } from '../hocs/with-error-boundary';
 
 interface TypeSelectorProps extends Omit<BaseControlProps, 'name'> {
   /**
@@ -42,10 +43,12 @@ export const TypeSelector: React.FC<
   return <BaseControl {...props} name="TypeSelector" />;
 };
 
-export default withParentContext(
-  withYMaps<TypeSelectorProps & WithYMapsProps & WithInstanceRef & AnyObject>(
-    TypeSelector,
-    true,
-    [`control.TypeSelector`]
+export default withErrorBoundary(
+  withParentContext(
+    withYMaps<TypeSelectorProps & WithYMapsProps & WithInstanceRef & AnyObject>(
+      TypeSelector,
+      true,
+      [`control.TypeSelector`]
+    )
   )
 );

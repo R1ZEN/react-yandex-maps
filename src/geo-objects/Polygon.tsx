@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { withParentContext } from '../Context';
-import withYMaps, { WithYMapsProps } from '../withYMaps';
+import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 
 import { BaseGeoObject, BaseGeoObjectProps } from './BaseGeoObject';
 import { IDataManager, IGeometry, IOptionManager } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
+import { withErrorBoundary } from '../hocs/with-error-boundary';
 
 interface PolygonProps extends Omit<BaseGeoObjectProps, 'name'> {
   /**
@@ -42,8 +43,10 @@ export const Polygon: React.FC<
   return <BaseGeoObject {...props} name="Polygon" />;
 };
 
-export default withParentContext(
-  withYMaps<PolygonProps & WithYMapsProps & WithInstanceRef>(Polygon, true, [
-    'Polygon',
-  ])
+export default withErrorBoundary(
+  withParentContext(
+    withYMaps<PolygonProps & WithYMapsProps & WithInstanceRef>(Polygon, true, [
+      'Polygon',
+    ])
+  )
 );
