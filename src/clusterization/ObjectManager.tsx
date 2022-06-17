@@ -8,7 +8,10 @@ import { withParentContext } from '../Context';
 import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 import applyRef from '../util/ref';
 import { AnyFunction, AnyObject, WithInstanceRef } from '../util/typing';
-import { withErrorBoundary } from '../hocs/with-error-boundary';
+import {
+  ErrorBoundaryProps,
+  withErrorBoundary,
+} from '../hocs/with-error-boundary';
 
 interface ObjectManagerProps {
   /**
@@ -44,7 +47,11 @@ interface ObjectManagerProps {
 }
 
 export class ObjectManager extends React.Component<
-  ObjectManagerProps & WithYMapsProps & WithInstanceRef & AnyObject
+  ObjectManagerProps &
+    WithYMapsProps &
+    WithInstanceRef &
+    ErrorBoundaryProps &
+    AnyObject
 > {
   constructor() {
     super();
@@ -187,9 +194,5 @@ export class ObjectManager extends React.Component<
 }
 
 export default withErrorBoundary(
-  withParentContext(
-    withYMaps<
-      ObjectManagerProps & WithYMapsProps & WithInstanceRef & AnyObject
-    >(ObjectManager, true, ['ObjectManager'])
-  )
+  withParentContext(withYMaps(ObjectManager, true, ['ObjectManager']))
 );

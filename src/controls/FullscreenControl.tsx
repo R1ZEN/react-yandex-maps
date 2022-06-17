@@ -6,7 +6,10 @@ import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 import { BaseControl, BaseControlProps } from './BaseControl';
 import { control, IDataManager } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
-import { withErrorBoundary } from '../hocs/with-error-boundary';
+import {
+  ErrorBoundaryProps,
+  withErrorBoundary,
+} from '../hocs/with-error-boundary';
 
 interface FullscreenControlProps extends Omit<BaseControlProps, 'name'> {
   /**
@@ -37,7 +40,11 @@ interface FullscreenControlProps extends Omit<BaseControlProps, 'name'> {
 
 export const FullscreenControl: React.FC<
   React.PropsWithChildren<
-    FullscreenControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+    FullscreenControlProps &
+      WithYMapsProps &
+      WithInstanceRef &
+      ErrorBoundaryProps &
+      AnyObject
   >
 > = (props) => {
   return <BaseControl {...props} name="FullscreenControl" />;
@@ -45,8 +52,6 @@ export const FullscreenControl: React.FC<
 
 export default withErrorBoundary(
   withParentContext(
-    withYMaps<
-      FullscreenControlProps & WithYMapsProps & WithInstanceRef & AnyObject
-    >(FullscreenControl, true, [`control.FullscreenControl`])
+    withYMaps(FullscreenControl, true, [`control.FullscreenControl`])
   )
 );

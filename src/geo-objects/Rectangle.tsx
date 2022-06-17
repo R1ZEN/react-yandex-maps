@@ -6,7 +6,10 @@ import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 import { BaseGeoObject, BaseGeoObjectProps } from './BaseGeoObject';
 import { IDataManager, IGeometry, IOptionManager } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
-import { withErrorBoundary } from '../hocs/with-error-boundary';
+import {
+  ErrorBoundaryProps,
+  withErrorBoundary,
+} from '../hocs/with-error-boundary';
 
 interface RectangleProps extends Omit<BaseGeoObjectProps, 'name'> {
   /**
@@ -37,18 +40,16 @@ interface RectangleProps extends Omit<BaseGeoObjectProps, 'name'> {
 
 export const Rectangle: React.FC<
   React.PropsWithChildren<
-    RectangleProps & WithYMapsProps & WithInstanceRef & AnyObject
+    RectangleProps &
+      WithYMapsProps &
+      WithInstanceRef &
+      ErrorBoundaryProps &
+      AnyObject
   >
 > = (props) => {
   return <BaseGeoObject {...props} name="Rectangle" />;
 };
 
 export default withErrorBoundary(
-  withParentContext(
-    withYMaps<RectangleProps & WithYMapsProps & WithInstanceRef>(
-      Rectangle,
-      true,
-      ['Rectangle']
-    )
-  )
+  withParentContext(withYMaps(Rectangle, true, ['Rectangle']))
 );

@@ -6,7 +6,10 @@ import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 import { BaseControl, BaseControlProps } from './BaseControl';
 import { control } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
-import { withErrorBoundary } from '../hocs/with-error-boundary';
+import {
+  ErrorBoundaryProps,
+  withErrorBoundary,
+} from '../hocs/with-error-boundary';
 
 interface RouteEditorProps extends Omit<BaseControlProps, 'name'> {
   /**
@@ -37,18 +40,16 @@ interface RouteEditorProps extends Omit<BaseControlProps, 'name'> {
 
 export const RouteEditor: React.FC<
   React.PropsWithChildren<
-    RouteEditorProps & WithYMapsProps & WithInstanceRef & AnyObject
+    RouteEditorProps &
+      WithYMapsProps &
+      WithInstanceRef &
+      ErrorBoundaryProps &
+      AnyObject
   >
 > = (props) => {
   return <BaseControl {...props} name="RouteEditor" />;
 };
 
 export default withErrorBoundary(
-  withParentContext(
-    withYMaps<RouteEditorProps & WithYMapsProps & WithInstanceRef & AnyObject>(
-      RouteEditor,
-      true,
-      [`control.RouteEditor`]
-    )
-  )
+  withParentContext(withYMaps(RouteEditor, true, [`control.RouteEditor`]))
 );

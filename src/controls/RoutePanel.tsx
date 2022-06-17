@@ -6,7 +6,10 @@ import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 import { BaseControl, BaseControlProps } from './BaseControl';
 import { control } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
-import { withErrorBoundary } from '../hocs/with-error-boundary';
+import {
+  ErrorBoundaryProps,
+  withErrorBoundary,
+} from '../hocs/with-error-boundary';
 
 interface RoutePanelProps extends Omit<BaseControlProps, 'name'> {
   /**
@@ -30,18 +33,16 @@ interface RoutePanelProps extends Omit<BaseControlProps, 'name'> {
 
 export const RoutePanel: React.FC<
   React.PropsWithChildren<
-    RoutePanelProps & WithYMapsProps & WithInstanceRef & AnyObject
+    RoutePanelProps &
+      WithYMapsProps &
+      WithInstanceRef &
+      ErrorBoundaryProps &
+      AnyObject
   >
 > = (props) => {
   return <BaseControl {...props} name="RoutePanel" />;
 };
 
 export default withErrorBoundary(
-  withParentContext(
-    withYMaps<RoutePanelProps & WithYMapsProps & WithInstanceRef & AnyObject>(
-      RoutePanel,
-      true,
-      [`control.RoutePanel`]
-    )
-  )
+  withParentContext(withYMaps(RoutePanel, true, [`control.RoutePanel`]))
 );

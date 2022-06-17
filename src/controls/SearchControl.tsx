@@ -6,7 +6,10 @@ import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 import { BaseControl, BaseControlProps } from './BaseControl';
 import { control } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
-import { withErrorBoundary } from '../hocs/with-error-boundary';
+import {
+  ErrorBoundaryProps,
+  withErrorBoundary,
+} from '../hocs/with-error-boundary';
 
 interface SearchControlProps extends Omit<BaseControlProps, 'name'> {
   /**
@@ -37,16 +40,16 @@ interface SearchControlProps extends Omit<BaseControlProps, 'name'> {
 
 export const SearchControl: React.FC<
   React.PropsWithChildren<
-    SearchControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+    SearchControlProps &
+      WithYMapsProps &
+      WithInstanceRef &
+      ErrorBoundaryProps &
+      AnyObject
   >
 > = (props) => {
   return <BaseControl {...props} name="SearchControl" />;
 };
 
 export default withErrorBoundary(
-  withParentContext(
-    withYMaps<
-      SearchControlProps & WithYMapsProps & WithInstanceRef & AnyObject
-    >(SearchControl, true, [`control.SearchControl`])
-  )
+  withParentContext(withYMaps(SearchControl, true, [`control.SearchControl`]))
 );

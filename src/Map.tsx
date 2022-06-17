@@ -10,7 +10,10 @@ import applyRef from './util/ref';
 import getParentElementSize from './util/getParentElementSize';
 import ymaps from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from './util/typing';
-import { withErrorBoundary } from './hocs/with-error-boundary';
+import {
+  ErrorBoundaryProps,
+  withErrorBoundary,
+} from './hocs/with-error-boundary';
 
 interface MapProps {
   /**
@@ -65,7 +68,7 @@ interface MapProps {
 }
 
 export class Map extends React.Component<
-  MapProps & WithYMapsProps & WithInstanceRef
+  MapProps & WithYMapsProps & WithInstanceRef & ErrorBoundaryProps
 > {
   constructor() {
     super();

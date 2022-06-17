@@ -1,16 +1,15 @@
 import React, { useContext } from 'react';
 import { ApiLoader } from './util/create-api-loader';
+import { AnyObject } from './util/typing';
 
 export const YMapsApiLoaderContext = React.createContext<ApiLoader | null>(
   null
 );
 
-export const withYMapsContext = <
-  TComponent extends React.ComponentType<React.PropsWithChildren<unknown>>
->(
-  Component: TComponent
-): TComponent => {
-  const WithYMapsContext: React.FC<React.PropsWithChildren<unknown>> = (
+export const withYMapsContext = <TProps extends AnyObject>(
+  Component: React.FC<React.PropsWithChildren<TProps>>
+): React.FC<React.PropsWithChildren<TProps>> => {
+  const WithYMapsContext: React.FC<React.PropsWithChildren<TProps>> = (
     props
   ) => (
     <YMapsApiLoaderContext.Consumer>
@@ -30,7 +29,7 @@ export const withYMapsContext = <
     </YMapsApiLoaderContext.Consumer>
   );
 
-  return WithYMapsContext as TComponent;
+  return WithYMapsContext;
 };
 
 export const useYMapsApiLoader = () => {
@@ -48,12 +47,10 @@ export const useYMapsApiLoader = () => {
 
 export const ParentContext = React.createContext(null);
 
-export const withParentContext = <
-  TComponent extends React.ComponentType<React.PropsWithChildren<unknown>>
->(
-  Component: TComponent
-): TComponent => {
-  const WithParentContext: React.FC<React.PropsWithChildren<unknown>> = (
+export const withParentContext = <TProps extends AnyObject>(
+  Component: React.FC<React.PropsWithChildren<TProps>>
+): React.FC<React.PropsWithChildren<TProps>> => {
+  const WithParentContext: React.FC<React.PropsWithChildren<TProps>> = (
     props
   ) => (
     <ParentContext.Consumer>
@@ -65,5 +62,5 @@ export const withParentContext = <
     </ParentContext.Consumer>
   );
 
-  return WithParentContext as TComponent;
+  return WithParentContext;
 };

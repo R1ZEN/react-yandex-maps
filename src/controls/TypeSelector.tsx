@@ -6,7 +6,10 @@ import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 import { BaseControl, BaseControlProps } from './BaseControl';
 import { data, IOptionManager } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
-import { withErrorBoundary } from '../hocs/with-error-boundary';
+import {
+  ErrorBoundaryProps,
+  withErrorBoundary,
+} from '../hocs/with-error-boundary';
 
 interface TypeSelectorProps extends Omit<BaseControlProps, 'name'> {
   /**
@@ -37,18 +40,16 @@ interface TypeSelectorProps extends Omit<BaseControlProps, 'name'> {
 
 export const TypeSelector: React.FC<
   React.PropsWithChildren<
-    TypeSelectorProps & WithYMapsProps & WithInstanceRef & AnyObject
+    TypeSelectorProps &
+      WithYMapsProps &
+      WithInstanceRef &
+      ErrorBoundaryProps &
+      AnyObject
   >
 > = (props) => {
   return <BaseControl {...props} name="TypeSelector" />;
 };
 
 export default withErrorBoundary(
-  withParentContext(
-    withYMaps<TypeSelectorProps & WithYMapsProps & WithInstanceRef & AnyObject>(
-      TypeSelector,
-      true,
-      [`control.TypeSelector`]
-    )
-  )
+  withParentContext(withYMaps(TypeSelector, true, [`control.TypeSelector`]))
 );

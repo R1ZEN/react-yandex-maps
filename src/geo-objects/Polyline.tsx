@@ -6,7 +6,10 @@ import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 import { BaseGeoObject, BaseGeoObjectProps } from './BaseGeoObject';
 import { IDataManager, IPolygonGeometry, IPolylineOptions } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
-import { withErrorBoundary } from '../hocs/with-error-boundary';
+import {
+  ErrorBoundaryProps,
+  withErrorBoundary,
+} from '../hocs/with-error-boundary';
 
 interface PolylineProps extends Omit<BaseGeoObjectProps, 'name'> {
   /**
@@ -37,18 +40,16 @@ interface PolylineProps extends Omit<BaseGeoObjectProps, 'name'> {
 
 export const Polyline: React.FC<
   React.PropsWithChildren<
-    PolylineProps & WithYMapsProps & WithInstanceRef & AnyObject
+    PolylineProps &
+      WithYMapsProps &
+      WithInstanceRef &
+      ErrorBoundaryProps &
+      AnyObject
   >
 > = (props) => {
   return <BaseGeoObject {...props} name="Polyline" />;
 };
 
 export default withErrorBoundary(
-  withParentContext(
-    withYMaps<PolylineProps & WithYMapsProps & WithInstanceRef>(
-      Polyline,
-      true,
-      ['Polyline']
-    )
-  )
+  withParentContext(withYMaps(Polyline, true, ['Polyline']))
 );

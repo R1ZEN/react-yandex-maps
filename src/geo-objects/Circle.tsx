@@ -6,7 +6,10 @@ import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 import { BaseGeoObject, BaseGeoObjectProps } from './BaseGeoObject';
 import { ICircleGeometry, ICircleOptions, IDataManager } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
-import { withErrorBoundary } from '../hocs/with-error-boundary';
+import {
+  ErrorBoundaryProps,
+  withErrorBoundary,
+} from '../hocs/with-error-boundary';
 
 interface CircleProps extends Omit<BaseGeoObjectProps, 'name'> {
   /**
@@ -37,18 +40,16 @@ interface CircleProps extends Omit<BaseGeoObjectProps, 'name'> {
 
 export const Circle: React.FC<
   React.PropsWithChildren<
-    CircleProps & WithYMapsProps & WithInstanceRef & AnyObject
+    CircleProps &
+      WithYMapsProps &
+      WithInstanceRef &
+      ErrorBoundaryProps &
+      AnyObject
   >
 > = (props) => {
   return <BaseGeoObject {...props} name="Circle" />;
 };
 
 export default withErrorBoundary(
-  withParentContext(
-    withYMaps<CircleProps & WithYMapsProps & WithInstanceRef & AnyObject>(
-      Circle,
-      true,
-      ['Circle']
-    )
-  )
+  withParentContext(withYMaps(Circle, true, ['Circle']))
 );

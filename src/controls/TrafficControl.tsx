@@ -6,7 +6,10 @@ import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 import { BaseControl, BaseControlProps } from './BaseControl';
 import { data, IOptionManager } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
-import { withErrorBoundary } from '../hocs/with-error-boundary';
+import {
+  ErrorBoundaryProps,
+  withErrorBoundary,
+} from '../hocs/with-error-boundary';
 
 interface TrafficControlProps extends Omit<BaseControlProps, 'name'> {
   /**
@@ -38,16 +41,16 @@ interface TrafficControlProps extends Omit<BaseControlProps, 'name'> {
 
 export const TrafficControl: React.FC<
   React.PropsWithChildren<
-    TrafficControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+    TrafficControlProps &
+      WithYMapsProps &
+      WithInstanceRef &
+      ErrorBoundaryProps &
+      AnyObject
   >
 > = (props) => {
   return <BaseControl {...props} name="TrafficControl" />;
 };
 
 export default withErrorBoundary(
-  withParentContext(
-    withYMaps<
-      TrafficControlProps & WithYMapsProps & WithInstanceRef & AnyObject
-    >(TrafficControl, true, [`control.TrafficControl`])
-  )
+  withParentContext(withYMaps(TrafficControl, true, [`control.TrafficControl`]))
 );

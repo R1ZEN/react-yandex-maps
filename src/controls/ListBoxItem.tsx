@@ -6,7 +6,10 @@ import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 import { BaseControl } from './BaseControl';
 import { control } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
-import { withErrorBoundary } from '../hocs/with-error-boundary';
+import {
+  ErrorBoundaryProps,
+  withErrorBoundary,
+} from '../hocs/with-error-boundary';
 
 interface ListBoxItemProps {
   /**
@@ -37,18 +40,16 @@ interface ListBoxItemProps {
 
 export const ListBoxItem: React.FC<
   React.PropsWithChildren<
-    ListBoxItemProps & WithYMapsProps & WithInstanceRef & AnyObject
+    ListBoxItemProps &
+      WithYMapsProps &
+      WithInstanceRef &
+      ErrorBoundaryProps &
+      AnyObject
   >
 > = (props) => {
   return <BaseControl {...props} name="ListBoxItem" />;
 };
 
 export default withErrorBoundary(
-  withParentContext(
-    withYMaps<ListBoxItemProps & WithYMapsProps & WithInstanceRef & AnyObject>(
-      ListBoxItem,
-      true,
-      [`control.ListBoxItem`]
-    )
-  )
+  withParentContext(withYMaps(ListBoxItem, true, [`control.ListBoxItem`]))
 );

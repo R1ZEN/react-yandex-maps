@@ -6,7 +6,10 @@ import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 import { BaseGeoObject, BaseGeoObjectProps } from './BaseGeoObject';
 import { AnyObject, WithInstanceRef } from '../util/typing';
 import { IDataManager, IGeometry } from 'yandex-maps';
-import { withErrorBoundary } from '../hocs/with-error-boundary';
+import {
+  ErrorBoundaryProps,
+  withErrorBoundary,
+} from '../hocs/with-error-boundary';
 
 interface GeoObjectProps extends Omit<BaseGeoObjectProps, 'name'> {
   /**
@@ -66,7 +69,11 @@ const geoObjectDangerZoneProps = {
 
 export const GeoObject: React.FC<
   React.PropsWithChildren<
-    GeoObjectProps & WithYMapsProps & WithInstanceRef & AnyObject
+    GeoObjectProps &
+      WithYMapsProps &
+      WithInstanceRef &
+      ErrorBoundaryProps &
+      AnyObject
   >
 > = (props) => {
   return (
@@ -79,11 +86,5 @@ export const GeoObject: React.FC<
 };
 
 export default withErrorBoundary(
-  withParentContext(
-    withYMaps<GeoObjectProps & WithYMapsProps & WithInstanceRef>(
-      GeoObject,
-      true,
-      ['GeoObject']
-    )
-  )
+  withParentContext(withYMaps(GeoObject, true, ['GeoObject']))
 );

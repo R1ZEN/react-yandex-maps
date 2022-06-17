@@ -6,7 +6,10 @@ import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 import { BaseControl, BaseControlProps } from './BaseControl';
 import { control } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
-import { withErrorBoundary } from '../hocs/with-error-boundary';
+import {
+  ErrorBoundaryProps,
+  withErrorBoundary,
+} from '../hocs/with-error-boundary';
 
 interface GeolocationControlProps extends Omit<BaseControlProps, 'name'> {
   /**
@@ -37,7 +40,11 @@ interface GeolocationControlProps extends Omit<BaseControlProps, 'name'> {
 
 export const GeolocationControl: React.FC<
   React.PropsWithChildren<
-    GeolocationControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+    GeolocationControlProps &
+      WithYMapsProps &
+      WithInstanceRef &
+      ErrorBoundaryProps &
+      AnyObject
   >
 > = (props) => {
   return <BaseControl {...props} name="GeolocationControl" />;
@@ -45,8 +52,6 @@ export const GeolocationControl: React.FC<
 
 export default withErrorBoundary(
   withParentContext(
-    withYMaps<
-      GeolocationControlProps & WithYMapsProps & WithInstanceRef & AnyObject
-    >(GeolocationControl, true, [`control.GeolocationControl`])
+    withYMaps(GeolocationControl, true, [`control.GeolocationControl`])
   )
 );

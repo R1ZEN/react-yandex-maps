@@ -6,7 +6,10 @@ import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 import { BaseControl, BaseControlProps } from './BaseControl';
 import { data, IDataManager, IOptionManager } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
-import { withErrorBoundary } from '../hocs/with-error-boundary';
+import {
+  ErrorBoundaryProps,
+  withErrorBoundary,
+} from '../hocs/with-error-boundary';
 
 interface ButtonProps extends Omit<BaseControlProps, 'name'> {
   /**
@@ -37,18 +40,16 @@ interface ButtonProps extends Omit<BaseControlProps, 'name'> {
 
 export const Button: React.FC<
   React.PropsWithChildren<
-    ButtonProps & WithYMapsProps & WithInstanceRef & AnyObject
+    ButtonProps &
+      WithYMapsProps &
+      WithInstanceRef &
+      ErrorBoundaryProps &
+      AnyObject
   >
 > = (props) => {
   return <BaseControl {...props} name="Button" />;
 };
 
 export default withErrorBoundary(
-  withParentContext(
-    withYMaps<ButtonProps & WithYMapsProps & WithInstanceRef & AnyObject>(
-      Button,
-      true,
-      [`control.Button`]
-    )
-  )
+  withParentContext(withYMaps(Button, true, [`control.Button`]))
 );

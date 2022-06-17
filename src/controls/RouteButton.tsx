@@ -6,7 +6,10 @@ import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 import { BaseControl, BaseControlProps } from './BaseControl';
 import { control } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
-import { withErrorBoundary } from '../hocs/with-error-boundary';
+import {
+  ErrorBoundaryProps,
+  withErrorBoundary,
+} from '../hocs/with-error-boundary';
 
 interface RouteButtonProps extends Omit<BaseControlProps, 'name'> {
   /**
@@ -29,18 +32,16 @@ interface RouteButtonProps extends Omit<BaseControlProps, 'name'> {
 
 export const RouteButton: React.FC<
   React.PropsWithChildren<
-    RouteButtonProps & WithYMapsProps & WithInstanceRef & AnyObject
+    RouteButtonProps &
+      WithYMapsProps &
+      WithInstanceRef &
+      ErrorBoundaryProps &
+      AnyObject
   >
 > = (props) => {
   return <BaseControl {...props} name="RouteButton" />;
 };
 
 export default withErrorBoundary(
-  withParentContext(
-    withYMaps<RouteButtonProps & WithYMapsProps & WithInstanceRef & AnyObject>(
-      RouteButton,
-      true,
-      [`control.RouteButton`]
-    )
-  )
+  withParentContext(withYMaps(RouteButton, true, [`control.RouteButton`]))
 );

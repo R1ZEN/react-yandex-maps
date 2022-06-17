@@ -6,7 +6,10 @@ import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 import { BaseControl, BaseControlProps } from './BaseControl';
 import { control } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
-import { withErrorBoundary } from '../hocs/with-error-boundary';
+import {
+  ErrorBoundaryProps,
+  withErrorBoundary,
+} from '../hocs/with-error-boundary';
 
 interface RulerControlProps extends Omit<BaseControlProps, 'name'> {
   /**
@@ -37,18 +40,16 @@ interface RulerControlProps extends Omit<BaseControlProps, 'name'> {
 
 export const RulerControl: React.FC<
   React.PropsWithChildren<
-    RulerControlProps & WithYMapsProps & WithInstanceRef & AnyObject
+    RulerControlProps &
+      WithYMapsProps &
+      WithInstanceRef &
+      ErrorBoundaryProps &
+      AnyObject
   >
 > = (props) => {
   return <BaseControl {...props} name="RulerControl" />;
 };
 
 export default withErrorBoundary(
-  withParentContext(
-    withYMaps<RulerControlProps & WithYMapsProps & WithInstanceRef & AnyObject>(
-      RulerControl,
-      true,
-      [`control.RulerControl`]
-    )
-  )
+  withParentContext(withYMaps(RulerControl, true, [`control.RulerControl`]))
 );

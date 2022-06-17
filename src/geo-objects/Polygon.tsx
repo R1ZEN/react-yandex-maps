@@ -6,7 +6,10 @@ import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 import { BaseGeoObject, BaseGeoObjectProps } from './BaseGeoObject';
 import { IDataManager, IGeometry, IOptionManager } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
-import { withErrorBoundary } from '../hocs/with-error-boundary';
+import {
+  ErrorBoundaryProps,
+  withErrorBoundary,
+} from '../hocs/with-error-boundary';
 
 interface PolygonProps extends Omit<BaseGeoObjectProps, 'name'> {
   /**
@@ -37,16 +40,16 @@ interface PolygonProps extends Omit<BaseGeoObjectProps, 'name'> {
 
 export const Polygon: React.FC<
   React.PropsWithChildren<
-    PolygonProps & WithYMapsProps & WithInstanceRef & AnyObject
+    PolygonProps &
+      WithYMapsProps &
+      WithInstanceRef &
+      ErrorBoundaryProps &
+      AnyObject
   >
 > = (props) => {
   return <BaseGeoObject {...props} name="Polygon" />;
 };
 
 export default withErrorBoundary(
-  withParentContext(
-    withYMaps<PolygonProps & WithYMapsProps & WithInstanceRef>(Polygon, true, [
-      'Polygon',
-    ])
-  )
+  withParentContext(withYMaps(Polygon, true, ['Polygon']))
 );

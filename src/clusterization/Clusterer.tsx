@@ -9,7 +9,10 @@ import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 import applyRef from '../util/ref';
 import { IClustererOptions } from 'yandex-maps';
 import { AnyFunction, AnyObject, WithInstanceRef } from '../util/typing';
-import { withErrorBoundary } from '../hocs/with-error-boundary';
+import {
+  ErrorBoundaryProps,
+  withErrorBoundary,
+} from '../hocs/with-error-boundary';
 
 interface ClusterProps {
   /** Clusterer [options](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Clusterer-docpage/) */
@@ -27,7 +30,11 @@ interface ClusterProps {
 }
 
 export class Clusterer extends React.Component<
-  ClusterProps & WithYMapsProps & WithInstanceRef & AnyObject
+  ClusterProps &
+    WithYMapsProps &
+    WithInstanceRef &
+    ErrorBoundaryProps &
+    AnyObject
 > {
   constructor() {
     super();
@@ -127,11 +134,5 @@ export class Clusterer extends React.Component<
 }
 
 export default withErrorBoundary(
-  withParentContext(
-    withYMaps<ClusterProps & WithYMapsProps & WithInstanceRef & AnyObject>(
-      Clusterer,
-      true,
-      ['Clusterer']
-    )
-  )
+  withParentContext(withYMaps(Clusterer, true, ['Clusterer']))
 );
