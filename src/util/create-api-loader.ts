@@ -1,5 +1,5 @@
 import { set } from './set';
-import { AnyObject, YMapsApi } from './typing';
+import { AnyObject, YMapsApi, YMapsModules } from './typing';
 import { isDevEnv } from './is-dev-env';
 import { isBrowser } from './is-browser';
 
@@ -61,13 +61,11 @@ export const createApiLoader = (options: CreateYMapsLoaderOptions) => {
   let api: YMapsApi;
 
   const getApi = (): YMapsApi =>
-    typeof window !== 'undefined' && namespace
-      ? (window as unknown as Record<string, YMapsApi>)[namespace]
-      : api;
+    typeof isBrowser && namespace ? windowObj[namespace] : api;
 
   const loadModule = (moduleName: string): Promise<YMapsApi> => {
     return new Promise((res, rej) => {
-      api.modules.require(moduleName).done((modules: AnyObject[]) => {
+      api.modules.require(moduleName).done((modules: YMapsModules[]) => {
         modules.forEach((module) => {
           set(api, moduleName, module, true);
         });
