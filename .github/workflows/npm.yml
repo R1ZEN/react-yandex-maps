@@ -19,5 +19,5 @@ jobs:
           node-version: ${{env.NODE_VERSION}}
           registry-url: 'https://registry.npmjs.org'
       - run: npm ci
-      - run: npm build
+      - run: npm run build
       - run: npm publish --access=public
