@@ -5,9 +5,6 @@ on:
 
 name: checks
 
-env:
-  NODE_VERSION: 14
-
 jobs:
   build_test_lint:
     runs-on: ubuntu-latest
@@ -15,10 +12,10 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: ${{env.NODE_VERSION}}
+          node-version-file: '.nvmrc'
 
       - name: Install node_modules
-        run: npm ci
+        run: npm i
 
       - name: Typecheck
         run: npm run tsc
@@ -30,7 +27,9 @@ jobs:
         run: npm run test
 
       - name: Build
-        run: npm run build
+        run: |
+          npm run build
+          npm run sb:build
 
       - uses: andresz1/size-limit-action@v1
         with:
