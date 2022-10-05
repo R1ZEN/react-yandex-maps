@@ -4,7 +4,7 @@ import { withParentContext } from '../Context';
 import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 
 import { BaseControl, BaseControlProps } from './BaseControl';
-import { data, IDataManager, IOptionManager } from 'yandex-maps';
+import { control } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
 import {
   ErrorBoundaryProps,
@@ -15,27 +15,27 @@ interface ButtonProps extends Omit<BaseControlProps, 'name'> {
   /**
    * Control [data](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/control.Button-docpage/#control.Button__param-parameters.data)
    */
-  data?: data.Manager;
+  data?: control.IButtonParameters['data'];
   /**
    * Uncontrolled control [data](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/control.Button-docpage/#control.Button__param-parameters.data)
    */
-  defaultData?: data.Manager;
+  defaultData?: control.IButtonParameters['data'];
   /**
    * Control [options](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/control.Button-docpage/#control.Button__param-parameters.options)
    */
-  options?: IOptionManager;
+  options?: control.IButtonParameters['options'];
   /**
    * Uncontrolled control [options](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/control.Button-docpage/#control.Button__param-parameters.options)
    */
-  defaultOptions?: IOptionManager;
+  defaultOptions?: control.IButtonParameters['options'];
   /**
    * Control [state](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/control.Button-docpage/#control.Button__param-parameters.state)
    */
-  state?: IDataManager;
+  state?: control.IButtonParameters['state'];
   /**
    * Uncontrolled control [state](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/control.Button-docpage/#control.Button__param-parameters.state)
    */
-  defaultState?: IDataManager;
+  defaultState?: control.IButtonParameters['state'];
 }
 
 export const Button: React.FC<
