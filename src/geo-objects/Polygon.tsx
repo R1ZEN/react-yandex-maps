@@ -4,7 +4,7 @@ import { withParentContext } from '../Context';
 import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 
 import { BaseGeoObject, BaseGeoObjectProps } from './BaseGeoObject';
-import { IDataManager, IGeometry, IOptionManager } from 'yandex-maps';
+import { IDataManager, IGeometry, IPolygonOptions } from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
 import {
   ErrorBoundaryProps,
@@ -31,11 +31,11 @@ interface PolygonProps extends Omit<BaseGeoObjectProps, 'name'> {
   /**
    * Polygon [options](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Polygon-docpage/#param-options)
    */
-  options?: IOptionManager;
+  options?: IPolygonOptions;
   /**
    * Uncontrolled Polygon [options](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Polygon-docpage/#param-options)
    */
-  defaultOptions?: IOptionManager;
+  defaultOptions?: IPolygonOptions;
 }
 
 export const Polygon: React.FC<
