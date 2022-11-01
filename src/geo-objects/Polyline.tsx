@@ -4,7 +4,11 @@ import { withParentContext } from '../Context';
 import withYMaps, { WithYMapsProps } from '../hocs/withYMaps';
 
 import { BaseGeoObject, BaseGeoObjectProps } from './BaseGeoObject';
-import { IDataManager, IPolygonGeometry, IPolylineOptions } from 'yandex-maps';
+import {
+  IDataManager,
+  ILineStringGeometry,
+  IPolylineOptions,
+} from 'yandex-maps';
 import { AnyObject, WithInstanceRef } from '../util/typing';
 import {
   ErrorBoundaryProps,
@@ -15,11 +19,11 @@ interface PolylineProps extends Omit<BaseGeoObjectProps, 'name'> {
   /**
    * Polyline [geometry](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Polyline-docpage/#param-geometry)
    */
-  geometry?: IPolygonGeometry;
+  geometry?: number[][] | AnyObject | ILineStringGeometry;
   /**
    * Uncontrolled Polyline [geometry](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Polyline-docpage/#param-geometry)
    */
-  defaultGeometry?: IPolygonGeometry;
+  defaultGeometry?: number[][] | AnyObject | ILineStringGeometry;
   /**
    * Polyline [properties](https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Polyline-docpage/#param-properties)
    */
