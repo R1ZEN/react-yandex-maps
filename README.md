@@ -1,54 +1,72 @@
-# @pbe/react-yandex-maps
+# React Yandex Maps
 
 [![npm](https://img.shields.io/npm/v/@pbe/react-yandex-maps)](https://www.npmjs.com/package/@pbe/react-yandex-maps)
 [![npm bundle size](https://img.shields.io/bundlephobia/minzip/@pbe/react-yandex-maps)](https://bundlephobia.com/package/@pbe/react-yandex-maps)
 
-[Yandex.Maps JS API][ymaps-api] bindings for React
+[Yandex Maps API][ymaps-api] bindings for React
 
 [ymaps-api]:
   https://tech.yandex.com/maps/doc/jsapi/2.1/quick-start/index-docpage/
 
-## Documentation
+### Features
 
-You can find the documentation at https://pbe-react-yandex-maps.vercel.app
+- Supports TypeScript out of the box
+- Automatic yamps api and modules loading
+- Declarative rendering
 
-## Contributing
+### Installation
 
-Feel free to submit issues and/or PRs if you found bugs 🐞 or have some features
-in mind! The documentation improvements will be super appreciated, if you feel
-that docs are lacking in some places 📝👩‍🔬
+npm:
 
-### Developing locally (Quick Start)
-
-If you want to work on the library locally:
-
-1. Fork this repository and clone your version of the repo
-2. Switch to correct node version
-
-```sh
-nvm use
+```
+npm install @pbe/react-yandex-maps
 ```
 
-3. Install npm dependencies
+yarn:
 
-```sh
-npm install
+```
+yarn add @pbe/react-yandex-maps
 ```
 
-4. Start storybook server locally
+### Getting Started
 
-```sh
-npm run sb:dev
+Try running a simple example:
+
+```jsx
+import React from 'react';
+import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
+
+export default function App() {
+  const defaultState = {
+    center: [55.751574, 37.573856],
+    zoom: 5,
+  };
+
+  return (
+    <YMaps>
+      <Map defaultState={defaultState}>
+        <Placemark geometry={[55.684758, 37.738521]} />
+      </Map>
+    </YMaps>
+  );
+}
 ```
 
-If everything went well, you now have documentation running on
-`http://localhost:6006`
+### Documentation
 
-Now you can make changes to the library and see them applied to the storybook in
-real time.
+The React Yandex Maps docs are located at
+[website](https://pbe-react-yandex-maps.vercel.app)
 
-When you commit changes, eslint will make sure that there are no linting errors
-and prettier will format your code based on the repo settings.
+- [Getting Started](https://pbe-react-yandex-maps.vercel.app/)
+- [Core Principles](https://pbe-react-yandex-maps.vercel.app/core-principles/)
+- [API Reference](https://pbe-react-yandex-maps.vercel.app/api-reference/)
 
-When you push changes, jest will run a set of unit tests to make sure that all
-of them are passing.
+### Contribution
+
+We appreciate your help!
+
+To contribute, please read our [contributing instructions](./CONTRIBUTING.md).
+
+### License
+
+[MIT](./LICENSE)
