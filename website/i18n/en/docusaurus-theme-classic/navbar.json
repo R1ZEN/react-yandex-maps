@@ -1,0 +1,14 @@
+{
+  "title": {
+    "message": "React Yandex Maps",
+    "description": "The title in the navbar"
+  },
+  "item.label.Yandex Maps API": {
+    "message": "Yandex Maps API",
+    "description": "Navbar item with label Yandex Maps API"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
+  }
+}

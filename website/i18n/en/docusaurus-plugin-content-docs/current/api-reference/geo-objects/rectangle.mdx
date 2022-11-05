@@ -1,0 +1,53 @@
+---
+slug: '/api/geo-objects/rectangle'
+title: Rectangle
+---
+
+import { Canvas } from '@site/src/components/Canvas';
+
+# Rectangle
+
+Renders Yandex.Maps API [Rectangle][docs] object
+
+## Basic Usage
+
+<Canvas>
+  {`
+  <YMaps>
+    <Map
+      defaultState={{
+        center: [55.674, 37.601],
+        zoom: 11,
+      }}
+    >
+      <Rectangle
+        geometry={[
+          [55.66, 37.6],
+          [55.71, 37.69],
+        ]}
+        options={{
+          draggable: true,
+          fillColor: '#ffff0022',
+          strokeColor: '#3caa3c88',
+          strokeWidth: 7,
+        }}
+      />
+    </Map>
+  </YMaps>
+`}
+</Canvas>
+
+## Props
+
+- `geometry`: Placemark geometry
+- `defaultGeometry`: Uncontrolled Placemark geometry
+- `properties`: Placemark properties
+- `defaultProperties`: Uncontrolled Placemark properties
+- `options`: Placemark options
+- `defaultOptions`: Uncontrolled Placemark options
+- `dangerZone`: Used in a special case where constructor needs to be modified
+  before passing it to the mount method
+- `instanceRef`: Object instance
+
+[docs]:
+  https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Rectangle-docpage/

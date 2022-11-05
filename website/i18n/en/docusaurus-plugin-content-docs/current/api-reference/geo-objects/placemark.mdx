@@ -1,0 +1,42 @@
+---
+slug: '/api/geo-objects/placemark'
+title: Placemark
+---
+
+import { Canvas } from '@site/src/components/Canvas';
+
+# Placemark
+
+Renders Yandex.Maps API [Placemark][docs] object
+
+## Basic Usage
+
+<Canvas>
+  {`
+  <YMaps>
+    <Map
+      defaultState={{
+        center: [55.751574, 37.573856],
+        zoom: 5,
+      }}
+    >
+      <Placemark geometry={[55.684758, 37.738521]} />
+    </Map>
+  </YMaps>
+`}
+</Canvas>
+
+## Props
+
+- `geometry`: Placemark geometry
+- `defaultGeometry`: Uncontrolled Placemark geometry
+- `properties`: Placemark properties
+- `defaultProperties`: Uncontrolled Placemark properties
+- `options`: Placemark options
+- `defaultOptions`: Uncontrolled Placemark options
+- `dangerZone`: Used in a special case where constructor needs to be modified
+  before passing it to the mount method
+- `instanceRef`: Object instance
+
+[docs]:
+  https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Placemark-docpage/

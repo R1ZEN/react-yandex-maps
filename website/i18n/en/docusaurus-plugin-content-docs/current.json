@@ -1,0 +1,38 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.API Reference": {
+    "message": "API Reference",
+    "description": "The label for category API Reference in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.API Reference.link.generated-index.title": {
+    "message": "API Reference",
+    "description": "The generated-index page title for category API Reference in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Clusterization": {
+    "message": "Clusterization",
+    "description": "The label for category Clusterization in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Clusterization.link.generated-index.title": {
+    "message": "Clusterization",
+    "description": "The generated-index page title for category Clusterization in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Controls": {
+    "message": "Controls",
+    "description": "The label for category Controls in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Controls.link.generated-index.title": {
+    "message": "Controls",
+    "description": "The generated-index page title for category Controls in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Geo Objects": {
+    "message": "Geo Objects",
+    "description": "The label for category Geo Objects in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Geo Objects.link.generated-index.title": {
+    "message": "Geo Objects",
+    "description": "The generated-index page title for category Geo Objects in sidebar tutorialSidebar"
+  }
+}

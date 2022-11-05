@@ -1,25 +1,28 @@
 ---
 slug: '/core-principles'
+title: Основные принципы
 ---
 
 import { Canvas } from '@site/src/components/Canvas';
 
-# Core Principles
+# Основные принципы
 
-## Modular Approach
+## Модульный подход
 
-This library heavily utilizes Yandex.Maps API module system to make amount of downloaded and executed code from
-Yandex.Maps as minimal as possible. There are some pros and cons to this system and there are also a way to opt out of
-this completely.
+Эта библиотека активно использует систему модулей API Яндекс.Карт, чтобы свести
+к минимуму объем загружаемого и исполняемого кода из Яндекс.Карт. У этой системы
+есть свои плюсы и минусы, а также есть способ полностью отказаться от нее.
 
-By default, this library will download only the modules that are actually rendered on the page. If `<Placemark />` or
-`<ObjectManager />` is not mounted in the page, corresponding would not be downloaded.
+По умолчанию эта библиотека загружает только те модули, которые фактически
+отображаются на странице. Если `<Placemark />` или `<ObjectManager />` не
+смонтирован на странице, соответствующий не будет загружен.
 
-That means that the amount of code your clients will download and execute will be as minimal as possible. On the other
-hand that means that instead of getting a lot of familiar Yandex.Maps API modules by default, now you need to really
-think about what you are using on the page.
+Это означает, что объем кода, который ваши клиенты будут загружать и выполнять,
+будет минимальным. С другой стороны, это означает, что вместо того, чтобы
+получать множество привычных API-модулей Яндекс.Карт по умолчанию, теперь вам
+нужно серьезно подумать о том, что вы используете на странице.
 
-In the example below, we are mounting Map with a Placemark on the page:
+В приведенном ниже примере мы монтируем карту с меткой на странице:
 
 <Canvas>
   {`
@@ -31,13 +34,16 @@ In the example below, we are mounting Map with a Placemark on the page:
 `}
 </Canvas>
 
-You can notice that all map controls that are usually provided on the map by default are missing here. This is happening
-because they are not part of the "core" Yandex.Maps module, not they are part of the Map or Placemark module.
+Вы можете заметить, что здесь отсутствуют все элементы управления картой,
+которые обычно предоставляются на карте по умолчанию. Это происходит потому, что
+они не входят в состав «основного» модуля Яндекс.Карт, не входят в состав модуля
+`Map` или `Placemark`.
 
-### Loading Modules with `modules` Prop
+### Загрузка модулей с `modules` проп
 
-Let's fix this by specifying which controls we want exactly in the map `state` and then let's use the `modules` prop to
-load the ones we need:
+Давайте исправим это, указав, какие именно элементы управления нам нужны на
+карте `state`, а затем воспользуемся `modules` пропом для загрузки нужных нам
+элементов:
 
 <Canvas>
   {`
@@ -56,14 +62,16 @@ load the ones we need:
 `}
 </Canvas>
 
-Nice! Now we have controls on the map and we also avoided downloading the full package of Yandex.Maps API.
+Отлично! Теперь у нас есть элементы управления на карте, а также мы избежали
+загрузки полного пакета API Яндекс.Карт.
 
-All components in this library support `modules` prop, that will allow you to download additional modules when they are
-needed.
+Все компоненты в этой библиотеке поддерживаю `modules` prop, что позволит вам
+загружать дополнительные модули, когда они понадобятся.
 
-Let's add another one to the example above. This time we will add balloon to the placemark. Balloon module is not
-downloaded with the base minimum bundle of Yandex.Maps API, so to actually see ballon we need to specify balloon addon
-as a module on the Placemark component.
+Давайте добавим еще один к приведенному выше примеру. На этот раз мы добавим
+балун к метке. Модуль всплывающей подсказки не загружается с базовым минимальным
+пакетом API Яндекс.Карт, поэтому, чтобы действительно увидеть баллон, нам нужно
+указать надстройку балуна как модуль в компоненте `Placemark`.
 
 <Canvas>
   {`
@@ -89,15 +97,18 @@ as a module on the Placemark component.
 `}
 </Canvas>
 
-### Loading Modules With YMaps Provider `query` Prop
+### Загрузка модулей с YMaps Provider `query` проп
 
-Manually specifying required modules is not the only way to load them. You can also take advantage of `load` option when
-you are specifying `query` on your Provider component.
+Ручное указание необходимых модулей — не единственный способ их загрузки. Вы
+также можете воспользоваться `load` опцией при указании `query` компонента
+Provider.
 
-This option is part of Yandex.Maps API request and can be used to define what modules you want to load right away with
-the Yandex.Maps API.
+Эта опция является частью запроса API Яндекс.Карт и может использоваться для
+определения того, какие модули вы хотите сразу загрузить с помощью API
+Яндекс.Карт.
 
-Lets see how the previous example could be changed to use this option:
+Давайте посмотрим, как можно изменить предыдущий пример, чтобы использовать эту
+опцию:
 
 <Canvas>
   {`
@@ -126,97 +137,118 @@ Lets see how the previous example could be changed to use this option:
 `}
 </Canvas>
 
-Notice how we removed all `modules` props from all components and used `query.load` prop instead to specify all modules
-that are required.
+Обратите внимание, как мы удалили все `modules` пропы из всех компонент и
+заменили их на список модулей в `query.load`.
 
-Yandex.Maps API default value for this option is `package.full`. Setting `query.load` to `'package.full'` will set this
-library to the mode that is completely matching the default Yandex.Maps API behavior
+Значение по умолчанию API Яндекс.Карт для этой опции — `package.full`. При
+установке `query.load` в `'package.full'` этой библиотеки будет установлен
+режим, полностью соответствующий стандартному поведению API Яндекс.Карт.
 
-You can learn more about [Yandex.Maps API on-demand module system][5.3.1] and [API loading parameters][5.3.2] in
-Yandex.Maps documentation.
+Вы можете прочитать подробнее про [Yandex.Maps API on-demand module
+system][5.3.1] и [API loading parameters][5.3.2] в документации на Яндекс.Карты.
 
-[5.3.1]: https://tech.yandex.com/maps/doc/jsapi/2.1/dg/concepts/modules-docpage/#require
-[5.3.2]: https://tech.yandex.com/maps/doc/jsapi/2.1/dg/concepts/load-docpage/#param
+[5.3.1]:
+  https://tech.yandex.com/maps/doc/jsapi/2.1/dg/concepts/modules-docpage/#require
+[5.3.2]:
+  https://tech.yandex.com/maps/doc/jsapi/2.1/dg/concepts/load-docpage/#param
 
-## Controlled and Uncontrolled Components
+## Контролируемы и Неконтролируемые компоненты
 
-Important React pattern that you should be aware of when using this library is controlled and uncontrolled components.
-This pattern is all about who is responsible for handling updates and storing components state.
+Важный шаблон React, о котором следует помнить при использовании этой
+библиотеки, — это контролируемые и неуправляемые компоненты. Этот шаблон
+полностью посвящен тому, кто отвечает за обработку обновлений и сохранение
+состояния компонентов.
 
-Applied to this library, that means that based on which props you are using, either Yandex.Maps API or your application
-will be responsible for being the source of truth for your map objects.
+Применительно к этой библиотеке это означает, что в зависимости от того, какие
+пропсы вы используете, либо API Яндекс.Карт, либо ваше приложение будет отвечать
+за то, чтобы быть источником правды для ваших объектов карты.
 
-In the example below, map state (more specifically zoom and coordinates) is controlled by application on the first map
-component, but is not controlled by application on the second map component. When you click the button, first map zoom
-and coordinates will be updated, but the second map will preserve its state. This happens because instead of `state`
-prop, we are using `defaultState` prop.
+В приведенном ниже примере состояние карты (точнее, масштаб и координаты)
+управляется приложением в первом компоненте карты, но не контролируется
+приложением во втором компоненте карты. При нажатии кнопки масштаб и координаты
+первой карты будут обновлены, а вторая карта сохранит свое состояние. Это
+происходит потому, что вместо `state` prop мы используем `defaultState` prop.
 
 ```jsx
-<>
-  {() => {
-    const [zoom, setZoom] = React.useState(9);
-    const mapState = React.useMemo(() => ({ center: [55.75, 37.57], zoom }), [zoom]);
-    return (
-      <YMaps>
-        <>
-          <table>
-            <tbody>
-              <tr>
-                <th>Controlled Map</th>
-                <th>Uncontrolled Map</th>
-              </tr>
-              <tr>
-                <td>
-                  <Map state={mapState} />
-                </td>
-                <td>
-                  <Map defaultState={mapState} />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <p>
-            <button onClick={() => setZoom((zoom) => (zoom === 9 ? 12 : 9))}>Toggle map zoom</button>
-          </p>
-        </>
-      </YMaps>
-    );
-  }}
-</>
+import React from 'react';
+
+export default function App() {
+  const [zoom, setZoom] = React.useState(9);
+  const mapState = React.useMemo(
+    () => ({ center: [55.75, 37.57], zoom }),
+    [zoom]
+  );
+
+  return (
+    <YMaps>
+      <>
+        <table>
+          <tbody>
+            <tr>
+              <th>Controlled Map</th>
+              <th>Uncontrolled Map</th>
+            </tr>
+            <tr>
+              <td>
+                <Map state={mapState} />
+              </td>
+              <td>
+                <Map defaultState={mapState} />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          <button onClick={() => setZoom((zoom) => (zoom === 9 ? 12 : 9))}>
+            Toggle map zoom
+          </button>
+        </p>
+      </>
+    </YMaps>
+  );
+}
 ```
 
-Every prop on every map object is this library supports the `default` version (e.g, `state` and `defaultState`,
-`options` and `defaultOptions`, `properties` and `defaultProperties`, `geometry` and `defaultGeometry`). By choosing to
-use `default` version you are opting out of this library updating map objects when the props are changed.
+Каждая поддержка каждого объекта карты — это библиотека, поддерживающая
+`default` версию (например: `state` и `defaultState`, `options` и
+`defaultOptions`, `properties` и `defaultProperties`, `geometry` и
+`defaultGeometry`). Выбирая использование `default` версии, вы отказываетесь от
+обновления объектов карты этой библиотекой при изменении реквизита.
 
-As mentioned in the "What Is Supported" section, there is no way to prevent Yandex.Maps from updating maps objects state
-completely, so it is very easy to go out of sync if you are using these components in a controlled way and not
-synchronizing the state back to your application state.
+Как упоминалось в разделе «Что поддерживается», невозможно запретить
+Яндекс.Картам полностью обновлять состояние объектов карты, поэтому очень легко
+выйти из синхронизации, если вы используете эти компоненты контролируемым
+образом и не синхронизируете состояние обратно в состояние вашего приложения.
 
-From the personal experience, you would want to use `default` props for most of the cases in your application.
+Исходя из личного опыта, вы хотели бы использовать `default` проп для
+большинства случаев в вашем приложении.
 
-If you want to know more about controlled and uncontrolled components, there are a few useful links from React
-documentation:
+Если вы хотите узнать больше об управляемых и неуправляемых компонентах, вот
+несколько полезных ссылок из документации React:
 
 - [Glossary: Controlled vs. Uncontroled Components][4.2.1]
 - [Uncontroled Components][4.2.2]
 - [Forms: Controlled Components][4.2.3]
 
-[4.2.1]: https://reactjs.org/docs/glossary.html#controlled-vs-uncontrolled-components
+[4.2.1]:
+  https://reactjs.org/docs/glossary.html#controlled-vs-uncontrolled-components
 [4.2.2]: https://reactjs.org/docs/uncontrolled-components.html
 [4.2.3]: https://reactjs.org/docs/forms.html#controlled-components
 
-## React Context. Provider and Consumer Components
+## Provider и Consumer компоненты
 
-This library uses React Context API to provide Yandex.Maps API to every component, that needs it.
+Эта библиотека использует React Context API для предоставления API Яндекс.Карт
+каждому компоненту, который в этом нуждается.
 
-This library also uses React Context API so parent Yandex.Maps objects (e.g., Map, Clusterer, ObjectManager) could
-provide children Yandex.Maps objects with a parent instance.
+Так как библиотека использует React Context API, поэтому родительские объекты
+Яндекс.Карт (например, Map, Clusterer, ObjectManager) могут предоставлять
+дочерним объектам Яндекс.Карт родительский экземпляр.
 
-If you want to know more about React Context and Provider/Consumer components, you can check out [React documentation
-section on the topic][4.1.1].
+Если вы хотите узнать больше о компонентах React Context и Provider/Consumer, вы
+можете ознакомиться с [разделом документации React по этой теме][4.1.1].
 
-Make sure that you used YMaps provider component and all Yandex.Maps objects are inside this component tree. This
-library will throw an error, if the Yandex.Maps context is missing.
+Убедитесь, что вы использовали компонент провайдера `YMaps` и все объекты
+Яндекс.Карт находятся внутри этого дерева компонентов. Эта библиотека выдаст
+ошибку, если отсутствует контекст Яндекс.Карт.
 
 [4.1.1]: https://reactjs.org/docs/context.html

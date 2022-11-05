@@ -31,6 +31,7 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           routeBasePath: '/',
         },
+        blog: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -55,6 +56,10 @@ const config = {
           height: 32,
         },
         items: [
+          {
+            type: 'localeDropdown',
+            position: 'right',
+          },
           {
             label: "Yandex Maps API",
             href: "https://yandex.com/dev/maps/jsapi/doc/",
