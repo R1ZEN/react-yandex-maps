@@ -3,43 +3,59 @@ slug: '/faq'
 title: FAQ
 ---
 
-# Frequently Asked Questions
+# Часто задаваемые вопросы
 
-## Is X Supported?
+### Поддерживается ли React 18?
 
-All basic Yandex.Maps API objects and controls are supported. All configuration options of those objects and all events
-are supported. For the list of supported items see ["What Is Supported?" section](/faq)
+Да
 
-## Can I Render React DOM Components Into Yandex.Maps Balloons or Placemark Icons?
+### Что поддерживается из API Яндекс.Карты?
 
-This behavior is not supported out of the box by the library. You can try rendering them on your own accessing
-Yandex.Maps API directly, see [#23](https://github.com/gribnoysup/react-yandex-maps/issues/23),
-[#27](https://github.com/gribnoysup/react-yandex-maps/issues/27), and
-[#150](https://github.com/gribnoysup/react-yandex-maps/issues/150) for some examples.
+Поддерживаются все основные объекты и элементы управления API Яндекс.Карт.
+Поддерживаются все параметры конфигурации этих объектов и всех событий. Список
+поддерживаемых элементов см. в разделе
+[Что поддерживается](/#что-поддерживается)
 
-## How To Style Map Container? Why Width and Height Props?
+### Могу ли я отрисовать компоненты React в Yandex.Maps Balloons или Placemark?
 
-By default you can only control Map container with width and height props. This is done so that `react-yandex-maps`
-library can keep track of size changes and call special Map method to fit the Map UI into available view.
+Это поведение не поддерживается библиотекой из коробки. Вы можете попробовать
+отрисовать их самостоятельно, напрямую обратившись к API Яндекс.Карт, см.
+[#23](https://github.com/gribnoysup/react-yandex-maps/issues/23),
+[#27](https://github.com/gribnoysup/react-yandex-maps/issues/27), и
+[#150](https://github.com/gribnoysup/react-yandex-maps/issues/150) для некоторых
+примеров.
 
-You can opt-out of this behavior by providing your own `style` or `className` prop to the Map component. Your props will
-be passed to the Map container node and the library will ignore the width and height props.
+### Как стилизовать контейнер карты? Зачем width и height пропс?
 
-## How To Get Access to Yandex.Maps API Instance?
+По умолчанию вы можете управлять контейнером карты только с prop width и height.
+Это сделано для того, чтобы `@pbe/react-yandex-maps` библиотека могла
+отслеживать изменения размера и вызывать специальный метод карты, чтобы вписать
+пользовательский интерфейс карты в доступное представление.
 
-There are two ways to achieve this:
+Вы можете отказаться от такого поведения, предоставив свой собственный `style`
+или `className` prop для компонента карты. Ваши props будут переданы в узел
+контейнера карты, а библиотека будет игнорировать props width и height.
 
-- Use `onLoad` callback prop on any map component from this library, when Yandex.Maps API will finish loading, this
-  callback will be called with API instance as the first argument.
+### Как получить доступ к объекту Яндекс.Карты API?
 
-- Use [`withYMaps` HOC][withymaps] and create your own custom component with full access to Yandex.Maps API as a prop.
+Есть два способа добиться этого:
+
+- Используйте `onLoad` callback prop для любого компонента карты из этой
+  библиотеки, когда API Яндекс.Карт завершит загрузку, этот callback будет
+  вызван с экземпляром API в качестве первого аргумента.
+
+- Используйте [`withYMaps` HOC][withymaps] и создайте свой собственный компонент
+  с полным доступом к API Яндекс.Карт в качестве реквизита.
 
 [withymaps]: /api/withymaps
 
-## How To Get Object Instance?
+### Как получить экземпляр объекта компонентов Яндекс.Карты?
 
-To get instance of any Yandex.Maps object that rendered by this library, use can use `instanceRef` prop. Keep in mind
-that this will behave as React [callback refs][]: it will call the ref callback with the Yandex.Maps API object instance
-when the component mounts, and call it with `null` when it unmounts.
+Чтобы получить экземпляр любого объекта Яндекс.Карт, отображаемого этой
+библиотекой, можно использовать `instanceRef` проп. Имейте ввиду, что он будет
+вести себя как [React callback refs][]: он будет вызывать обратный вызов ref с
+экземпляром объекта API Яндекс.Карт при монтировании компонента и вызывать его с
+помощью `null` при размонтировании.
 
-[callback refs]: https://reactjs.org/docs/refs-and-the-dom.html#callback-refs
+[react callback refs]:
+  https://reactjs.org/docs/refs-and-the-dom.html#callback-refs

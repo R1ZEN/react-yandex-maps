@@ -5,32 +5,41 @@ title: YMaps Provider
 
 # YMaps Provider
 
-This component is used to provide YMaps components with Yandex.Maps API context. You always need to add this component
-somewhere above your maps in the component tree.
+Этот компонент используется для обеспечения компонентов YMaps контекстом API
+Яндекс.Карт. Вам всегда нужно добавлять этот компонент где-то над вашими картами
+в дереве компонентов.
 
-As `<YMaps />` provides an API to fetch Yandex.Maps API, this is the component you can use to customize your api query:
+Поскольку `<YMaps />` предоставляет API для получения API Яндекс.Карт, это
+компонент, который вы можете использовать для настройки вашего API-запроса:
 
 ```jsx
-const Application = () => <YMaps query={{ lang: 'en_RU' }}>Application with YMaps Provider</YMaps>;
+const Application = () => (
+  <YMaps query={{ lang: 'en_RU' }}>Application with YMaps Provider</YMaps>
+);
 render(<Application />);
 ```
 
-Now you can add map components anywhere in your component tree below `<YMaps />` and they will have access to anything
-needed to get Yandex.Maps API.
+Теперь вы можете добавлять компоненты карты в любом месте вашего дерева
+компонентов ниже `<YMaps />`, и они будут иметь доступ ко всему, что необходимо
+для получения API Яндекс.Карт.
 
-## Where To Put Provider?
+## Куда поместить Provider?
 
-Don't be afraid to add provider higher in your application tree, Yandex.Maps API wouldn't be fetched until some map
-component will request it. If this behavior is undesirable, you can use `preload` prop to tell provider to fetch Yandex
-Maps API as soon as it mounts in the tree.
+Не бойтесь добавлять провайдера выше в дереве приложений, API Яндекс.Карт не
+будет загружаться, пока его не запросит какой-нибудь компонент карты. Если такое
+поведение нежелательно, вы можете использовать `preload` prop, чтобы указать
+провайдеру получать API Яндекс Карт, как только он смонтируется в дереве.
 
-Keep in mind that by default provider will fetch only the **critical part** of Yandex.Maps API. After that every map
-component will handle fetching corresponding part of Yandex Maps API automatically.
+Имейте в виду, что по умолчанию провайдер будет получать только **критическую
+часть** API Яндекс.Карт. После этого каждый компонент карты будет автоматически
+обрабатывать получение соответствующей части API Яндекс Карт.
 
-If you want to load more parts of the Yandex.Maps right away you can use `load` parameter in component `query` prop to
-define what exactly you want to fetch.
+Если вы хотите сразу загрузить больше частей Яндекс.Карт, вы можете использовать
+`load` параметр в компоненте `query` prop, чтобы определить, что именно вы
+хотите получить.
 
-[All query parameters][1], except for `onload` and `onerror`, from Yandex Maps API documentation are supported by
-`query` prop. Don't worry, you still can get access to `onLoad` and `onError` on all connected components
+[Все параметры запроса][1], кроме `onload` и `onerror`, из документации API
+Яндекс Карт поддерживаются `query` prop. Не беспокойтесь, вы по-прежнему можете
+получить доступ ко `onLoad` и `onError` для всех подключенных компонентов.
 
 [1]: https://tech.yandex.com/maps/doc/jsapi/2.1/dg/concepts/load-docpage/

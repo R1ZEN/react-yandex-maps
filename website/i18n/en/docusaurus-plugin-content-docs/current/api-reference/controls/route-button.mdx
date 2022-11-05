@@ -1,0 +1,38 @@
+---
+slug: '/api/controls/route-button'
+title: RouteButton
+---
+
+import { Canvas } from '@site/src/components/Canvas';
+
+# RouteButton
+
+Renders Yandex.Maps API [RouteButton][control] control
+
+## Basic Usage
+
+<Canvas>
+  {`
+  <YMaps>
+    <Map
+      defaultState={{
+        center: [55.751574, 37.573856],
+        zoom: 9,
+        controls: [],
+      }}
+    >
+      <RouteButton options={{ float: 'right' }} />
+    </Map>
+  </YMaps>
+`}
+</Canvas>
+
+## Props
+
+- `options`: Control options
+- `defaultOptions`: Uncontrolled control options
+- `state`: Control state
+- `defaultState`: Uncontrolled control state
+
+[control]:
+  https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/control.RouteButton-docpage/

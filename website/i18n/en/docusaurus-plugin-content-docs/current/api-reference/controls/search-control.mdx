@@ -1,0 +1,40 @@
+---
+slug: '/api/controls/search-control'
+title: SearchControl
+---
+
+import { Canvas } from '@site/src/components/Canvas';
+
+# SearchControl
+
+Renders Yandex.Maps API [SearchControl][control] control
+
+## Basic Usage
+
+<Canvas>
+  {`
+  <YMaps>
+    <Map
+      defaultState={{
+        center: [55.751574, 37.573856],
+        zoom: 9,
+        controls: [],
+      }}
+    >
+      <SearchControl options={{ float: 'right' }} />
+    </Map>
+  </YMaps>
+`}
+</Canvas>
+
+## Props
+
+- `data`: Control data
+- `defaultData`: Uncontrolled control data
+- `options`: Control options
+- `defaultOptions`: Uncontrolled control options
+- `state`: Control state
+- `defaultState`: Uncontrolled control state
+
+[control]:
+  https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/control.SearchControl-docpage/

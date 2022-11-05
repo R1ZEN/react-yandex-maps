@@ -7,9 +7,9 @@ import { Canvas } from '@site/src/components/Canvas';
 
 # TypeSelector
 
-Renders Yandex.Maps API [TypeSelector][control] control
+Создает объект Yandex.Maps API [TypeSelector][control]
 
-## Basic Usage
+## Использование
 
 <Canvas>
   {`
@@ -29,13 +29,16 @@ Renders Yandex.Maps API [TypeSelector][control] control
 
 ## Props
 
-- `mapTypes`: Array of constructors for map types or keys. If the parameter is omitted, the item is added to the
-  standard set of map types. (`yandex#map`, `yandex#satellite`, `yandex#hybrid`)
-- `defaultMapTypes`: Uncontroled array of constructors for map types or keys. If the parameter is omitted, the item is
-  added to the standard set of map types. (`yandex#map`, `yandex#satellite`, `yandex#hybrid`)
+- `mapTypes`: Array of constructors for map types or keys. If the parameter is
+  omitted, the item is added to the standard set of map types. (`yandex#map`,
+  `yandex#satellite`, `yandex#hybrid`)
+- `defaultMapTypes`: Uncontroled array of constructors for map types or keys. If
+  the parameter is omitted, the item is added to the standard set of map types.
+  (`yandex#map`, `yandex#satellite`, `yandex#hybrid`)
 - `options`: Control options
 - `defaultOptions`: Uncontrolled control options
 - `state`: Control state
 - `defaultState`: Uncontrolled control state
 
-[control]: https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/control.TypeSelector-docpage/
+[control]:
+  https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/control.TypeSelector-docpage/

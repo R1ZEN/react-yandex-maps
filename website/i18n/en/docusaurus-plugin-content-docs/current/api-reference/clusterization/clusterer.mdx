@@ -1,0 +1,45 @@
+---
+slug: '/api/clusterization/clusterer'
+title: Clusterer
+---
+
+import { Canvas } from '@site/src/components/Canvas';
+import clusterPoints from '@site/src/mocks/clusterer-points';
+
+# Clusterer
+
+Renders Yandex.Maps API [Clusterer][docs]
+
+## Basic Usage
+
+<Canvas scope={{ clusterPoints }}>
+  {`
+  <YMaps>
+    <Map
+      defaultState={{
+        center: [55.751574, 37.573856],
+        zoom: 5,
+      }}
+    >
+      <Clusterer
+        options={{
+          preset: 'islands#invertedVioletClusterIcons',
+          groupByCoordinates: false,
+        }}
+      >
+        {clusterPoints.map((coordinates, index) => (
+          <Placemark key={index} geometry={coordinates} />
+        ))}
+      </Clusterer>
+    </Map>
+  </YMaps>
+`}
+</Canvas>
+
+## Props
+
+- `options`: Clusterer options
+- `defaultOptions`: Uncontrolled Clusterer options
+
+[docs]:
+  https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Clusterer-docpage/
