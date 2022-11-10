@@ -31,10 +31,14 @@ export default function App() {
       return;
     }
 
-    new ymaps.Map(mapRef.current, {
+    const map = new ymaps.Map(mapRef.current, {
       center: [55.76, 37.64],
       zoom: 10,
     });
+
+    return () => {
+      map.destroy();
+    };
   }, [ymaps]);
 
   return <div ref={mapRef} style={{ width: '320px', height: '240px' }} />;
