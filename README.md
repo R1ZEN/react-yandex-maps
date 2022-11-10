@@ -59,7 +59,7 @@ The React Yandex Maps docs are located at
 
 - [Getting Started](https://pbe-react-yandex-maps.vercel.app/)
 - [Core Principles](https://pbe-react-yandex-maps.vercel.app/core-principles/)
-- [API Reference](https://pbe-react-yandex-maps.vercel.app/api-reference/)
+- [API Reference](https://pbe-react-yandex-maps.vercel.app/category/api-reference/)
 
 ### Contribution
 
