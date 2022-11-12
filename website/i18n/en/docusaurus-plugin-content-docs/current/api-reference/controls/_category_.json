@@ -1,0 +1,10 @@
+{
+  "position": 6,
+  "label": "Controls",
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "title": "Controls"
+  }
+}

@@ -1,0 +1,39 @@
+---
+slug: '/api/controls/route-panel'
+title: RoutePanel
+---
+
+import { Canvas } from '@site/src/components/Canvas';
+
+# RoutePanel
+
+Создает объект Yandex.Maps API [RoutePanel][control]
+
+## Использование
+
+<Canvas>
+  {`
+  <YMaps>
+    <Map
+      defaultState={{
+        center: [55.751574, 37.573856],
+        zoom: 9,
+        controls: [],
+      }}
+    >
+      <RoutePanel options={{ float: 'right' }} />
+    </Map>
+  </YMaps>
+`}
+</Canvas>
+
+## Props
+
+- `options`: Control options
+- `defaultOptions`: Uncontrolled control options
+- `state`: Control state
+- `defaultState`: Uncontrolled control state
+- `instanceRef`: Object instance
+
+[control]:
+  https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/control.RoutePanel-docpage/

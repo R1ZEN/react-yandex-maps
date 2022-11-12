@@ -1,0 +1,55 @@
+---
+slug: '/api/clusterization/object-manager'
+title: Object Manager
+---
+
+import { Canvas } from '@site/src/components/Canvas';
+import objectManagerFeatures from '@site/src/mocks/object-manager-features';
+
+# ObjectManager
+
+Создает объект Yandex.Maps API [ObjectManager][docs]
+
+## Использование
+
+<Canvas scope={{ objectManagerFeatures }}>
+  {`
+  <YMaps>
+    <Map
+      defaultState={{
+        center: [55.751574, 37.573856],
+        zoom: 10,
+      }}
+    >
+      <ObjectManager
+        options={{
+          clusterize: true,
+          gridSize: 32,
+        }}
+        objects={{
+          openBalloonOnClick: true,
+          preset: 'islands#greenDotIcon',
+        }}
+        clusters={{
+          preset: 'islands#redClusterIcons',
+        }}
+        filter={(object) => object.id % 2 === 0}
+        defaultFeatures={objectManagerFeatures}
+        modules={[
+          'objectManager.addon.objectsBalloon',
+          'objectManager.addon.objectsHint',
+        ]}
+      />
+    </Map>
+  </YMaps>
+`}
+</Canvas>
+
+## Props
+
+- `options`: Clusterer options
+- `defaultOptions`: Uncontrolled Clusterer options
+- `instanceRef`: Object instance
+
+[docs]:
+  https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/control.ObjectManager-docpage/

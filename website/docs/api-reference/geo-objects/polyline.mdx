@@ -1,0 +1,55 @@
+---
+slug: '/api/geo-objects/polyline'
+title: Polyline
+---
+
+import { Canvas } from '@site/src/components/Canvas';
+
+# Polyline
+
+Создает объект Yandex.Maps API [Polyline][docs]
+
+## Использование
+
+<Canvas>
+  {`
+  <YMaps>
+    <Map
+      defaultState={{
+        center: [55.72, 37.44],
+        zoom: 10,
+      }}
+    >
+      <Polyline
+        geometry={[
+          [55.8, 37.5],
+          [55.8, 37.4],
+          [55.7, 37.5],
+          [55.7, 37.4],
+        ]}
+        options={{
+          balloonCloseButton: false,
+          strokeColor: '#000',
+          strokeWidth: 4,
+          strokeOpacity: 0.5,
+        }}
+      />
+    </Map>
+  </YMaps>
+`}
+</Canvas>
+
+## Props
+
+- `geometry`: Placemark geometry
+- `defaultGeometry`: Uncontrolled Placemark geometry
+- `properties`: Placemark properties
+- `defaultProperties`: Uncontrolled Placemark properties
+- `options`: Placemark options
+- `defaultOptions`: Uncontrolled Placemark options
+- `dangerZone`: Used in a special case where constructor needs to be modified
+  before passing it to the mount method
+- `instanceRef`: Object instance
+
+[docs]:
+  https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Polyline-docpage/

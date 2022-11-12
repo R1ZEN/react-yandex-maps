@@ -1,0 +1,42 @@
+---
+slug: '/api/useymaps'
+title: useYMaps
+---
+
+# useYMaps
+
+Возвращает объект API Яндекс.Карты
+
+## Использование
+
+```jsx
+const ymaps = useYMaps(modules);
+```
+
+## Параметры хука
+
+### modules
+
+Cписок модулей которые будут загружены. Например: _Map_, _Placemark_, _etc._
+
+Пример использования:
+
+```jsx
+export default function App() {
+  const mapRef = useRef(null);
+  const ymaps = useYMaps(['Map']);
+
+  useEffect(() => {
+    if (!ymaps || !mapRef.current) {
+      return;
+    }
+
+    new ymaps.Map(mapRef.current, {
+      center: [55.76, 37.64],
+      zoom: 10,
+    });
+  }, [ymaps]);
+
+  return <div ref={mapRef} style={{ width: '320px', height: '240px' }} />;
+}
+```

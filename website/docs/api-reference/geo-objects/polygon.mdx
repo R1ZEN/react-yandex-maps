@@ -1,0 +1,64 @@
+---
+slug: '/api/geo-objects/polygon'
+title: Polygon
+---
+
+import { Canvas } from '@site/src/components/Canvas';
+
+# Polygon
+
+Создает объект Yandex.Maps API [Polygon][docs]
+
+## Использование
+
+<Canvas>
+  {`
+<YMaps>
+    <Map
+      defaultState={{
+        center: [55.73, 37.9],
+        zoom: 10,
+      }}
+    >
+      <Polygon
+        geometry={[
+          [
+            [55.75, 37.8],
+            [55.8, 37.9],
+            [55.75, 38.0],
+            [55.7, 38.0],
+            [55.7, 37.8],
+          ],
+          [
+            [55.75, 37.82],
+            [55.75, 37.98],
+            [55.65, 37.9],
+          ],
+        ]}
+        options={{
+          fillColor: '#00FF00',
+          strokeColor: '#0000FF',
+          opacity: 0.5,
+          strokeWidth: 5,
+          strokeStyle: 'shortdash',
+        }}
+      />
+    </Map>
+  </YMaps>
+`}
+</Canvas>
+
+## Props
+
+- `geometry`: Placemark geometry
+- `defaultGeometry`: Uncontrolled Placemark geometry
+- `properties`: Placemark properties
+- `defaultProperties`: Uncontrolled Placemark properties
+- `options`: Placemark options
+- `defaultOptions`: Uncontrolled Placemark options
+- `dangerZone`: Used in a special case where constructor needs to be modified
+  before passing it to the mount method
+- `instanceRef`: Object instance
+
+[docs]:
+  https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Polygon-docpage/

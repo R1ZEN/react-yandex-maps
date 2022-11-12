@@ -1,0 +1,32 @@
+---
+slug: '/api/panorama'
+title: Panorama
+---
+
+# Panorama
+
+Создаёт объект Yandex.Maps API [Panorama][panorama]
+
+## Использование
+
+```jsx
+<YMaps>
+  <Panorama defaultPoint={[55.733685, 37.588264]} />
+</YMaps>
+```
+
+## Props
+
+- `options`: Panorama options
+- `defaultOptions`: Uncontrolled Panorama options
+- `point`: The point for searching for nearby panoramas
+- `locateOptions`: Panorama locate options
+- `width`: Panorama container width. Default 320
+- `height`: Panorama container height. Default 240
+- `style`: Panorama container style
+- `className`: Panorama container className
+- `modules`: Yandex Maps modules
+- `instanceRef`: Object instance
+
+[panorama]:
+  https://tech.yandex.ru/maps/doc/jsapi/2.1/ref/reference/panorama.Player-docpage/

@@ -1,0 +1,10 @@
+{
+  "position": 6,
+  "label": "Geo Objects",
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "title": "Geo Objects"
+  }
+}

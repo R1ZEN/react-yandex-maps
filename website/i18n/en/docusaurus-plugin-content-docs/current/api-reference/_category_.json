@@ -1,0 +1,10 @@
+{
+  "position": 5,
+  "label": "API Reference",
+  "collapsible": false,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "title": "API Reference"
+  }
+}

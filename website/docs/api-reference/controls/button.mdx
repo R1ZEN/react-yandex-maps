@@ -1,0 +1,45 @@
+---
+slug: '/api/controls/button'
+title: Button
+---
+
+import { Canvas } from '@site/src/components/Canvas';
+
+# Button
+
+Создает объект Yandex.Maps API [Button][control]
+
+## Использование
+
+<Canvas>
+  {`
+  <YMaps>
+    <Map
+      defaultState={{
+        center: [55.751574, 37.573856],
+        zoom: 9,
+        controls: [],
+      }}
+    >
+      <Button
+        options={{ maxWidth: 128 }}
+        data={{ content: 'Unpress me!' }}
+        defaultState={{ selected: true }}
+      />
+    </Map>
+  </YMaps>
+`}
+</Canvas>
+
+## Props
+
+- `data`: Control data
+- `defaultData`: Uncontrolled control data
+- `options`: Control options
+- `defaultOptions`: Uncontrolled control options
+- `state`: Control state
+- `defaultState`: Uncontrolled control state
+- `instanceRef`: Object instance
+
+[control]:
+  https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/control.Button-docpage/

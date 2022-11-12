@@ -1,0 +1,48 @@
+---
+slug: '/api/controls/listbox-item'
+title: ListBoxItem
+---
+
+import { Canvas } from '@site/src/components/Canvas';
+
+# ListBoxItem
+
+Создает объект Yandex.Maps API [ListBoxItem][control]
+
+## Использование
+
+<Canvas>
+  {`
+  <YMaps>
+    <Map
+      defaultState={{
+        center: [55.751574, 37.573856],
+        zoom: 9,
+        controls: [],
+      }}
+    >
+      <ListBox data={{ content: 'Select city' }}>
+        <ListBoxItem data={{ content: 'Moscow' }} />
+        <ListBoxItem
+          data={{
+            content: 'Saint Petersburg',
+          }}
+        />
+      </ListBox>
+    </Map>
+  </YMaps>
+`}
+</Canvas>
+
+## Props
+
+- `data`: Control data
+- `defaultData`: Uncontrolled control data
+- `options`: Control options
+- `defaultOptions`: Uncontrolled control options
+- `state`: Control state
+- `defaultState`: Uncontrolled control state
+- `instanceRef`: Object instance
+
+[control]:
+  https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/control.ListBoxItem-docpage/
