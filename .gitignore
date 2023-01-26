@@ -19,6 +19,7 @@ typings
 !.prettierrc.yml
 !.babelrc.js
 
+tsconfig.tsbuildinfo
 yarn.lock
 npm-shrinkwrap.json
 coverage

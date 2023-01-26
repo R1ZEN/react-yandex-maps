@@ -19,7 +19,7 @@ class ErrorBoundary extends React.Component<
     this.state = { error: null, errorInfo: null };
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+  override componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     const { onError = () => void 0 } = this.props;
 
     onError(error);
@@ -30,7 +30,7 @@ class ErrorBoundary extends React.Component<
     });
   }
 
-  render() {
+  override render() {
     return this.state.error ? null : this.props.children;
   }
 }
