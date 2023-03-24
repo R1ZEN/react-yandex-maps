@@ -35,7 +35,7 @@
     "react": "^16.x || ^17.x || ^18.x"
   },
   "dependencies": {
-    "@types/yandex-maps": "2.1.28"
+    "@types/yandex-maps": "2.1.29"
   },
   "devDependencies": {
     "@babel/core": "7.18.2",
