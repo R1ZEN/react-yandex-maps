@@ -12,7 +12,7 @@ import prettierParserBabel from 'prettier/parser-babel';
 
 interface PlaygroundCodeProps {
   children: string;
-  scope?: Record<string, any>;
+  scope?: Record<string, unknown>;
 }
 
 const formatCode = (code: string) =>

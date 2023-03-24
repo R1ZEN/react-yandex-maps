@@ -9,6 +9,7 @@ Sitemap: ${new URL(path.join('sitemap.xml'), baseUrl).href}
 
 User-agent: *
 Disallow: /img/*
+Disallow: /ru/*
 `.trim();
 
 fs.writeFileSync(

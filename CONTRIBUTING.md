@@ -21,18 +21,6 @@ nvm use
 npm install
 ```
 
-4. Start storybook server locally
-
-```sh
-npm run sb:dev
-```
-
-If everything went well, you now have documentation running on
-`http://localhost:6006`
-
-Now you can make changes to the library and see them applied to the storybook in
-real time.
-
 When you commit changes, eslint will make sure that there are no linting errors
 and prettier will format your code based on the repo settings.
 

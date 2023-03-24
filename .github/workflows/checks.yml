@@ -6,7 +6,7 @@ on:
 name: checks
 
 env:
-  NODE_VERSION: 14
+  NODE_VERSION: 16.15.0
 
 jobs:
   build_test_lint:
@@ -18,13 +18,13 @@ jobs:
           node-version: ${{env.NODE_VERSION}}
 
       - name: Install node_modules
-        run: npm ci
+        run: npm ci --no-audit
 
       - name: Typecheck
         run: npm run tsc
 
       - name: Lint
-        run: npm run lint -- src
+        run: npm run lint
 
       - name: Test
         run: npm run test
