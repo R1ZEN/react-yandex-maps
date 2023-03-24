@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "2.2.0",
-    "@pbe/react-yandex-maps": "1.1.9",
+    "@pbe/react-yandex-maps": "1.2.2",
     "@tsconfig/docusaurus": "1.0.5",
     "dotenv": "16.0.3",
     "prettier": "2.7.1",
