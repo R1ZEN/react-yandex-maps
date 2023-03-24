@@ -12,7 +12,7 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
-    'plugin:storybook/recommended',
+    'plugin:@typescript-eslint/recommended',
   ],
   plugins: ['react', '@typescript-eslint'],
   parserOptions: {
@@ -24,9 +24,7 @@ module.exports = {
   },
   overrides: [
     {
-      extends: [
-        'plugin:@typescript-eslint/recommended',
-      ],
+      extends: ['plugin:@typescript-eslint/recommended'],
       files: ['**/src/**'],
       parserOptions: {
         sourceType: 'module',
@@ -36,7 +34,7 @@ module.exports = {
       },
     },
     {
-      files: ['**/*.test.{js,jsx}', '**/__mocks__/**'],
+      files: ['**/*.test.{js,jsx}'],
       ...jestRecommendedConfig,
       env: {
         jest: true,
