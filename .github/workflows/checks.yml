@@ -9,7 +9,7 @@ env:
   NODE_VERSION: 16.15.0
 
 jobs:
-  build_test_lint:
+  package_checks:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -21,7 +21,7 @@ jobs:
         run: npm ci --no-audit
 
       - name: Typecheck
-        run: npm run tsc
+        run: npm run typecheck
 
       - name: Lint
         run: npm run lint
@@ -35,3 +35,23 @@ jobs:
       - uses: andresz1/size-limit-action@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+
+  website_checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{env.NODE_VERSION}}
+
+      - name: Install node_modules
+        run: npm ci --no-audit
+        working-directory: ./website
+
+      - name: Typecheck
+        run: npm run typecheck
+        working-directory: ./website
+
+      - name: Build
+        run: npm run build
+        working-directory: ./website

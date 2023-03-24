@@ -15,14 +15,14 @@
     "typings"
   ],
   "engines": {
-    "npm": ">=6",
-    "node": ">=14"
+    "node": ">=16",
+    "npm": "8"
   },
   "scripts": {
     "clear": "rm -rf dist",
     "prettier": "prettier --write .",
     "lint": "eslint src",
-    "tsc": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
     "build": "npm run clear && npm run microbundle:production && size-limit",
     "microbundle": "microbundle --jsx React.createElement --name ReactYandexMaps --external react --globals react=React --define process.env.NODE_ENV=\"${NODE_ENV}\"",
     "microbundle:production": "cross-env NODE_ENV=production npm run microbundle -- --output ./dist",
