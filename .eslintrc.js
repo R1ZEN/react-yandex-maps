@@ -13,7 +13,6 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:storybook/recommended',
-    'plugin:@typescript-eslint/recommended',
   ],
   plugins: ['react', '@typescript-eslint'],
   parserOptions: {
@@ -25,6 +24,9 @@ module.exports = {
   },
   overrides: [
     {
+      extends: [
+        'plugin:@typescript-eslint/recommended',
+      ],
       files: ['**/src/**'],
       parserOptions: {
         sourceType: 'module',

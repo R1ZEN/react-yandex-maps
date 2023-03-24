@@ -19,7 +19,7 @@ const config = {
 
   i18n: {
     defaultLocale: 'ru',
-    locales: ['ru', 'en']
+    locales: ['ru', 'en'],
   },
 
   presets: [
@@ -40,12 +40,18 @@ const config = {
   ],
 
   themeConfig:
-  /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       image: 'img/logo-landscape.png',
       metadata: [
-        { name: 'keywords', content: 'react-yandex-maps, @pbe/react-yandex-maps, yandex-maps' },
-        process.env.YANDEX_VERIFICATION && { name: 'yandex-verification', content: process.env.YANDEX_VERIFICATION }
+        {
+          name: 'keywords',
+          content: 'react-yandex-maps, @pbe/react-yandex-maps, yandex-maps',
+        },
+        process.env.YANDEX_VERIFICATION && {
+          name: 'yandex-verification',
+          content: process.env.YANDEX_VERIFICATION,
+        },
       ].filter(Boolean),
       navbar: {
         title: 'React Yandex Maps',
@@ -61,8 +67,8 @@ const config = {
             position: 'right',
           },
           {
-            label: "Yandex Maps API",
-            href: "https://yandex.com/dev/maps/jsapi/doc/",
+            label: 'Yandex Maps API',
+            href: 'https://yandex.com/dev/maps/jsapi/doc/',
             position: 'right',
           },
           {
@@ -83,13 +89,19 @@ const config = {
     }),
 
   plugins: [
-    process.env.GOOGLE_ANALYTIC_ID && ['@docusaurus/plugin-google-gtag', {
-      trackingID: process.env.GOOGLE_ANALYTIC_ID,
-      anonymizeIP: false,
-    }],
-    process.env.YANDEX_METRIKA_ID && ['docusaurus-plugin-yandex-metrica', {
-      counterID: process.env.YANDEX_METRIKA_ID,
-    }]
+    process.env.GOOGLE_ANALYTIC_ID && [
+      '@docusaurus/plugin-google-gtag',
+      {
+        trackingID: process.env.GOOGLE_ANALYTIC_ID,
+        anonymizeIP: false,
+      },
+    ],
+    process.env.YANDEX_METRIKA_ID && [
+      'docusaurus-plugin-yandex-metrica',
+      {
+        counterID: process.env.YANDEX_METRIKA_ID,
+      },
+    ],
   ].filter(Boolean),
 };
 

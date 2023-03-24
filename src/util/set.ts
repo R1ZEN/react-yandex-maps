@@ -7,7 +7,7 @@
  * @param {boolean} [ifNotExists] Will skip setting value if value exists
  */
 export const set = <TValue>(
-  object: Record<string, any>,
+  object: Record<string, unknown>,
   path: string | string[],
   value: TValue,
   ifNotExists = false
@@ -18,11 +18,15 @@ export const set = <TValue>(
   let ref = object;
 
   while (setPath.length > 1) {
-    key = setPath.shift() as string;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    key = setPath.shift()!;
     if (!ref[key]) ref[key] = {};
-    ref = ref[key];
+    ref = ref[key] as Record<string, unknown>;
   }
 
-  ref[setPath[0]] = ifNotExists === true ? ref[setPath[0]] || value : value;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const lastPathKey = setPath[0]!;
+
+  ref[lastPathKey] = ifNotExists === true ? ref[lastPathKey] || value : value;
   return object;
 };
