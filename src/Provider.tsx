@@ -14,6 +14,7 @@ interface YMapProvider {
   query?: {
     lang?: 'tr_TR' | 'en_US' | 'en_RU' | 'ru_RU' | 'ru_UA' | 'uk_UA';
     apikey?: string;
+    suggest_apikey?: string;
     coordorder?: 'latlong' | 'longlat';
     load?: string;
     mode?: 'release' | 'debug';
